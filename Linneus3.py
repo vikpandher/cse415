@@ -97,6 +97,12 @@ def process(info) :
     result_match_object = assertion_pattern.match(info)
     if result_match_object != None :
         items = result_match_object.groups()
+        if isa_test1(items[1], items[3]) :
+            print("You told me that earlier.")
+            return
+        if isa_test(items[1], items[3]) :
+            print("You don't have to tell me that.")
+            return
         store_article(items[1], items[0])
         store_article(items[3], items[2])
         store_isa_fact(items[1], items[3])
