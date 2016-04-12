@@ -83,6 +83,8 @@ def linneus():
         info = input('Enter an ISA fact, or "bye" here: ')
         if info == 'bye': return 'Goodbye now!'
         process(info)
+        print_dict() ###
+        print(); ###
 
 # Some regular expressions used to parse the user sentences:    
 assertion_pattern = compile(r"^(a|an|A|An)\s+([-\w]+)\s+is\s+(a|an)\s+([-\w]+)(\.|\!)*$", IGNORECASE)    
@@ -182,12 +184,18 @@ def find_chain(x, z):
                 temp.insert(0, [x,y])
                 return temp
 
+### For Testing
+def print_dict() :
+    print("ISA      = " + str(ISA))
+    print("INCLUDES = " + str(INCLUDES))
+    print("ARTICLES = " + str(ARTICLES))
+
 def test() :
     process("A turtle is a reptile.")
     process("A turtle is a shelled-creature.")
     process("A reptile is an animal.")
     process("An animal is a thing.")
 
-test()
+# test()
 linneus()
 
