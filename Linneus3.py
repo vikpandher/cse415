@@ -103,7 +103,7 @@ def process(info) :
         if isa_test(items[1], items[3]) :
             print("You don't have to tell me that.")
             return
-        if checkIndirect(items[1], items[3], items[0], items[2]) :
+        if checkIndirect(items[1], items[3]) :
             return
         store_article(items[1], items[0])
         store_article(items[3], items[2])
@@ -151,23 +151,20 @@ def process(info) :
     print("I do not understand.  You entered: ")
     print(info)
 
-def checkIndirect(x, y, firstArt, secondArt) :
-    yincludes = get_includes_list(y)
-    for item in yincludes :
-        itemisa = get_isa_list(item)
-        for isa in itemisa :
-            if isa == y :
-                store_article(x, firstArt)
-                store_article(y, secondArt)
-                store_isa_fact(x, y)
-                print("Your earlier statement that " + get_article(item) +\
-                      " " + item + " is " + get_article(y) + " " + y +\
+def checkIndirect(child, parent) :
+    siblings = get_includes_list(parent)
+    for sibling in siblings :
+        guardians = get_isa_list(sibling)
+        for guardian in guardians :
+            if guardian == child :
+                print("Your earlier statement that " + get_article(sibling) +\
+                      " " + sibling + " is " + get_article(parent) + " " + parent +\
                       " is now redundant.")
-                itemisa.remove(isa)
-                yincludes.remove(item)
+                siblings.remove(sibling)
+                guardians.remove(parent)
                 return True
-    return False            
-
+    return False
+    
 def answer_why(x, y):
     'Handles the answering of a Why question.'
     if x == y:
