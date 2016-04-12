@@ -160,8 +160,9 @@ def checkIndirect(x, y, firstArt, secondArt) :
                 store_article(x, firstArt)
                 store_article(y, secondArt)
                 store_isa_fact(x, y)
-                print("Your earlier statement that a " + item +\
-                      " is a " + y + " is now redundant.")
+                print("Your earlier statement that " + get_article(item) +\
+                      " " + item + " is " + get_article(y) + " " + y +\
+                      " is now redundant.")
                 itemisa.remove(isa)
                 yincludes.remove(item)
                 return True
