@@ -103,11 +103,12 @@ def process(info) :
         if isa_test(items[1], items[3]) :
             print("You don't have to tell me that.")
             return
-        if checkIndirect(items[1], items[3]) :
-            return
         store_article(items[1], items[0])
         store_article(items[3], items[2])
         store_isa_fact(items[1], items[3])
+        # Part 3
+        if checkIndirect(items[1], items[3]) :
+            return
         print("I understand.")
         return
     result_match_object = query_pattern.match(info)
@@ -151,20 +152,27 @@ def process(info) :
     print("I do not understand.  You entered: ")
     print(info)
 
-def checkIndirect(child, parent) :
+def checkIndirect(child, parent, depth_limit = 3):
+    if depth_limit < 1 :
+        return False
+    print("Checking: " + str(child) + ", " + str(parent) + ", depth_limit = " +\
+    str(depth_limit))
     siblings = get_includes_list(parent)
     for sibling in siblings :
-        guardians = get_isa_list(sibling)
-        for guardian in guardians :
-            if guardian == child :
-                print("Your earlier statement that " + get_article(sibling) +\
-                      " " + sibling + " is " + get_article(parent) + " " + parent +\
-                      " is now redundant.")
-                siblings.remove(sibling)
-                guardians.remove(parent)
-                return True
+        if isa_test(sibling, child) and sibling != child:
+            print("Redundancy: " + str(sibling) + " is a " + str(child));
+            print("Your earlier statement that " + get_article(sibling) +\
+                  " " + sibling + " is " + get_article(parent) + " " + parent +\
+                  " is now redundant.")
+            siblings.remove(sibling)
+            get_isa_list(sibling).remove(parent)
+            return True
+    grandparents = get_isa_list(parent)
+    for grandparent in grandparents :
+        if checkIndirect(parent, grandparent, depth_limit - 1):
+            return True
     return False
-    
+
 def answer_why(x, y):
     'Handles the answering of a Why question.'
     if x == y:
