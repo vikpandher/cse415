@@ -13,7 +13,8 @@
 #  ('turtle' : ['reptile', 'shelled-creature'])
 
 from re import *   # Loads the regular expression module.
-
+# make an all powerful being like GOD for non qualified modes
+# person -> reliable, [cat, animal], 
 ISA = {}
 INCLUDES = {}
 ARTICLES = {}
@@ -98,6 +99,7 @@ def process(info) :
     result_match_object = qualified_pattern.match(info)
     if result_match_object != None :
         #then mark some flag
+        
     'Handles the user sentence, matching and responding.'
     result_match_object = assertion_pattern.match(info)
     if result_match_object != None :
