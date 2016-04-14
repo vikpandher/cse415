@@ -127,10 +127,13 @@ def process(info) :
                           " is now redundant.")
             return
         elif redundancy_count > 1:
+            output = ""
             print("The following statements you made earlier are now all redundant:")
             for parent in REDUNDANCIES :
                 for child in REDUNDANCIES.get(redundancy) :
-                    print(get_article(child) + " " + child + " is " + get_article(parent) + " " + parent)
+                    output += (get_article(child) + " " + child + " is " + get_article(parent) + " " + parent + ";\n")
+            output = output[0:-2] + ".\n"
+            print(output)
             return
         print("I understand.")
         return

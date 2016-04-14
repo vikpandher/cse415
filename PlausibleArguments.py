@@ -16,6 +16,10 @@ from re import *   # Loads the regular expression module.
 ISA = {} # [A is a [B, God], [c, joe]], [Jones is a reliable, God], [Stef is an unreliable, Jones]
 INCLUDES = {} # B includes A, etc.
 ARTICLES = {} # (a) C
+REDUNDANCIES = {} # Tracks redundancies for checkIndirect
+# Redundancies are stored as a dictionary where the key is the parent and the
+# values are the children. The "is a" relations would be as follows:
+# (child is a parrent)
 
 # Possibly add a parameter for 'speaker' make tuples.........
 def store_isa_fact(category1, category2, speaker):
@@ -102,7 +106,7 @@ why_pattern = compile(r"^Why\s+is\s+(a|an)\s+([-\w]+)\s+(a|an)\s+([-\w]+)(\?\.)*
 why_possible_pattern = compile(r"^Why\s+is\s+it\s+possible\s+that\s+(a|an)\s+([-\w]+)\s+is\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)
 # see if qualified
 qualified_pattern = compile(r"^([-\w]+)\s+says\s+that.*", IGNORECASE)
-reliability_pattern = compile(r"^([-\w]+\s+says\s+that\s+)?([-\w]+)\s+is\s+(a|an)\s+(reliable|unreliable)\s+source$", IGNORECASE)
+reliability_pattern = compile(r"^([-\w]+\s+says\s+that\s+)?([-\w]+)\s+is\s+(a|an)\s+(reliable|unreliable)\s+source\.?$", IGNORECASE)
 only_why_pattern = compile(r"^Why\?$", IGNORECASE)
 
 last_is_question = {}
@@ -136,9 +140,41 @@ def process(info) :
     if result_match_object != None :
         # speaker says isa relationship
         items = result_match_object.groups()
+        # If already told something, no need to store it
+        if isa_test1(items[1], items[3]) :
+            print("You told me that earlier.")
+            return
+        if isa_test(items[1], items[3]) :
+            print("You don't have to tell me that.")
+            return
         store_article(items[1], items[0])
         store_article(items[3], items[2])
         store_isa_fact(items[1], items[3], speaker)
+        # Clear REDUNDANCIES and check for them
+        REDUNDANCIES.clear()
+        checkIndirect(items[1], items[3])
+        redundancy_count = 0
+        # Go through REDUNDANCIES and count all the redundancies
+        for redundancy in REDUNDANCIES :
+            redundancy_count += len(REDUNDANCIES.get(redundancy))
+        # The output message varies depending on the number of redundancies
+        if redundancy_count == 1 :
+            for parent in REDUNDANCIES :
+                for child in REDUNDANCIES.get(redundancy) :
+                    print("Your earlier statement that " + get_article(child[0]) +\
+                          " " + child[0] + " is " + get_article(parent) + " " + parent +\
+                          " is now redundant.")
+            return
+        elif redundancy_count > 1:
+            output = ""
+            print("The following statements you made earlier are now all redundant:")
+            for parent in REDUNDANCIES :
+                for child in REDUNDANCIES.get(redundancy) :
+                    output += (get_article(child[0]) + " " + child[0] +\
+                    " is " + get_article(parent) + " " + parent + ";\n")
+            output = output[0:-2] + ".\n"
+            print(output)
+            return
         print("I understand.")
         return
     result_match_object = query_pattern.match(info)
@@ -199,8 +235,44 @@ def process(info) :
         else :
             answer_why(last_is_question[1], last_is_question[3])
         return
-    print("I do not understand.  You entered: ")
-    print(info)
+    print("I do not understand.")
+
+# This method checks for indirect connections and reports them
+# in the dictionary called REDUNDANCIES
+def checkIndirect(child, parent, depth_limit = 3):
+    # Depth limit reached
+    if depth_limit < 1 :
+        return False
+    # siblings are all the things that are directly under the parent
+    siblings = get_includes_list(parent)
+    for sibling in siblings :
+        # If a sibling "isa" child, record the redundancy,
+        # Ignore the case where sibling == child since that will
+        # always be true (A spade is a spade.)
+        if isa_test(sibling[0], child) and sibling[0] != child:
+            try :
+                list = REDUNDANCIES[parent]
+                list.append(sibling)
+            except KeyError :
+                REDUNDANCIES[parent] = [sibling]
+    # Remove the redundancies from the ISA and INCLUDES ditionaries
+    for source in REDUNDANCIES :
+        for thing in REDUNDANCIES.get(source) :
+            isa_list = get_isa_list(thing[0])
+            for item in isa_list :
+                if item[0] == source :
+                    isa_list.remove(item);
+            for item in siblings :
+                if item == thing :
+                    siblings.remove(thing);
+    # for indirect redundancies go up and do the same check for the
+    # parents of the parent. depth_limit limits how far up we check
+    # from the given parent.
+    grandparents = get_isa_list(parent)
+    for grandparent in grandparents :
+        if checkIndirect(parent, grandparent[0], depth_limit - 1):
+            return True
+    return False
 
 reliable = True
 bad_speaker = ""
@@ -230,7 +302,7 @@ def report_chain(x, y):
     last_link = chain[-1]
     main_phrase = reduce(lambda x, y: x + y, map(report_link, all_but_last))
     last_phrase = "and " + report_link(last_link)
-    new_last_phrase = last_phrase[0:-2] + '.'
+    new_last_phrase = last_phrase[0:-3] + '.'
     return main_phrase + new_last_phrase
 
 def report_link(link):
@@ -243,9 +315,9 @@ def report_link(link):
     global reliable
     reliable = check_reliability(speaker)
     if speaker == "God" :
-        return a1 + " " + x + " is definitely " + a2 + " " + y + ", "
+        return a1 + " " + x + " is definitely " + a2 + " " + y + ", \n"
     else :
-        return speaker + " says that " + a1 + " " + x + " is " + a2 + " " + y + ", "
+        return speaker + " says that " + a1 + " " + x + " is " + a2 + " " + y + ", \n"
 
 def check_reliability(speaker) :
     for el in get_includes_list("unreliable"):
@@ -271,19 +343,148 @@ def find_chain(x, z):
                 temp.insert(0, [x,y[0]])
                 return temp
 
-### For Testing
+# output dictionary info for debugging
 def print_dict() :
     print("ISA      = " + str(ISA))
     print("INCLUDES = " + str(INCLUDES))
     print("ARTICLES = " + str(ARTICLES))
 
+# Stock test
 def test() :
     process("A turtle is a reptile.")
     process("A turtle is a shelled-creature.")
     process("A reptile is an animal.")
     process("An animal is a thing.")
 
-def test1() :
+# Part 2.3 test
+def test2() :
+    print(">>> A hawk is a raptor")
+    process("A hawk is a raptor")
+    print_dict()
+    print();
+    print(">>> A hawk is an animal")
+    process("A hawk is an animal")
+    print_dict()
+    print();
+    print(">>> A bird is an animal")
+    process("A bird is an animal")
+    print_dict()
+    print();
+    print(">>> A raptor is a bird")
+    process("A raptor is a bird")
+    print_dict()
+    print();
+
+def test3_0() :
+    print(">>> Jones says that a chinook is an organism.")
+    process("Jones says that a chinook is an organism.")
+    print_dict()
+    print();
+    print(">>> Jones says that a sockeye is a salmon.")
+    process("Jones says that a sockeye is a salmon.")
+    print_dict()
+    print();
+    print(">>> Jones says that a fish is an animal.")
+    process("Jones says that a fish is an animal.")
+    print_dict()
+    print();
+    print(">>> Jones says that a sockeye is an organism.")
+    process("Jones says that a sockeye is an organism.")
+    print_dict()
+    print();
+    print(">>> Jones says that a chinook is an animal.")
+    process("Jones says that a chinook is an animal.")
+    print_dict()
+    print();
+    print(">>> Jones says that a chinook is a salmon.")
+    process("Jones says that a chinook is a salmon.")
+    print_dict()
+    print();
+    print(">>> Jones says that a sockeye is an animal.")
+    process("Jones says that a sockeye is an animal.")
+    print_dict()
+    print();
+    print(">>> Jones says that a fish is an organism.")
+    process("Jones says that a fish is an organism.")
+    print_dict()
+    print();
+
+# Part 2.4 test
+def test3() :
+    print(">>> A chinook is an organism.")
+    process("A chinook is an organism.")
+    print_dict()
+    print();
+    print(">>> A sockeye is a salmon.")
+    process("A sockeye is a salmon.")
+    print_dict()
+    print();
+    print(">>> A fish is an animal.")
+    process("A fish is an animal.")
+    print_dict()
+    print();
+    print(">>> A sockeye is an organism.")
+    process("A sockeye is an organism.")
+    print_dict()
+    print();
+    print(">>> A chinook is an animal.")
+    process("A chinook is an animal.")
+    print_dict()
+    print();
+    print(">>> A chinook is a salmon.")
+    process("A chinook is a salmon.")
+    print_dict()
+    print();
+    print(">>> A sockeye is an animal.")
+    process("A sockeye is an animal.")
+    print_dict()
+    print();
+    print(">>> A fish is an organism.")
+    process("A fish is an organism.")
+    print_dict()
+    print();
+    print(">>> A salmon is a fish.")
+    process("A salmon is a fish.")
+    print_dict()
+    print();
+    
+def test4() :
+    print(">>> An ant is an insect.")
+    process("An ant is an insect.")
+    print_dict()
+    print();
+    print(">>> An insect is an animal.")
+    process("An insect is an animal.")
+    print_dict()
+    print();
+    print(">>> An animal is a thing.")
+    process("An animal is a thing.")
+    print_dict()
+    print();
+    print(">>> Why is an ant a thing.")
+    process("Why is an ant a thing.")
+    print_dict()
+    print();
+
+def test5() :
+    print(">>> Joe said an ant is an insect.")
+    process("Joe said an ant is an insect.")
+    print_dict()
+    print();
+    print(">>> Steve said an insect is an animal.")
+    process("Steve said an insect is an animal.")
+    print_dict()
+    print();
+    print(">>> An animal is a thing.")
+    process("An animal is a thing.")
+    print_dict()
+    print();
+    print(">>> Why is an ant a thing.")
+    process("Why is an ant a thing.")
+    print_dict()
+    print();
+
+def test6() :
     print(">>> Jones says that an animal is an organism.")
     process("Jones says that an animal is an organism.")
     print_dict()
@@ -321,6 +522,12 @@ def test1() :
     print_dict()
     print();
 
-#test1()
-test()
+
+# test()
+# test2()
+# test3_0() 
+# test3()
+# test4()
+# test5()
+# test6()
 linneus()
