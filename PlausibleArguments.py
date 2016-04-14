@@ -1,3 +1,16 @@
+'''PartIII.py
+Chloe Nash, Vik Pandher, CSE 415, Spring 2016, University of Washington
+Instructor: S. Tanimoto.
+Assignment 2 Part III. ISA Heirarchy Manipulation
+
+I worked with Vik Pandher.
+
+Status of the implementation of new features:
+
+Qualified and unqualified statements both work properly.
+Both why questions work as specified.
+'''
+
 # Linneus3.py
 # Implements storage and inference on an ISA hierarchy
 # This Python program goes with the book "The Elements of Artificial
@@ -13,7 +26,7 @@
 #  ('turtle' : ['reptile', 'shelled-creature'])
 
 from re import *   # Loads the regular expression module.
-ISA = {} # [A is a [B, God], [c, joe]], [Jones is a reliable, God], [Stef is an unreliable, Jones]
+ISA = {} # [A is a [B, God], [c, joe]], [Jones is a reliable, God], [Stef is an [unreliable, Jones]]
 INCLUDES = {} # B includes A, etc.
 ARTICLES = {} # (a) C
 REDUNDANCIES = {} # Tracks redundancies for checkIndirect
@@ -21,7 +34,9 @@ REDUNDANCIES = {} # Tracks redundancies for checkIndirect
 # values are the children. The "is a" relations would be as follows:
 # (child is a parrent)
 
-# Possibly add a parameter for 'speaker' make tuples.........
+# Modified isa to store who qualified the statement.
+# If no qualifier, automatically set to God, taken as fact.
+# Isa is a list of tuples 
 def store_isa_fact(category1, category2, speaker):
     'Stores one fact of the form A BIRD IS AN ANIMAL'
     # That is, a member of CATEGORY1 is a member of CATEGORY2
@@ -52,6 +67,7 @@ def get_includes_list(category1):
     except:
         return []
 
+# all_god is True when no qualified statements, False if a qualified statement is specified
 all_god = True
 def isa_test1(category1, category2):
     'Returns True if category 2 is (directly) on the list for category 1.'
@@ -94,29 +110,33 @@ def linneus():
         info = input('Enter an ISA fact, or "bye" here: ')
         if info == 'bye': return 'Goodbye now!'
         process(info)
-        print_dict() ###
-        print() ###
 
 # Some regular expressions used to parse the user sentences:    
 assertion_pattern = compile(r".*(a|an|A|An)\s+([-\w]+)\s+is\s+(a|an)\s+([-\w]+)(\.|\!)*$", IGNORECASE)    
 query_pattern = compile(r"^is\s+(a|an)\s+([-\w]+)\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)    
 what_pattern = compile(r"^What\s+is\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)    
 why_pattern = compile(r"^Why\s+is\s+(a|an)\s+([-\w]+)\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)    
+# Matches when the user asks why something is possible
 # ex: Why is it possible that a dog is an organism?
 why_possible_pattern = compile(r"^Why\s+is\s+it\s+possible\s+that\s+(a|an)\s+([-\w]+)\s+is\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)
-# see if qualified
+# Matches when a statement is qualified
 qualified_pattern = compile(r"^([-\w]+)\s+says\s+that.*", IGNORECASE)
+# Matches when a statement declares the reliability of someone
 reliability_pattern = compile(r"^([-\w]+\s+says\s+that\s+)?([-\w]+)\s+is\s+(a|an)\s+(reliable|unreliable)\s+source\.?$", IGNORECASE)
+# Matches when the user only types why?
 only_why_pattern = compile(r"^Why\?$", IGNORECASE)
 
+# Stores the last question asked so when the user types Why? it can be answered
 last_is_question = {}
 def process(info) :
     global last_is_question
-    # in case not qualified
+    # in case not qualified, God is default speaker
     speaker = "God"
+    'Handles the user sentence, matching and responding.'
     result_match_object = qualified_pattern.match(info)
     if result_match_object != None :
         # speaker is either the specified or default God
+        # after speaker updated, move on to match rest of sentence
         items = result_match_object.groups()
         speaker = items[0]
     result_match_object = reliability_pattern.match(info)
@@ -135,10 +155,8 @@ def process(info) :
         else :
             answer_why(items[1], items[3])
         return
-    'Handles the user sentence, matching and responding.'
     result_match_object = assertion_pattern.match(info)
     if result_match_object != None :
-        # speaker says isa relationship
         items = result_match_object.groups()
         # If already told something, no need to store it
         if isa_test1(items[1], items[3]) :
@@ -181,11 +199,10 @@ def process(info) :
     if result_match_object != None :
         global all_god
         all_god = True
-        # have to check reliability of a speaker
         items = result_match_object.groups()
-        last_is_question = items
-        answer = isa_test(items[1], items[3])
-        immediate = isa_test1(items[1], items[3])
+        last_is_question = items # update the last question asked for why? case
+        answer = isa_test(items[1], items[3]) # stores if it is even true
+        immediate = isa_test1(items[1], items[3]) # stores if directly true
         if answer and all_god :
             print("Yes.")
         elif answer and not all_god and immediate :
@@ -193,13 +210,13 @@ def process(info) :
                 if isa[0] == items[3] :
                     print("" + isa[1] + " says that it is.")
         elif answer and not all_god :
-            print("It's quite possible that " + get_article(items[1]) +" " + str(items[1]) + " is " + get_article(items[3]) + " " + str(items[3]) + ".")
+            print("It's quite possible that " + get_article(items[1]) +" " + str(items[1]) +\
+                  " is " + get_article(items[3]) + " " + str(items[3]) + ".")
         else :
             print("I have no reason to believe so.")
         return
     result_match_object = what_pattern.match(info)
     if result_match_object != None :
-        # have to check statements, who said them, and their reliability
         items = result_match_object.groups()
         supersets = get_isa_list(items[1])
         if supersets != [] :
@@ -221,7 +238,6 @@ def process(info) :
         return
     result_match_object = why_pattern.match(info)
     if result_match_object != None :
-        # link reliabliity with who said what
         items = result_match_object.groups()
         if not isa_test(items[1], items[3]) :
             print("But that's not true, as far as I know!")
@@ -231,6 +247,7 @@ def process(info) :
     result_match_object = only_why_pattern.match(info)
     if result_match_object != None :
         if len(last_is_question) == 0 :
+            # If Why? is the first thing typed
             print("Why what?")
         else :
             answer_why(last_is_question[1], last_is_question[3])
@@ -274,7 +291,9 @@ def checkIndirect(child, parent, depth_limit = 3):
             return True
     return False
 
+# tracks if all the speakers are reliable, False if 1 or more are not reliable
 reliable = True
+# Tracks who the unreliable speaker is
 bad_speaker = ""
 def answer_why(x, y):
     global bad_speaker
@@ -288,6 +307,7 @@ def answer_why(x, y):
     print("Because " + report_chain(x, y))
     global reliable
     if not all_god and not reliable:
+        # Only prints if a speaker is found to be unreliable
         print("However, " + bad_speaker + " is an unreliable source,")
         print("and therefore we cannot be certain about this chain of reasoning.")
         reliable = True
@@ -315,10 +335,12 @@ def report_link(link):
     global reliable
     reliable = check_reliability(speaker)
     if speaker == "God" :
+        # If speaker is God, taken as fact 
         return a1 + " " + x + " is definitely " + a2 + " " + y + ", \n"
     else :
         return speaker + " says that " + a1 + " " + x + " is " + a2 + " " + y + ", \n"
 
+# checks if current speaker is unreliable and updates 'reliable'
 def check_reliability(speaker) :
     for el in get_includes_list("unreliable"):
         if el[0] == speaker :
@@ -327,6 +349,7 @@ def check_reliability(speaker) :
             return False
     return True
 
+# returns the current speaker for the specified isa relationship
 def get_speaker(x, y) :
     for isa in get_isa_list(x) :
         if isa[0] == y :

@@ -1,3 +1,15 @@
+'''PartII.py
+Chloe Nash, Vik Pandher, CSE 415, Spring 2016, University of Washington
+Instructor: S. Tanimoto.
+Assignment 2 Part II. ISA Heirarchy Manipulation
+
+I worked with Vik Pandher.
+
+Status of the implementation of new features:
+
+All forms of redundancy detection and processing are working.
+'''
+
 # Linneus3.py
 # Implements storage and inference on an ISA hierarchy
 # This Python program goes with the book "The Elements of Artificial
