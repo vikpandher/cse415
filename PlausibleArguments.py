@@ -252,7 +252,8 @@ def process(info) :
         else :
             answer_why(last_is_question[1], last_is_question[3])
         return
-    print("I do not understand.")
+    print("I do not understand.  You entered: ")
+    print(info)
 
 # This method checks for indirect connections and reports them
 # in the dictionary called REDUNDANCIES
