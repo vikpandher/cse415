@@ -153,8 +153,7 @@ def process(info) :
         if answer and god :
             print("Yes.")
         elif answer and not god :
-            print("It's possible")
-            #print("It's quite possible that " + get_article(items[1] +" " + str(items[1]) + " is " + get_article(items[3]) + " " + str(items[3]) + ".")
+            print("It's quite possible that " + get_article(items[1]) +" " + str(items[1]) + " is " + get_article(items[3]) + " " + str(items[3]) + ".")
         else :
             print("I have no reason to believe so.")
         return
