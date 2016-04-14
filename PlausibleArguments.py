@@ -103,9 +103,11 @@ why_possible_pattern = compile(r"^Why\s+is\s+it\s+possible\s+that\s+(a|an)\s+([-
 # see if qualified
 qualified_pattern = compile(r"^([-\w]+)\s+says\s+that.*", IGNORECASE)
 reliability_pattern = compile(r"^([-\w]+\s+says\s+that\s+)?([-\w]+)\s+is\s+(a|an)\s+(reliable|unreliable)\s+source$", IGNORECASE)
-#### check back if need to answer Is jones a reliable source?
+only_why_pattern = compile(r"^Why\?$", IGNORECASE)
 
+last_is_question = {}
 def process(info) :
+    global last_is_question
     # in case not qualified
     speaker = "God"
     result_match_object = qualified_pattern.match(info)
@@ -128,6 +130,7 @@ def process(info) :
             print("But that's not true, as far as I know!")
         else :
             answer_why(items[1], items[3])
+        return
     'Handles the user sentence, matching and responding.'
     result_match_object = assertion_pattern.match(info)
     if result_match_object != None :
@@ -144,6 +147,7 @@ def process(info) :
         all_god = True
         # have to check reliability of a speaker
         items = result_match_object.groups()
+        last_is_question = items
         answer = isa_test(items[1], items[3])
         immediate = isa_test1(items[1], items[3])
         if answer and all_god :
@@ -188,11 +192,20 @@ def process(info) :
         else:
             answer_why(items[1], items[3])
         return
+    result_match_object = only_why_pattern.match(info)
+    if result_match_object != None :
+        if len(last_is_question) == 0 :
+            print("Why what?")
+        else :
+            answer_why(last_is_question[1], last_is_question[3])
+        return
     print("I do not understand.  You entered: ")
     print(info)
-    
 
+reliable = True
+bad_speaker = ""
 def answer_why(x, y):
+    global bad_speaker
     'Handles the answering of a Why question.'
     if x == y:
         print("Because they are identical.")
@@ -201,9 +214,12 @@ def answer_why(x, y):
         print("Because you told me that.")
         return
     print("Because " + report_chain(x, y))
-    if not all_god :
-        print("However, not all sources are reliable,")
+    global reliable
+    if not all_god and not reliable:
+        print("However, " + bad_speaker + " is an unreliable source,")
         print("and therefore we cannot be certain about this chain of reasoning.")
+        reliable = True
+        bad_speaker = ""
     return
 
 from functools import reduce
@@ -224,10 +240,20 @@ def report_link(link):
     a1 = get_article(x)
     a2 = get_article(y)
     speaker = get_speaker(x, y)
+    global reliable
+    reliable = check_reliability(speaker)
     if speaker == "God" :
         return a1 + " " + x + " is definitely " + a2 + " " + y + ", "
     else :
         return speaker + " says that " + a1 + " " + x + " is " + a2 + " " + y + ", "
+
+def check_reliability(speaker) :
+    for el in get_includes_list("unreliable"):
+        if el[0] == speaker :
+            global bad_speaker
+            bad_speaker = speaker
+            return False
+    return True
 
 def get_speaker(x, y) :
     for isa in get_isa_list(x) :
@@ -257,5 +283,44 @@ def test() :
     process("A reptile is an animal.")
     process("An animal is a thing.")
 
+def test1() :
+    print(">>> Jones says that an animal is an organism.")
+    process("Jones says that an animal is an organism.")
+    print_dict()
+    print();
+    print(">>> Jones says that Smith is a reliable source.")
+    process("Jones says that Smith is a reliable source.")
+    print_dict()
+    print();
+    print(">>> A dog is an animal.")
+    process("A dog is an animal.")
+    print_dict()
+    print();
+    print(">>> Is a dog a pet?")
+    process("Is a dog a pet?")
+    print_dict()
+    print();
+    print(">>> Is a dog an organism?")
+    process("Is a dog an organism?")
+    print_dict()
+    print();
+    print(">>> Is a dog an animal?")
+    process("Is a dog an animal?")
+    print_dict()
+    print();
+    print(">>> Is an animal an organism?")
+    process("Is an animal an organism?")
+    print_dict()
+    print();
+    print(">>> Jones is an unreliable source.")
+    process("Jones is an unreliable source.")
+    print_dict()
+    print();
+    print(">>> Why is it possible that a dog is an organism?")
+    process("Why is it possible that a dog is an organism?")
+    print_dict()
+    print();
+
+#test1()
 test()
 linneus()
