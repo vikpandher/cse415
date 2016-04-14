@@ -17,7 +17,10 @@ from re import *   # Loads the regular expression module.
 ISA = {}
 INCLUDES = {}
 ARTICLES = {}
-redundancies = {} # Tracks redundancies for checkIndirect
+REDUNDANCIES = {} # Tracks redundancies for checkIndirect
+# Redundancies are stored as a dictionary where the key is the parent and the
+# values are the children. The "is a" relations would be as follows:
+# (child is a parrent)
 
 def store_isa_fact(category1, category2):
     'Stores one fact of the form A BIRD IS AN ANIMAL'
@@ -84,8 +87,8 @@ def linneus():
         info = input('Enter an ISA fact, or "bye" here: ')
         if info == 'bye': return 'Goodbye now!'
         process(info)
-        print_dict() ###
-        print(); ###
+        # print_dict() # for debugging
+        # print()
 
 # Some regular expressions used to parse the user sentences:    
 assertion_pattern = compile(r"^(a|an|A|An)\s+([-\w]+)\s+is\s+(a|an)\s+([-\w]+)(\.|\!)*$", IGNORECASE)    
@@ -98,6 +101,7 @@ def process(info) :
     result_match_object = assertion_pattern.match(info)
     if result_match_object != None :
         items = result_match_object.groups()
+        # If already told something, no need to store it
         if isa_test1(items[1], items[3]) :
             print("You told me that earlier.")
             return
@@ -107,23 +111,25 @@ def process(info) :
         store_article(items[1], items[0])
         store_article(items[3], items[2])
         store_isa_fact(items[1], items[3])
-        # Part 4
-        redundancies.clear()
+        # Clear REDUNDANCIES and check for them
+        REDUNDANCIES.clear()
         checkIndirect(items[1], items[3])
-        redundancy_count = 0;
-        for redundancy in redundancies :
-            redundancy_count += len(redundancies.get(redundancy))
+        redundancy_count = 0
+        # Go through REDUNDANCIES and count all the redundancies
+        for redundancy in REDUNDANCIES :
+            redundancy_count += len(REDUNDANCIES.get(redundancy))
+        # The output message varies depending on the number of redundancies
         if redundancy_count == 1 :
-            for parent in redundancies :
-                for child in redundancies.get(redundancy) :
+            for parent in REDUNDANCIES :
+                for child in REDUNDANCIES.get(redundancy) :
                     print("Your earlier statement that " + get_article(child) +\
                           " " + child + " is " + get_article(parent) + " " + parent +\
                           " is now redundant.")
             return
         elif redundancy_count > 1:
             print("The following statements you made earlier are now all redundant:")
-            for parent in redundancies :
-                for child in redundancies.get(redundancy) :
+            for parent in REDUNDANCIES :
+                for child in REDUNDANCIES.get(redundancy) :
                     print(get_article(child) + " " + child + " is " + get_article(parent) + " " + parent)
             return
         print("I understand.")
@@ -169,20 +175,27 @@ def process(info) :
     print("I do not understand.  You entered: ")
     print(info)
 
+# This method checks for indirect connections and reports them
+# in the dictionary called REDUNDANCIES
 def checkIndirect(child, parent, depth_limit = 3):
+    # Depth limit reached
     if depth_limit < 1 :
         return False
+    # siblings are all the things that are directly under the parent
     siblings = get_includes_list(parent)
     for sibling in siblings :
+        # If a sibling "isa" child, record the redundancy,
+        # Ignore the case where sibling == child since that will
+        # always be true (A spade is a spade.)
         if isa_test(sibling, child) and sibling != child:
             try :
-                list = redundancies[parent]
+                list = REDUNDANCIES[parent]
                 list.append(sibling)
             except KeyError :
-                redundancies[parent] = [sibling]
-    # NEED TO OPTIMIZE THIS
-    for source in redundancies :
-        for thing in redundancies.get(source) :
+                REDUNDANCIES[parent] = [sibling]
+    # Remove the redundancies from the ISA and INCLUDES ditionaries
+    for source in REDUNDANCIES :
+        for thing in REDUNDANCIES.get(source) :
             isa_list = get_isa_list(thing)
             for item in isa_list :
                 if item == source :
@@ -190,6 +203,9 @@ def checkIndirect(child, parent, depth_limit = 3):
             for item in siblings :
                 if item == thing :
                     siblings.remove(thing);
+    # for indirect redundancies go up and do the same check for the
+    # parents of the parent. depth_limit limits how far up we check
+    # from the given parent.
     grandparents = get_isa_list(parent)
     for grandparent in grandparents :
         if checkIndirect(parent, grandparent, depth_limit - 1):
@@ -237,18 +253,20 @@ def find_chain(x, z):
                 temp.insert(0, [x,y])
                 return temp
 
-### For Testing
+# output dictionary info for debugging
 def print_dict() :
     print("ISA      = " + str(ISA))
     print("INCLUDES = " + str(INCLUDES))
     print("ARTICLES = " + str(ARTICLES))
 
+# Stock test
 def test() :
     process("A turtle is a reptile.")
     process("A turtle is a shelled-creature.")
     process("A reptile is an animal.")
     process("An animal is a thing.")
 
+# Part 2.3 test
 def test2() :
     print(">>> A hawk is a raptor")
     process("A hawk is a raptor")
@@ -267,6 +285,7 @@ def test2() :
     print_dict()
     print();
 
+# Part 2.4 test
 def test3() :
     print(">>> A chinook is an organism.")
     process("A chinook is an organism.")
@@ -305,8 +324,27 @@ def test3() :
     print_dict()
     print();
     
+def test4() :
+    print(">>> An ant is an insect.")
+    process("An ant is an insect.")
+    print_dict()
+    print();
+    print(">>> An insect is an animal.")
+    process("An insect is an animal.")
+    print_dict()
+    print();
+    print(">>> An animal is a thing.")
+    process("An animal is a thing.")
+    print_dict()
+    print();
+    print(">>> Why is an ant a thing.")
+    process("Why is an ant a thing.")
+    print_dict()
+    print();
+    
 # test()
 # test2()
 # test3()
+# test4()
 linneus()
 
