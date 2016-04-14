@@ -305,7 +305,11 @@ def answer_why(x, y):
     if isa_test1(x, y):
         print("Because you told me that.")
         return
-    print("Because " + report_chain(x, y))
+    if isa_test(x, y) :
+        print("Because " + report_chain(x, y))
+    else :
+        print("I have no reason to believe so.")
+        return
     global reliable
     if not all_god and not reliable:
         # Only prints if a speaker is found to be unreliable
