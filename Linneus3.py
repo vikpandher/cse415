@@ -17,6 +17,7 @@ from re import *   # Loads the regular expression module.
 ISA = {}
 INCLUDES = {}
 ARTICLES = {}
+redundancies = {} # Tracks redundancies for checkIndirect
 
 def store_isa_fact(category1, category2):
     'Stores one fact of the form A BIRD IS AN ANIMAL'
@@ -106,8 +107,24 @@ def process(info) :
         store_article(items[1], items[0])
         store_article(items[3], items[2])
         store_isa_fact(items[1], items[3])
-        # Part 3
-        if checkIndirect(items[1], items[3]) :
+        # Part 4
+        redundancies.clear()
+        checkIndirect(items[1], items[3])
+        redundancy_count = 0;
+        for redundancy in redundancies :
+            redundancy_count += len(redundancies.get(redundancy))
+        if redundancy_count == 1 :
+            for parent in redundancies :
+                for child in redundancies.get(redundancy) :
+                    print("Your earlier statement that " + get_article(child) +\
+                          " " + child + " is " + get_article(parent) + " " + parent +\
+                          " is now redundant.")
+            return
+        elif redundancy_count > 1:
+            print("The following statements you made earlier are now all redundant:")
+            for parent in redundancies :
+                for child in redundancies.get(redundancy) :
+                    print(get_article(child) + " " + child + " is " + get_article(parent) + " " + parent)
             return
         print("I understand.")
         return
@@ -155,18 +172,24 @@ def process(info) :
 def checkIndirect(child, parent, depth_limit = 3):
     if depth_limit < 1 :
         return False
-    print("Checking: " + str(child) + ", " + str(parent) + ", depth_limit = " +\
-    str(depth_limit))
     siblings = get_includes_list(parent)
     for sibling in siblings :
         if isa_test(sibling, child) and sibling != child:
-            print("Redundancy: " + str(sibling) + " is a " + str(child));
-            print("Your earlier statement that " + get_article(sibling) +\
-                  " " + sibling + " is " + get_article(parent) + " " + parent +\
-                  " is now redundant.")
-            siblings.remove(sibling)
-            get_isa_list(sibling).remove(parent)
-            return True
+            try :
+                list = redundancies[parent]
+                list.append(sibling)
+            except KeyError :
+                redundancies[parent] = [sibling]
+    # NEED TO OPTIMIZE THIS
+    for source in redundancies :
+        for thing in redundancies.get(source) :
+            isa_list = get_isa_list(thing)
+            for item in isa_list :
+                if item == source :
+                    isa_list.remove(source);
+            for item in siblings :
+                if item == thing :
+                    siblings.remove(thing);
     grandparents = get_isa_list(parent)
     for grandparent in grandparents :
         if checkIndirect(parent, grandparent, depth_limit - 1):
@@ -226,6 +249,64 @@ def test() :
     process("A reptile is an animal.")
     process("An animal is a thing.")
 
+def test2() :
+    print(">>> A hawk is a raptor")
+    process("A hawk is a raptor")
+    print_dict()
+    print();
+    print(">>> A hawk is an animal")
+    process("A hawk is an animal")
+    print_dict()
+    print();
+    print(">>> A bird is an animal")
+    process("A bird is an animal")
+    print_dict()
+    print();
+    print(">>> A raptor is a bird")
+    process("A raptor is a bird")
+    print_dict()
+    print();
+
+def test3() :
+    print(">>> A chinook is an organism.")
+    process("A chinook is an organism.")
+    print_dict()
+    print();
+    print(">>> A sockeye is a salmon.")
+    process("A sockeye is a salmon.")
+    print_dict()
+    print();
+    print(">>> A fish is an animal.")
+    process("A fish is an animal.")
+    print_dict()
+    print();
+    print(">>> A sockeye is an organism.")
+    process("A sockeye is an organism.")
+    print_dict()
+    print();
+    print(">>> A chinook is an animal.")
+    process("A chinook is an animal.")
+    print_dict()
+    print();
+    print(">>> A chinook is a salmon.")
+    process("A chinook is a salmon.")
+    print_dict()
+    print();
+    print(">>> A sockeye is an animal.")
+    process("A sockeye is an animal.")
+    print_dict()
+    print();
+    print(">>> A fish is an organism.")
+    process("A fish is an organism.")
+    print_dict()
+    print();
+    print(">>> A salmon is a fish.")
+    process("A salmon is a fish.")
+    print_dict()
+    print();
+    
 # test()
+# test2()
+# test3()
 linneus()
 
