@@ -47,15 +47,18 @@ def get_includes_list(category1):
         return c1list
     except:
         return []
-    
+
+all_god = True
 def isa_test1(category1, category2):
     'Returns True if category 2 is (directly) on the list for category 1.'
     c1list = get_isa_list(category1)
     for isa in c1list :
         if isa[0] == category2 :
+            if isa[1] != "God" :
+                global all_god
+                all_god = False
             return True
     return False
-    # return c1list.__contains__(category2)
     
 def isa_test(category1, category2, depth_limit = 10):
     'Returns True if category 1 is a subset of category 2 within depth_limit levels'
@@ -67,23 +70,6 @@ def isa_test(category1, category2, depth_limit = 10):
             return True
     return False
 
-# Checks if any speakers other than God
-def check_speakers(x, y) :
-    c1list = get_isa_list(x)
-    for isa in c1list :
-        if isa[0] == y and isa[1] == "God" :
-            return True
-    return False
-
-def check_speakers2(x, y, depth_limit = 10) :
-    if x == y : return True
-    if check_speakers(x, y) : return True
-    if depth_limit < 2 : return False
-    for intermediate_category in get_isa_list(x):
-        if check_speakers2(intermediate_category[0], y, depth_limit - 1):
-            return True
-    return False
-    
 def store_article(noun, article):
     'Saves the article (in lower-case) associated with a noun.'
     ARTICLES[noun] = article.lower()
@@ -112,9 +98,12 @@ assertion_pattern = compile(r".*(a|an|A|An)\s+([-\w]+)\s+is\s+(a|an)\s+([-\w]+)(
 query_pattern = compile(r"^is\s+(a|an)\s+([-\w]+)\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)    
 what_pattern = compile(r"^What\s+is\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)    
 why_pattern = compile(r"^Why\s+is\s+(a|an)\s+([-\w]+)\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)    
+# ex: Why is it possible that a dog is an organism?
+why_possible_pattern = compile(r"^Why\s+is\s+it\s+possible\s+that\s+(a|an)\s+([-\w]+)\s+is\s+(a|an)\s+([-\w]+)(\?\.)*", IGNORECASE)
 # see if qualified
 qualified_pattern = compile(r"^([-\w]+)\s+says\s+that.*", IGNORECASE)
 reliability_pattern = compile(r"^([-\w]+\s+says\s+that\s+)?([-\w]+)\s+is\s+(a|an)\s+(reliable|unreliable)\s+source$", IGNORECASE)
+#### check back if need to answer Is jones a reliable source?
 
 def process(info) :
     # in case not qualified
@@ -132,6 +121,13 @@ def process(info) :
         store_isa_fact(items[1], items[3], speaker)
         print("I understand.")
         return
+    result_match_object = why_possible_pattern.match(info)
+    if result_match_object != None :
+        items = result_match_object.groups()
+        if not isa_test(items[1], items[3]) :
+            print("But that's not true, as far as I know!")
+        else :
+            answer_why(items[1], items[3])
     'Handles the user sentence, matching and responding.'
     result_match_object = assertion_pattern.match(info)
     if result_match_object != None :
@@ -144,15 +140,19 @@ def process(info) :
         return
     result_match_object = query_pattern.match(info)
     if result_match_object != None :
+        global all_god
+        all_god = True
         # have to check reliability of a speaker
         items = result_match_object.groups()
         answer = isa_test(items[1], items[3])
-        god = check_speakers2(items[1], items[3])
-        print(god)
-        print(answer)
-        if answer and god :
+        immediate = isa_test1(items[1], items[3])
+        if answer and all_god :
             print("Yes.")
-        elif answer and not god :
+        elif answer and not all_god and immediate :
+            for isa in get_isa_list(items[1]) :
+                if isa[0] == items[3] :
+                    print("" + isa[1] + " says that it is.")
+        elif answer and not all_god :
             print("It's quite possible that " + get_article(items[1]) +" " + str(items[1]) + " is " + get_article(items[3]) + " " + str(items[3]) + ".")
         else :
             print("I have no reason to believe so.")
@@ -201,6 +201,9 @@ def answer_why(x, y):
         print("Because you told me that.")
         return
     print("Because " + report_chain(x, y))
+    if not all_god :
+        print("However, not all sources are reliable,")
+        print("and therefore we cannot be certain about this chain of reasoning.")
     return
 
 from functools import reduce
@@ -220,7 +223,16 @@ def report_link(link):
     y = link[1]
     a1 = get_article(x)
     a2 = get_article(y)
-    return a1 + " " + x + " is " + a2 + " " + y + ", "
+    speaker = get_speaker(x, y)
+    if speaker == "God" :
+        return a1 + " " + x + " is definitely " + a2 + " " + y + ", "
+    else :
+        return speaker + " says that " + a1 + " " + x + " is " + a2 + " " + y + ", "
+
+def get_speaker(x, y) :
+    for isa in get_isa_list(x) :
+        if isa[0] == y :
+            return isa[1]
     
 def find_chain(x, z):
     'Returns a list of lists, which each sublist representing a link.'
