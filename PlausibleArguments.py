@@ -308,7 +308,7 @@ def answer_why(x, y):
     if isa_test(x, y) :
         print("Because " + report_chain(x, y))
     else :
-        print("I have no reason to believe so.")
+        print("Because I have no reason to believe so.")
         return
     global reliable
     if not all_god and not reliable:
