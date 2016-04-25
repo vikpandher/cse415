@@ -22,13 +22,11 @@ Python 3 constructs and has been tested with Python 3.5.
 
 #<COMMON_CODE>
 
-# Compare all 8 positions in two states. If any is different,
-# they're not equal
 def DEEP_EQUALS(p1, p2):
-  result = True
-  for i in range(9):
-    result = result and (p1[i] == p2[i])
-  return result
+  for i in range(Dimension*Dimension*Dimension):
+    if p1[i] != p2[i]:
+      return False
+  return True
 
 def DESCRIBE_STATE(s):
   # Produces a textual description of a state.
@@ -48,10 +46,8 @@ def HASHCODE(s):
   return hash
 
 def copy_state(s):
-  # Performs an appropriately deep copy of a state,
-  # for use by operators in creating new states.
   new = []
-  for i in range(9):
+  for i in range(Dimension*Dimension*Dimension):
     new.append(s[i])
   return new
 
@@ -75,16 +71,17 @@ def move(s,From,To):
   new[From] = temp
   return new # return new state
 
+
 def goal_test(s):
-  '''If the puzzle looks like: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  '''If the puzzle is completely full
   Then the goal is reached.'''
-  result = True
-  for i in range(9):
-    result = result and (s[i] == i)
-  return result
+  for i in range(Dimension*Dimension*Dimension):
+    if s[i] == 0 :
+      return False
+  return True
 
 def goal_message(s):
-  return "The Basic Eight Puzzle is Solved!"
+  return "The Jigsaw is Solved!"
 
 class Operator:
   def __init__(self, name, precond, state_transf):
@@ -100,11 +97,40 @@ class Operator:
 
 #</COMMON_CODE>
 
+#<COMMON_DATA>
+Dimension = 3
+#</COMMON_DATA>
+
 #<INITIAL_STATE>
 #INITIAL_STATE = [0, 1, 2, 3, 4, 5, 6, 7, 8] # puzzle0
 #INITIAL_STATE = [1, 0, 2, 3, 4, 5, 6, 7, 8] # puzzle1a
 #INITIAL_STATE = [3, 1, 2, 4, 0, 5, 6, 7, 8] # puzzle2a
 INITIAL_STATE = [1, 4, 2, 3, 7, 0, 6, 8, 5] # puzzle4a
+
+
+
+SPACE =   [0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0]
+PEICE1 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0]
+PEICE2 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0]
+PEICE3 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0]
+PEICE4 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0]
+PEICE5 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0]
+PEICE6 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0,
+           0, 0, 0, 0, 0, 0, 0, 0, 0]
+
 CREATE_INITIAL_STATE = lambda: INITIAL_STATE
 #</INITIAL_STATE>
 
