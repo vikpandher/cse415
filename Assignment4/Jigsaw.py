@@ -1,27 +1,21 @@
-'''BasicEightPuzzle.py
-Vikramjit Pandher, CSE 415, Spring 2016, University of Washington
+'''Jigsaw.py
+Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
 Instructor:  S. Tanimoto.
-Assignment 3 Part II. Basic 8 Puzzle Formulation
+Assignment 4 Option B: Uncommon Puzzles. 
 
 Status of the implementation:
 All required features working. Works with sample puzzles.
-
-Basic Eight Puzzle: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-=
-[  1 2]
-[3 4 5]
-[6 7 8]
 
 '''
 
 #<METADATA>
 QUIET_VERSION = "0.1"
-PROBLEM_NAME = "Basic Eight Puzzle"
+PROBLEM_NAME = "Jigsaw Puzzle"
 PROBLEM_VERSION = "0.1"
-PROBLEM_AUTHORS = ['V. Pandher']
-PROBLEM_CREATION_DATE = "20-APR-2016"
+PROBLEM_AUTHORS = ['V. Pandher', 'C. Nash']
+PROBLEM_CREATION_DATE = "25-APR-2016"
 PROBLEM_DESC=\
-'''This formulation of the Basic Eight Puzzel uses generic
+'''This formulation of the Jigsaw Puzzel uses generic
 Python 3 constructs and has been tested with Python 3.5.
 '''
 #</METADATA>
