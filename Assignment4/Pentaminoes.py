@@ -23,17 +23,22 @@ Python 3 constructs and has been tested with Python 3.5.
 #<COMMON_CODE>
 
 def DEEP_EQUALS(p1, p2):
-  for i in range(Dimension*Dimension*Dimension):
-    if p1[i] != p2[i]:
-      return False
+  for row in range(0,6):
+    for col in range (0,10):
+      if p1{row][col] != p2[row][col] :
+        return False
   return True
 
 def DESCRIBE_STATE(s):
   # Produces a textual description of a state.
   # Might not be needed in normal operation with GUIs.
-  txt = "[" + str(s[0]) + ", " + str(s[1]) + ", " + str(s[2]) + "]\n" +\
-        "[" + str(s[3]) + ", " + str(s[4]) + ", " + str(s[5]) + "]\n" +\
-        "[" + str(s[6]) + ", " + str(s[7]) + ", " + str(s[8]) + "]\n"
+  for row in range(0,10):
+    for col in range (0,6):
+      if s[row][col] < 10 :
+        txt += str(s[row][col]) + "  "
+      else :
+        txt += str(s[row][col]) + " "
+    txt += "\n"
   return txt
 
 # Make a string and return it as the hash code
@@ -41,15 +46,28 @@ def HASHCODE(s):
   '''The result should be an immutable object such as a string
   that is unique for the state s.'''
   hash = ""
-  for i in range(9):
-    hash += str(s[i])
+  for row in range(0,10):
+    for col in range (0,6):
+      hash += str(s[row][col])
   return hash
 
 def copy_state(s):
-  new = []
-  for i in range(Dimension*Dimension*Dimension):
-    new.append(s[i])
+  new = 6[[]]
+  for row in range(0,10):
+    for col in range (0,6):
+      new.append(s[row][col])
   return new
+
+
+def rotate(p) :
+  new = len(p[0])*[[]]
+  for row in len(p[0]):
+    for col in len(p):
+      new.append(p[row][col])
+  return
+
+def flip(p) :
+  return
 
 def can_move(s,From,To):
   '''Tests whether it's legal to move a number in state s
@@ -109,28 +127,34 @@ INITIAL_STATE = [1, 4, 2, 3, 7, 0, 6, 8, 5] # puzzle4a
 
 
 
-SPACE =   [0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0]
-PEICE1 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0]
-PEICE2 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0]
-PEICE3 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0]
-PEICE4 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0]
-PEICE5 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0]
-PEICE6 =  [0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0,
-           0, 0, 0, 0, 0, 0, 0, 0, 0]
+SPACE =   6*[10*[0]]
+PIECES = {"PIECE1" : PIECE1,
+          "PIECE2" : PIECE2,
+          "PIECE3" : PIECE3,
+          "PIECE4" : PIECE4,
+          "PIECE5" : PIECE5,
+          "PIECE6" : PIECE6,
+          "PIECE7" : PIECE7,
+          "PIECE8" : PIECE8,
+          "PIECE9" : PIECE9,
+          "PIECE10" : PIECE10,
+          "PIECE11" : PIECE11,
+          "PIECE12" : PIECE12}
+          
+PEICE1 = [[0,1,0], [1,1,1], [1,0,0]]
+PIECE2 = [[2,2,2,2,2]]
+PIECE3 = [[3,3,3,3], [0,0,0,3]]
+PIECE4 = [[0,0,4,4], [4,4,4,0]]
+PIECE5 = [[5,5,5], [5,5,0]]
+PIECE6 = [[6,0,0], [6,6,6], [6,0,0]]
+PIECE7 = [[7,7], [0,7], [7,7]]
+PIECE8 = [[8,8,8], [0,0,8], [0,0,8]]
+PIECE9 = [[9,9,0], [0,9,9], [0,0,9]]
+PIECE10 = [[0,10,0], [10,10,10], [0,10,0]]
+PIECE11 = [[0,11,0,0], [11,11,11,11]]
+PIECE12 = [[12,0,0], [12,12,12], [0,0,12]]
 
+INITIAL_STATE = [SPACE,["PIECE" + str(x) for x in range(1,13)]]
 CREATE_INITIAL_STATE = lambda: INITIAL_STATE
 #</INITIAL_STATE>
 
