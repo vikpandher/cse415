@@ -1,7 +1,7 @@
 '''Jigsaw.py
 Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
 Instructor:  S. Tanimoto.
-Assignment 4 Option B: Uncommon Puzzles. 
+Assignment 4 Option A: Pentaminoes. 
 
 Status of the implementation:
 All required features working. Works with sample puzzles.
@@ -10,22 +10,22 @@ All required features working. Works with sample puzzles.
 
 #<METADATA>
 QUIET_VERSION = "0.1"
-PROBLEM_NAME = "Jigsaw Puzzle"
+PROBLEM_NAME = "Pentaminoes"
 PROBLEM_VERSION = "0.1"
 PROBLEM_AUTHORS = ['V. Pandher', 'C. Nash']
 PROBLEM_CREATION_DATE = "25-APR-2016"
 PROBLEM_DESC=\
-'''This formulation of the Jigsaw Puzzel uses generic
+'''This formulation of the Pentaminoes uses generic
 Python 3 constructs and has been tested with Python 3.5.
 '''
 #</METADATA>
 
 #<COMMON_CODE>
 
-def DEEP_EQUALS(p1, p2):
-  for row in range(0,6):
-    for col in range (0,10):
-      if p1{row][col] != p2[row][col] :
+def DEEP_EQUALS(s1, s2):
+  for row in range(0,10):
+    for col in range (0,6):
+      if s1{row][col] != s2[row][col] :
         return False
   return True
 
@@ -52,18 +52,17 @@ def HASHCODE(s):
   return hash
 
 def copy_state(s):
-  new = 6[[]]
+  new = [[0 for x in range(6)] for y in range(10)]
   for row in range(0,10):
     for col in range (0,6):
-      new.append(s[row][col])
+      new[row][col] = s[row][col]
   return new
 
-
 def rotate(p) :
-  new = len(p[0])*[[]]
-  for row in len(p[0]):
-    for col in len(p):
-      new.append(p[row][col])
+  new = [[0 for x in range(len(p[0]))] for y in range(len(p))]
+  for row in range(0, len(p[0])) :
+    for col in range(len(p), 0, -1):
+      new[][] = p[col][row]
   return
 
 def flip(p) :
@@ -93,13 +92,14 @@ def move(s,From,To):
 def goal_test(s):
   '''If the puzzle is completely full
   Then the goal is reached.'''
-  for i in range(Dimension*Dimension*Dimension):
-    if s[i] == 0 :
-      return False
+  for row in range(0,10):
+    for col in range (0,6):
+      if s[row][col] == 0 :
+        return False
   return True
 
 def goal_message(s):
-  return "The Jigsaw is Solved!"
+  return "Pentaminoes is Solved!"
 
 class Operator:
   def __init__(self, name, precond, state_transf):
@@ -116,18 +116,10 @@ class Operator:
 #</COMMON_CODE>
 
 #<COMMON_DATA>
-Dimension = 3
+################
 #</COMMON_DATA>
 
-#<INITIAL_STATE>
-#INITIAL_STATE = [0, 1, 2, 3, 4, 5, 6, 7, 8] # puzzle0
-#INITIAL_STATE = [1, 0, 2, 3, 4, 5, 6, 7, 8] # puzzle1a
-#INITIAL_STATE = [3, 1, 2, 4, 0, 5, 6, 7, 8] # puzzle2a
-INITIAL_STATE = [1, 4, 2, 3, 7, 0, 6, 8, 5] # puzzle4a
-
-
-
-SPACE =   6*[10*[0]]
+SPACE = [[0 for x in range(6)] for y in range(10)]
 PIECES = {"PIECE1" : PIECE1,
           "PIECE2" : PIECE2,
           "PIECE3" : PIECE3,
@@ -141,18 +133,18 @@ PIECES = {"PIECE1" : PIECE1,
           "PIECE11" : PIECE11,
           "PIECE12" : PIECE12}
           
-PEICE1 = [[0,1,0], [1,1,1], [1,0,0]]
-PIECE2 = [[2,2,2,2,2]]
-PIECE3 = [[3,3,3,3], [0,0,0,3]]
-PIECE4 = [[0,0,4,4], [4,4,4,0]]
-PIECE5 = [[5,5,5], [5,5,0]]
-PIECE6 = [[6,0,0], [6,6,6], [6,0,0]]
-PIECE7 = [[7,7], [0,7], [7,7]]
-PIECE8 = [[8,8,8], [0,0,8], [0,0,8]]
-PIECE9 = [[9,9,0], [0,9,9], [0,0,9]]
+PEICE1 = [[0,1,1], [1,1,0], [0,1,0]]
+PIECE2 = [[2], [2], [2], [2], [2]]
+PIECE3 = [[3,0], [3,0], [3,0], [3,3]]
+PIECE4 = [[0,4], [4,4], [4,0], [4,0]]
+PIECE5 = [[0,5], [5,5], [5,5]]
+PIECE6 = [[6,6,6], [0,6,0], [0,6,0]]
+PIECE7 = [[7,0,7], [7,7,7]]
+PIECE8 = [[8,0,0], [8,0,0], [8,8,8]]
+PIECE9 = [[9,0,0], [9,9,0], [0,9,9]]
 PIECE10 = [[0,10,0], [10,10,10], [0,10,0]]
-PIECE11 = [[0,11,0,0], [11,11,11,11]]
-PIECE12 = [[12,0,0], [12,12,12], [0,0,12]]
+PIECE11 = [[0,11], [11,11], [0,11], [0,11]]
+PIECE12 = [[12,12,0], [0,12,0], [0,12,12]]
 
 INITIAL_STATE = [SPACE,["PIECE" + str(x) for x in range(1,13)]]
 CREATE_INITIAL_STATE = lambda: INITIAL_STATE
