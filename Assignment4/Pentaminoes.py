@@ -69,8 +69,14 @@ def rotate(old_list):
       new_list[i][j] = old_list[new_row_count-j][i]
   return(new_list)
 
-def flip(p) :
-  return
+def flip(old_list):
+  old_row_count = len(old_list)
+  old_col_count = len(old_list[0])
+  new_list = [[0 for x in range(old_col_count)] for y in range(old_row_count)]
+  for j in range(0, old_col_count):
+    for i in range(0, old_row_count):
+      new_list[i][j] = old_list[i][old_col_count-1-j]
+  return(new_list)
 
 def can_move(s,From,To):
   '''Tests whether it's legal to move a number in state s
