@@ -126,7 +126,8 @@ class Operator:
 #</COMMON_CODE>
 
 #<COMMON_DATA>
-################
+STATE_WIDTH = 6
+STATE_HEIGHT = 10
 #</COMMON_DATA>
 
 SPACE = [[0 for x in range(6)] for y in range(10)]
