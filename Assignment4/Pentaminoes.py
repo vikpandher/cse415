@@ -106,6 +106,7 @@ def place(state, peice, row, col):
       state[i+col][j+row] = peice[i][j]
   return(state)
   
+  
 def can_place(state, peice, row, col):
   peice_row_count = len(peice)
   peice_col_count = len(peice[0])

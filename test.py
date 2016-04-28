@@ -33,6 +33,7 @@ def place(state, peice, row, col):
       state[i+col][j+row] = peice[i][j]
   return(state)
   
+  
 def can_place(state, peice, row, col):
   STATE_HEIGHT = len(state)
   STATE_WIDTH = len(state[0])
