@@ -98,6 +98,24 @@ def move(s,From,To):
   new[From] = temp
   return new # return new state
 
+def place(state, peice, row, col):
+  peice_row_count = len(peice)
+  peice_col_count = len(peice[0])
+  for j in range(0, peice_col_count):
+    for i in range(0, peice_row_count):
+      state[i+col][j+row] = peice[i][j]
+  return(state)
+  
+def can_place(state, peice, row, col):
+  peice_row_count = len(peice)
+  peice_col_count = len(peice[0])
+  if(peice_row_count + col > STATE_HEIGHT) or (peice_col_count + row > STATE_WIDTH):
+    return False;
+  for j in range(0, peice_col_count):
+    for i in range(0, peice_row_count):
+      if(peice[i][j] != 0 and state[i+col][j+row] != 0):
+        return False
+  return True
 
 def goal_test(s):
   '''If the puzzle is completely full
