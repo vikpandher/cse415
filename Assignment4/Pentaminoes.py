@@ -192,11 +192,11 @@ combinations = [(0, 1), (0, 3),
 locations = [(x, y) for x in range(STATE_WIDTH) for y in range(STATE_HEIGHT)]
 OPERATORS = [Operator("Place pentamino " + str(mino) + " in location " + str(x) + " " + str(y) + ".",
             
-            lambda s,mino=mino, : can_place(s,p,q),
+            lambda s,mino=mino, x=x, y=y : can_place(s,mino,x,y),
             # The default value construct is needed
             # here to capture the values of p&q separately
             # in each iteration of the list comp. iteration.
-            lambda s,p=p,q=q: place(s,p,q) )
+            lambda s,mino=mino,x=x,y=y: place(s,mino,x,y) )
             
             for (p, q) in combinations]
 #</OPERATORS>
