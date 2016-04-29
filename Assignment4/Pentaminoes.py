@@ -66,7 +66,7 @@ def rotate(old_list):
   new_list = [[0 for x in range(new_col_count)] for y in range(new_row_count)]
   for j in range(0, new_col_count):
     for i in range(0, new_row_count):
-      new_list[i][j] = old_list[new_row_count-j][i]
+      new_list[i][j] = old_list[old_row_count-1-j][i]
   return(new_list)
 
 def flip(old_list):
@@ -77,6 +77,24 @@ def flip(old_list):
     for i in range(0, old_row_count):
       new_list[i][j] = old_list[i][old_col_count-1-j]
   return(new_list)
+
+def generate_peices(peice):
+  peices = [peice]
+  peice90 = rotate(peice)
+  peice180 = rotate(peice90)
+  peice270 = rotate(peice180)
+  peiceflip = flip(peice)
+  peiceflip90 = rotate(peiceflip)
+  peiceflip180 = rotate(peiceflip90)
+  peiceflip270 = rotate(peiceflip180)
+  peices.append(peice90)
+  peices.append(peice180)
+  peices.append(peice270)
+  peices.append(peiceflip)
+  peices.append(peiceflip90)
+  peices.append(peiceflip180)
+  peices.append(peiceflip270)
+  return peices
 
 def can_move(s,From,To):
   '''Tests whether it's legal to move a number in state s
@@ -149,18 +167,18 @@ STATE_HEIGHT = 10
 #</COMMON_DATA>
 
 SPACE = [[0 for x in range(STATE_WIDTH)] for y in range(STATE_HEIGHT)]
-PIECES = {"PIECE1" : PIECE1,
-          "PIECE2" : PIECE2,
-          "PIECE3" : PIECE3,
-          "PIECE4" : PIECE4,
-          "PIECE5" : PIECE5,
-          "PIECE6" : PIECE6,
-          "PIECE7" : PIECE7,
-          "PIECE8" : PIECE8,
-          "PIECE9" : PIECE9,
-          "PIECE10" : PIECE10,
-          "PIECE11" : PIECE11,
-          "PIECE12" : PIECE12}
+PIECES = {"PIECE1" : generate_peices(PIECE1),
+          "PIECE2" : generate_peices(PIECE2),
+          "PIECE3" : generate_peices(PIECE3),
+          "PIECE4" : generate_peices(PIECE4),
+          "PIECE5" : generate_peices(PIECE5),
+          "PIECE6" : generate_peices(PIECE6),
+          "PIECE7" : generate_peices(PIECE7),
+          "PIECE8" : generate_peices(PIECE8),
+          "PIECE9" : generate_peices(PIECE9),
+          "PIECE10" : generate_peices(PIECE10),
+          "PIECE11" : generate_peices(PIECE11),
+          "PIECE12" : generate_peices(PIECE12)}
           
 PEICE1 = [[0,1,1], [1,1,0], [0,1,0]]
 PIECE2 = [[2], [2], [2], [2], [2]]
