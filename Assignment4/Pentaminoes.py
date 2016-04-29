@@ -106,7 +106,6 @@ def place(state, peice, row, col):
       state[i+col][j+row] = peice[i][j]
   return(state)
   
-  
 def can_place(state, peice, row, col):
   peice_row_count = len(peice)
   peice_col_count = len(peice[0])
@@ -149,7 +148,7 @@ STATE_WIDTH = 6
 STATE_HEIGHT = 10
 #</COMMON_DATA>
 
-SPACE = [[0 for x in range(6)] for y in range(10)]
+SPACE = [[0 for x in range(STATE_WIDTH)] for y in range(STATE_HEIGHT)]
 PIECES = {"PIECE1" : PIECE1,
           "PIECE2" : PIECE2,
           "PIECE3" : PIECE3,
@@ -190,13 +189,15 @@ combinations = [(0, 1), (0, 3),
                 (6, 3), (6, 7),
                 (7, 4), (7, 6), (7, 8),
                 (8, 5), (8, 7)]
-OPERATORS = [Operator("Move square from location " + str(p) +\
-            " to location "+ str(q),
-            lambda s,p=p,q=q: can_move(s,p,q),
+locations = [(x, y) for x in range(STATE_WIDTH) for y in range(STATE_HEIGHT)]
+OPERATORS = [Operator("Place pentamino " + str(mino) + " in location " + str(x) + " " + str(y) + ".",
+            
+            lambda s,mino=mino, : can_place(s,p,q),
             # The default value construct is needed
             # here to capture the values of p&q separately
             # in each iteration of the list comp. iteration.
-            lambda s,p=p,q=q: move(s,p,q) )
+            lambda s,p=p,q=q: place(s,p,q) )
+            
             for (p, q) in combinations]
 #</OPERATORS>
 
