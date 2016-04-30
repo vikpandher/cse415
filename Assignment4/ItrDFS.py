@@ -62,6 +62,8 @@ def IterativeDFS(initial_state):
       #print("Trying operator: "+op.name)
       if op.precond(S):
         new_state = op.state_transf(S)
+        print(Problem.DESCRIBE_STATE(new_state)) ##########################################
+        print()
         if not occurs_in(new_state, CLOSED):
           L.append(new_state)
           BACKLINKS[Problem.HASHCODE(new_state)] = S
