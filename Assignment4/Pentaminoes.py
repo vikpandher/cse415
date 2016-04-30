@@ -220,7 +220,7 @@ def generate_operators():
   piece_list = PIECES.values();
   for piece in piece_list:
     for orientation in piece:
-      operators.append(
+      operators.extend(
       [Operator("Place pentamino " + str(orientation) + " in location " +\
       str(x) + " " + str(y) + ".",
       
@@ -228,7 +228,7 @@ def generate_operators():
       # The default value construct is needed
       # here to capture the values of p&q separately
       # in each iteration of the list comp. iteration.
-      lambda s,x=x,y=y: place(s,orientation,x,y) )
+      lambda s,x=x,y=y: place(s,orientation,x,y))
       
       for (x, y) in LOCATIONS])
   return operators
