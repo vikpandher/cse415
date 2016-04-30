@@ -18,6 +18,24 @@ Assignment 4 Option A: Pentaminoes2.
 Status of the implementation:
 All required features working. Works with sample puzzles.
 
+The pentominoes states are repersented by a board and a list of available_pieces.
+So, the state is a list of 2 things.
+An empty board would look like this: with a 6 by 10 board
+Initial State:
+0  0  0  0  0  0
+0  0  0  0  0  0
+0  0  0  0  0  0
+0  0  0  0  0  0
+0  0  0  0  0  0
+0  0  0  0  0  0
+0  0  0  0  0  0
+0  0  0  0  0  0
+0  0  0  0  0  0
+0  0  0  0  0  0
+
+Each peice is represented by a number
+
+
 '''
 
 #<METADATA>
