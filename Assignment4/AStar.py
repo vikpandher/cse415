@@ -19,24 +19,12 @@ import sys
 from heapq import heappush, heappop 
 
 if sys.argv==[''] or len(sys.argv)<2:
-    import EightPuzzleWithHeuristics as Problem
-    Heuristic = 'h_euclidean'
-    import puzzle1 as Puzzle
-elif len(sys.argv)<3:
-    import importlib
-    Problem = importlib.import_module(sys.argv[1])
-    Heuristic = 'h_euclidean'
-    import puzzle2a as Puzzle
-elif len(sys.argv)<4:
-    import importlib
-    Problem = importlib.import_module(sys.argv[1])
-    Heuristic = sys.argv[2]
-    #import puzzle2a as Puzzle
+    import Pentaminoes2 as Problem
+    Heuristic = 'h_custom'
 else:
   import importlib
   Problem = importlib.import_module(sys.argv[1])
   Heuristic = sys.argv[2]
-  Puzzle = importlib.import_module(sys.argv[3][:-3])
 
 
 print("\nWelcome to AStar")
