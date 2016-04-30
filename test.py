@@ -124,7 +124,8 @@ OPERATORS = [Operator("Place pentamino " + str(PIECE1) + " in location " + str(x
             lambda s,x=x,y=y: place(s[0],PIECE1,x,y) )
             
             for (x, y) in LOCATIONS]
-  
+
+# UPDATED
 def generate_operators():
   operators = []
   piece_list = PIECES.values();
