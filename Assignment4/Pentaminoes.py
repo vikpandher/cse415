@@ -56,6 +56,10 @@ def DESCRIBE_STATE(s):
       else :
         txt += str(state[row][col]) + " "
     txt += "\n"
+  available_pieces = s[1]
+  for piece in available_pieces:
+    txt += piece + " "
+  
   return txt
 
 # Make a string and return it as the hash code
@@ -120,7 +124,8 @@ def generate_pieces(piece):
   pieces.append(pieceflip270)
   return pieces
 
-def place(state, piece, orientation, row, col):
+def place(old_state, piece, orientation, row, col):
+  state = copy_state(old_state)
   board = state[0]
   available_pieces = state[1]
   piece_row_count = len(orientation)
@@ -220,17 +225,17 @@ def generate_operators():
   for piece in ["PIECE" + str(x) for x in range(1,13)]:
     orientations = PIECES[piece]
     for orientation in orientations:
-      operators.extend(
+      this_operator = []
+      this_operator.extend(
       [Operator("Place pentamino " + str(orientation) + " in location " +\
-      str(x) + " " + str(y) + ".",
-      
-      lambda s,x=x,y=y : is_available(s[1], piece) and can_place(s[0], orientation, x, y),
+      str(x) + "," + str(y) + ".",
+      lambda s,piece=piece,orientation=orientation,x=x,y=y : is_available(s[1], piece) and can_place(s[0],orientation,x,y),
       # The default value construct is needed
       # here to capture the values of p&q separately
       # in each iteration of the list comp. iteration.
-      lambda s,x=x,y=y: place(s, piece, orientation, x, y) )
-      
+      lambda s,piece=piece,orientation=orientation,x=x,y=y: place(s, piece, orientation, x, y) )
       for (x, y) in LOCATIONS])
+      operators.extend(this_operator)
   return operators
 
 OPERATORS = generate_operators()

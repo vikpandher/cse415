@@ -23,19 +23,18 @@ def flip(old_list):
 state_a = [[0 for x in range(6)] for y in range(10)]
 piece_a = [[0,1,1], [1,1,0], [0,1,0]]
 
-# UPDATED
-def place(state, piece, row, col):
+#UPDATED
+def place(state, piece, orientation, row, col):
   board = state[0]
   available_pieces = state[1]
-  piece_row_count = len(piece)
-  piece_col_count = len(piece[0])
+  piece_row_count = len(orientation)
+  piece_col_count = len(orientation[0])
   for j in range(0, piece_col_count):
     for i in range(0, piece_row_count):
-      board[i+col][j+row] = piece[i][j]
+      board[i+col][j+row] = orientation[i][j]
   available_pieces.remove(piece)
   return(state)
 
-# UPDATED
 def can_place(board, piece, row, col):
   piece_row_count = len(piece)
   piece_col_count = len(piece[0])
@@ -47,7 +46,6 @@ def can_place(board, piece, row, col):
         return False
   return True
 
-# NEW
 def is_available(list, piece):
   for p in list:
     if p == piece:
@@ -135,21 +133,34 @@ def generate_operators():
     for orientation in orientations:
       print("orientation_count = " + str(orientation_count))
       orientation_count += 1
-      operators.append(
-      [Operator("Place pentamino " + str(orientation) + " in location " +\
-      str(x) + " " + str(y) + ".",
       
-      lambda s,x=x,y=y : is_available(s[1], piece) and can_place(s[0],orientation,x,y),
+      this_operator = []
+      this_operator.extend(
+      [Operator("Place pentamino " + str(orientation) + " in location " +\
+      str(x) + "," + str(y) + ".",
+      
+      lambda s,piece=piece,orientation=orientation,x=x,y=y : is_available(s[1], piece) and can_place(s[0],orientation,x,y),
       # The default value construct is needed
       # here to capture the values of p&q separately
       # in each iteration of the list comp. iteration.
-      lambda s,x=x,y=y: place(s,orientation,x,y) )
+      lambda s,piece=piece,orientation=orientation,x=x,y=y: place(s, piece, orientation, x, y) )
       
       for (x, y) in LOCATIONS])
+      
+      operators.extend(this_operator)
+      
+      for op in this_operator:
+        print("this op:")
+        print(op.name)
+        print("piece")
+        print(piece)
+        print("orientation")
+        print(orientation)
+        print()
   return operators
 
 
-print(len(generate_operators())) # Thats 96 operators
+print(len(generate_operators())) # Thats 5760 operators
 print()
 
 print(is_available)
