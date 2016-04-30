@@ -23,24 +23,37 @@ def flip(old_list):
 state_a = [[0 for x in range(6)] for y in range(10)]
 piece_a = [[0,1,1], [1,1,0], [0,1,0]]
 
+# UPDATED
 def place(state, piece, row, col):
+  board = state[0]
+  available_pieces = state[1]
   piece_row_count = len(piece)
   piece_col_count = len(piece[0])
   for j in range(0, piece_col_count):
     for i in range(0, piece_row_count):
-      state[i+col][j+row] = piece[i][j]
+      board[i+col][j+row] = piece[i][j]
+  available_pieces.remove(piece)
   return(state)
-  
-def can_place(state, piece, row, col):
+
+# UPDATED
+def can_place(board, piece, row, col):
   piece_row_count = len(piece)
   piece_col_count = len(piece[0])
   if(piece_row_count + col > STATE_HEIGHT) or (piece_col_count + row > STATE_WIDTH):
     return False;
   for j in range(0, piece_col_count):
     for i in range(0, piece_row_count):
-      if(piece[i][j] != 0 and state[i+col][j+row] != 0):
+      if(piece[i][j] != 0 and board[i+col][j+row] != 0):
         return False
   return True
+
+# NEW
+def is_available(list, piece):
+  for p in list:
+    if p == piece:
+      return True
+  return False
+
   
 STATE_WIDTH = 6
 STATE_HEIGHT = 10
@@ -112,25 +125,25 @@ OPERATORS = [Operator("Place pentamino " + str(PIECE1) + " in location " + str(x
             
             for (x, y) in LOCATIONS]
   
-def generate_operators(available_pieces):
+def generate_operators():
   operators = []
-  for piece_key in available_pieces:
-    piece_list = PIECES[piece_key]
-    for piece in piece_list:
+  piece_list = PIECES.values();
+  for piece in piece_list:
+    for orientation in piece:
       operators.append(
-      [Operator("Place pentamino " + str(piece) + " in location " +\
+      [Operator("Place pentamino " + str(orientation) + " in location " +\
       str(x) + " " + str(y) + ".",
       
-      lambda s,x=x,y=y : can_place(s[0],piece,x,y),
+      lambda s,x=x,y=y : is_available(s[1], orientation) and can_place(s[0],orientation,x,y),
       # The default value construct is needed
       # here to capture the values of p&q separately
       # in each iteration of the list comp. iteration.
-      lambda s,x=x,y=y: place(s[0],piece,x,y) )
+      lambda s,x=x,y=y: place(s,orientation,x,y) )
       
       for (x, y) in LOCATIONS])
   return operators
-  
-print(len(generate_operators(INITIAL_STATE[1])))
+
+print(len(generate_operators())) # Thats 96 operators
 print()
   
   
