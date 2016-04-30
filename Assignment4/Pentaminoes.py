@@ -132,7 +132,8 @@ def place(old_state, piece, orientation, row, col):
   piece_col_count = len(orientation[0])
   for j in range(0, piece_col_count):
     for i in range(0, piece_row_count):
-      board[i+col][j+row] = orientation[i][j]
+      if(orientation[i][j] != 0):
+        board[i+col][j+row] = orientation[i][j]
   available_pieces.remove(piece)
   return(state)
   
