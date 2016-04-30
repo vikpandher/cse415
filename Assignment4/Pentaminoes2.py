@@ -62,9 +62,6 @@ def DESCRIBE_STATE(s):
   
   return txt
 
-def h_hamming(s):
-  return len(s[1])
-
 # Make a string and return it as the hash code
 def HASHCODE(s):
   '''The result should be an immutable object such as a string
@@ -182,6 +179,50 @@ class Operator:
   def apply(self, s):
     return self.state_transf(s)
 
+def h_hamming(s):
+  return len(s[1])
+
+TO_VISIT = []
+VISITED = []
+
+def h_custom(s):
+  board = s[0]
+  smallest_depth = 1000;
+  for row in range(0,STATE_HEIGHT):
+    for col in range (0,STATE_WIDTH):
+      if(board[row][col] == 0):
+        depth = 0
+        TO_VISIT.append([row, col])
+        while(len(TO_VISIT) > 0):
+          current = TO_VISIT.pop()
+          VISITED.append(current)
+          depth += 1
+          pit_search(board, current)
+        
+        if(depth < smallest_depth):
+          smallest_depth = depth
+  return 1000000 / smallest_depth + len(s[1])
+  
+def visited(pit):
+  row = pit[0]
+  col = pit[1]
+  for v in VISITED:
+    if v[0] == row and v[1] == col:
+      return True
+  return False
+
+def pit_search(board, pit):
+  row = pit[0]
+  col = pit[1]
+  if((board[row][col] == 0)):
+    if(row - 1 > 0 and not visited([row - 1, col])):
+      TO_VISIT.append([row - 1, col])
+    if(row + 1 < STATE_HEIGHT and not visited([row + 1, col])):
+      TO_VISIT.append([row + 1, col])
+    if(col - 1 > 0 and not visited([row, col - 1])):
+      TO_VISIT.append([row, col - 1])
+    if(col + 1 < STATE_WIDTH and not visited([row, col + 1])):
+      TO_VISIT.append([row, col + 1])
 #</COMMON_CODE>
 
 #<COMMON_DATA>
@@ -241,5 +282,5 @@ GOAL_MESSAGE_FUNCTION = lambda s: goal_message(s)
 #</GOAL_MESSAGE_FUNCTION>
 
 #<HEURISTICS>
-HEURISTICS = {'h_hamming':h_hamming}
+HEURISTICS = {'h_hamming':h_hamming, 'h_custom':h_custom}
 #</HEURISTICS>
