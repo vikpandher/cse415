@@ -78,23 +78,23 @@ def flip(old_list):
       new_list[i][j] = old_list[i][old_col_count-1-j]
   return(new_list)
 
-def generate_peices(peice):
-  peices = [peice]
-  peice90 = rotate(peice)
-  peice180 = rotate(peice90)
-  peice270 = rotate(peice180)
-  peiceflip = flip(peice)
-  peiceflip90 = rotate(peiceflip)
-  peiceflip180 = rotate(peiceflip90)
-  peiceflip270 = rotate(peiceflip180)
-  peices.append(peice90)
-  peices.append(peice180)
-  peices.append(peice270)
-  peices.append(peiceflip)
-  peices.append(peiceflip90)
-  peices.append(peiceflip180)
-  peices.append(peiceflip270)
-  return peices
+def generate_pieces(piece):
+  pieces = [piece]
+  piece90 = rotate(piece)
+  piece180 = rotate(piece90)
+  piece270 = rotate(piece180)
+  pieceflip = flip(piece)
+  pieceflip90 = rotate(pieceflip)
+  pieceflip180 = rotate(pieceflip90)
+  pieceflip270 = rotate(pieceflip180)
+  pieces.append(piece90)
+  pieces.append(piece180)
+  pieces.append(piece270)
+  pieces.append(pieceflip)
+  pieces.append(pieceflip90)
+  pieces.append(pieceflip180)
+  pieces.append(pieceflip270)
+  return pieces
 
 def can_move(s,From,To):
   '''Tests whether it's legal to move a number in state s
@@ -116,22 +116,22 @@ def move(s,From,To):
   new[From] = temp
   return new # return new state
 
-def place(state, peice, row, col):
-  peice_row_count = len(peice)
-  peice_col_count = len(peice[0])
-  for j in range(0, peice_col_count):
-    for i in range(0, peice_row_count):
-      state[i+col][j+row] = peice[i][j]
+def place(state, piece, row, col):
+  piece_row_count = len(piece)
+  piece_col_count = len(piece[0])
+  for j in range(0, piece_col_count):
+    for i in range(0, piece_row_count):
+      state[i+col][j+row] = piece[i][j]
   return(state)
   
-def can_place(state, peice, row, col):
-  peice_row_count = len(peice)
-  peice_col_count = len(peice[0])
-  if(peice_row_count + col > STATE_HEIGHT) or (peice_col_count + row > STATE_WIDTH):
+def can_place(state, piece, row, col):
+  piece_row_count = len(piece)
+  piece_col_count = len(piece[0])
+  if(piece_row_count + col > STATE_HEIGHT) or (piece_col_count + row > STATE_WIDTH):
     return False;
-  for j in range(0, peice_col_count):
-    for i in range(0, peice_row_count):
-      if(peice[i][j] != 0 and state[i+col][j+row] != 0):
+  for j in range(0, piece_col_count):
+    for i in range(0, piece_row_count):
+      if(piece[i][j] != 0 and state[i+col][j+row] != 0):
         return False
   return True
 
@@ -167,20 +167,20 @@ STATE_HEIGHT = 10
 #</COMMON_DATA>
 
 SPACE = [[0 for x in range(STATE_WIDTH)] for y in range(STATE_HEIGHT)]
-PIECES = {"PIECE1" : generate_peices(PIECE1),
-          "PIECE2" : generate_peices(PIECE2),
-          "PIECE3" : generate_peices(PIECE3),
-          "PIECE4" : generate_peices(PIECE4),
-          "PIECE5" : generate_peices(PIECE5),
-          "PIECE6" : generate_peices(PIECE6),
-          "PIECE7" : generate_peices(PIECE7),
-          "PIECE8" : generate_peices(PIECE8),
-          "PIECE9" : generate_peices(PIECE9),
-          "PIECE10" : generate_peices(PIECE10),
-          "PIECE11" : generate_peices(PIECE11),
-          "PIECE12" : generate_peices(PIECE12)}
+PIECES = {"PIECE1" : generate_pieces(PIECE1),
+          "PIECE2" : generate_pieces(PIECE2),
+          "PIECE3" : generate_pieces(PIECE3),
+          "PIECE4" : generate_pieces(PIECE4),
+          "PIECE5" : generate_pieces(PIECE5),
+          "PIECE6" : generate_pieces(PIECE6),
+          "PIECE7" : generate_pieces(PIECE7),
+          "PIECE8" : generate_pieces(PIECE8),
+          "PIECE9" : generate_pieces(PIECE9),
+          "PIECE10" : generate_pieces(PIECE10),
+          "PIECE11" : generate_pieces(PIECE11),
+          "PIECE12" : generate_pieces(PIECE12)}
           
-PEICE1 = [[0,1,1], [1,1,0], [0,1,0]]
+PIECE1 = [[0,1,1], [1,1,0], [0,1,0]]
 PIECE2 = [[2], [2], [2], [2], [2]]
 PIECE3 = [[3,0], [3,0], [3,0], [3,3]]
 PIECE4 = [[0,4], [4,4], [4,0], [4,0]]
