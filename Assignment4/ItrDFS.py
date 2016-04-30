@@ -11,7 +11,7 @@
 import sys
 
 if sys.argv==[''] or len(sys.argv)<2:
-  import EightPuzzle as Problem
+  import Pentaminoes as Problem
 else:
   import importlib
   Problem = importlib.import_module(sys.argv[1])

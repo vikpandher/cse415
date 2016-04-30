@@ -1,4 +1,16 @@
-'''Jigsaw.py
+'''Pentaminoes.py
+A QUIET Solving Tool problem formulation.
+QUIET = Quetzal User Intelligence Enhancing Technology.
+The XML-like tags used here serve to identify key sections of this 
+problem formulation.  
+
+CAPITALIZED constructs are generally present in any problem
+formulation and therefore need to be spelled exactly the way they are.
+Other globals begin with a capital letter but otherwise are lower
+case or camel case.
+'''
+
+'''
 Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
 Instructor:  S. Tanimoto.
 Assignment 4 Option A: Pentaminoes. 
@@ -17,27 +29,32 @@ PROBLEM_CREATION_DATE = "25-APR-2016"
 PROBLEM_DESC=\
 '''This formulation of the Pentaminoes uses generic
 Python 3 constructs and has been tested with Python 3.5.
+It is designed to work accordingly to the QUIET tools interface.
 '''
 #</METADATA>
 
 #<COMMON_CODE>
 
 def DEEP_EQUALS(s1, s2):
+  state1 = s1[0]
+  state2 = s2[0]
   for row in range(0,10):
     for col in range (0,6):
-      if s1{row][col] != s2[row][col] :
+      if state1[row][col] != state2[row][col] :
         return False
   return True
 
 def DESCRIBE_STATE(s):
   # Produces a textual description of a state.
   # Might not be needed in normal operation with GUIs.
+  state = s[0]
+  txt = ""
   for row in range(0,10):
     for col in range (0,6):
-      if s[row][col] < 10 :
-        txt += str(s[row][col]) + "  "
+      if state[row][col] < 10 :
+        txt += str(state[row][col]) + "  "
       else :
-        txt += str(s[row][col]) + " "
+        txt += str(state[row][col]) + " "
     txt += "\n"
   return txt
 
@@ -45,17 +62,19 @@ def DESCRIBE_STATE(s):
 def HASHCODE(s):
   '''The result should be an immutable object such as a string
   that is unique for the state s.'''
+  state = s[0]
   hash = ""
   for row in range(0,10):
     for col in range (0,6):
-      hash += str(s[row][col])
+      hash += str(state[row][col])
   return hash
 
 def copy_state(s):
+  state = s[0]
   new = [[0 for x in range(6)] for y in range(10)]
   for row in range(0,10):
     for col in range (0,6):
-      new[row][col] = s[row][col]
+      new[row][col] = state[row][col]
   return new
 
 def rotate(old_list):
@@ -96,26 +115,6 @@ def generate_pieces(piece):
   pieces.append(pieceflip270)
   return pieces
 
-def can_move(s,From,To):
-  '''Tests whether it's legal to move a number in state s
-     from the From location to the To location.'''
-  try:
-    # Can only move from a 0. No other check needed since operators
-    # only has valid move combinations
-    if s[From] == 0: return True
-    return False
-  except (Exception) as e:
-    print(e)
-
-def move(s,From,To):
-  '''Assuming it's legal to make the move, this computes
-     the new state resulting from moving.'''
-  new = copy_state(s) # start with a deep copy.
-  temp = new[To]
-  new[To] = new[From]
-  new[From] = temp
-  return new # return new state
-
 def place(state, piece, row, col):
   piece_row_count = len(piece)
   piece_col_count = len(piece[0])
@@ -138,9 +137,10 @@ def can_place(state, piece, row, col):
 def goal_test(s):
   '''If the puzzle is completely full
   Then the goal is reached.'''
+  state = s[0]
   for row in range(0,10):
     for col in range (0,6):
-      if s[row][col] == 0 :
+      if state[row][col] == 0 :
         return False
   return True
 
@@ -165,20 +165,6 @@ class Operator:
 STATE_WIDTH = 6
 STATE_HEIGHT = 10
 #</COMMON_DATA>
-
-SPACE = [[0 for x in range(STATE_WIDTH)] for y in range(STATE_HEIGHT)]
-PIECES = {"PIECE1" : generate_pieces(PIECE1),
-          "PIECE2" : generate_pieces(PIECE2),
-          "PIECE3" : generate_pieces(PIECE3),
-          "PIECE4" : generate_pieces(PIECE4),
-          "PIECE5" : generate_pieces(PIECE5),
-          "PIECE6" : generate_pieces(PIECE6),
-          "PIECE7" : generate_pieces(PIECE7),
-          "PIECE8" : generate_pieces(PIECE8),
-          "PIECE9" : generate_pieces(PIECE9),
-          "PIECE10" : generate_pieces(PIECE10),
-          "PIECE11" : generate_pieces(PIECE11),
-          "PIECE12" : generate_pieces(PIECE12)}
           
 PIECE1 = [[0,1,1], [1,1,0], [0,1,0]]
 PIECE2 = [[2], [2], [2], [2], [2]]
@@ -193,30 +179,48 @@ PIECE10 = [[0,10,0], [10,10,10], [0,10,0]]
 PIECE11 = [[0,11], [11,11], [0,11], [0,11]]
 PIECE12 = [[12,12,0], [0,12,0], [0,12,12]]
 
+SPACE = [[0 for x in range(STATE_WIDTH)] for y in range(STATE_HEIGHT)]
+PIECES = {"PIECE1" : generate_pieces(PIECE1),
+          "PIECE2" : generate_pieces(PIECE2),
+          "PIECE3" : generate_pieces(PIECE3),
+          "PIECE4" : generate_pieces(PIECE4),
+          "PIECE5" : generate_pieces(PIECE5),
+          "PIECE6" : generate_pieces(PIECE6),
+          "PIECE7" : generate_pieces(PIECE7),
+          "PIECE8" : generate_pieces(PIECE8),
+          "PIECE9" : generate_pieces(PIECE9),
+          "PIECE10" : generate_pieces(PIECE10),
+          "PIECE11" : generate_pieces(PIECE11),
+          "PIECE12" : generate_pieces(PIECE12)}
+
+
 INITIAL_STATE = [SPACE,["PIECE" + str(x) for x in range(1,13)]]
 CREATE_INITIAL_STATE = lambda: INITIAL_STATE
 #</INITIAL_STATE>
 
 #<OPERATORS>
-combinations = [(0, 1), (0, 3),
-                (1, 0), (1, 2), (1, 4),
-                (2, 1), (2, 5),
-                (3, 0), (3, 4), (3, 6),
-                (4, 1), (4, 3), (4, 5), (4, 7),
-                (5, 2), (5, 4), (5, 8),
-                (6, 3), (6, 7),
-                (7, 4), (7, 6), (7, 8),
-                (8, 5), (8, 7)]
-locations = [(x, y) for x in range(STATE_WIDTH) for y in range(STATE_HEIGHT)]
-OPERATORS = [Operator("Place pentamino " + str(mino) + " in location " + str(x) + " " + str(y) + ".",
-            
-            lambda s,mino=mino, x=x, y=y : can_place(s,mino,x,y),
-            # The default value construct is needed
-            # here to capture the values of p&q separately
-            # in each iteration of the list comp. iteration.
-            lambda s,mino=mino,x=x,y=y: place(s,mino,x,y) )
-            
-            for (p, q) in combinations]
+LOCATIONS = [(x, y) for x in range(STATE_WIDTH) for y in range(STATE_HEIGHT)]
+
+def generate_operators():
+  operators = []
+  for piece_key in PIECES:
+    piece_list = PIECES[piece_key]
+    for piece in piece_list:
+      operators.append(
+      [Operator("Place pentamino " + str(piece) + " in location " +\
+      str(x) + " " + str(y) + ".",
+      
+      lambda s,piece=piece,x=x,y=y : can_place(s[0],piece,x,y),
+      # The default value construct is needed
+      # here to capture the values of p&q separately
+      # in each iteration of the list comp. iteration.
+      lambda s,piece=piece,x=x,y=y: place(s[0],piece,x,y) )
+      
+      for (x, y) in LOCATIONS])
+  return operators
+
+OPERATORS = generate_operators()
+
 #</OPERATORS>
 
 #<GOAL_TEST> (optional)
