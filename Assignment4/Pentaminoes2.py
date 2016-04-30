@@ -51,7 +51,7 @@ def DESCRIBE_STATE(s):
   txt = ""
   for row in range(0,STATE_HEIGHT):
     for col in range (0,STATE_WIDTH):
-      if state[row][col] < STATE_HEIGHT :
+      if state[row][col] < STATE_HEIGHT + 1 :
         txt += str(state[row][col]) + "  "
       else :
         txt += str(state[row][col]) + " "
@@ -186,11 +186,11 @@ STATE_WIDTH = 5
 STATE_HEIGHT = 5
 #</COMMON_DATA>
           
-PIECE1 = [[3,0], [3,0], [3,0], [3,3]] 
-PIECE2 = [[0,4], [4,4], [4,0], [4,0]] 
-PIECE3 = [[7,0,7], [7,7,7]] 
-PIECE4 = [[9,0,0], [9,9,0], [0,9,9]] 
-PIECE5 = [[0,11], [11,11], [0,11], [0,11]] 
+PIECE1 = [[1,0], [1,0], [1,0], [1,1]] 
+PIECE2 = [[0,2], [2,2], [2,0], [2,0]] 
+PIECE3 = [[3,0,3], [3,3,3]] 
+PIECE4 = [[4,0,0], [4,4,0], [0,4,4]] 
+PIECE5 = [[0,5], [5,5], [0,5], [0,5]] 
 
 SPACE = [[0 for x in range(STATE_WIDTH)] for y in range(STATE_HEIGHT)]
 PIECES = {"PIECE1" : generate_pieces(PIECE1),
