@@ -159,15 +159,78 @@ def generate_operators():
         print()
   return operators
 
+
 def h_hamming(s):
   return len(s[1])
 
+'''
 def h_custom(s):
   board = s[0]
-  available_pieces = s[1]
+  smallest_pit = 1000;
+  for row in range(0,STATE_HEIGHT):
+    for col in range (0,STATE_WIDTH):
+      if(board[row][col] == 0):
+        pit = pit_search(board, row, col)
+        if(pit < smallest_pit):
+          smallest_pit = pit
+  return 1000000 / smallest_pit
   
+  
+def pit_search(board, row, col):
+  if(board[row][col] == 0):
+    out = 1;
+    if(row - 1 > 0):
+      out += pit_search(board, row - 1, col)
+    if(row + 1 < STATE_HEIGHT):
+      out += pit_search(board, row + 1, col)
+    if(col - 1 > 0):
+      out += pit_search(board, row, col - 1)
+    if(col + 1 < STATE_WIDTH):
+      out += pit_search(board, row, col + 1)
+    return out;
+  return 0;
+'''
 
-print(h_hamming(INITIAL_STATE))
+def h_custom(s):
+  board = s[0]
+  smallest_depth = 1000;
+  for row in range(0,STATE_HEIGHT):
+    for col in range (0,STATE_WIDTH):
+      if(board[row][col] == 0):
+        depth = 0
+        pits.append([row, col])
+        while(len(pits) > 0):
+          current = pits.pop()
+          depth += 1
+          pit_search(board, current)   
+        if(depth < smallest_depth):
+          smallest_depth = depth
+  return 1000000 / smallest_depth
+  
+pits = []
+visited_pist = []
+
+def visited(pit):
+  for v in visited_pist:
+    if v == pit:
+      return True
+  return False
+
+
+def pit_search(board, pit):
+  row = pit[0]
+  col = pit[1]
+  if((board[row][col] == 0)):
+    if(row - 1 > 0 and not visited([row - 1, col])):
+      pits.append([row - 1, col])
+    if(row + 1 < STATE_HEIGHT and not visited([row + 1, col])):
+      pits.append([row + 1, col])
+    if(col - 1 > 0 and not visited([row, col - 1])):
+      pits.append([row, col - 1])
+    if(col + 1 < STATE_WIDTH and not visited([row, col + 1])):
+      pits.append([row, col + 1])
+
+print(h_custom(INITIAL_STATE))
 print()
   
 '''
