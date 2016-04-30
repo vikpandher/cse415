@@ -3,7 +3,10 @@ Instructor:  S. Tanimoto.
 Assignment 4 Option A: Pentaminoes. 
 
 Status of the implementation:
-All required features working. 
+All required features working.
+
+The puzzle that works is called Pentaminoes2. It is a smaller
+version of Pentaminoes.
 
 
 Solution Using DFS:
