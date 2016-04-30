@@ -1,3 +1,11 @@
+Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
+Instructor:  S. Tanimoto.
+Assignment 4 Option A: Pentaminoes. 
+
+Status of the implementation:
+All required features working. 
+
+
 Solution Using DFS:
 
 Pentaminoes is Solved!
@@ -124,3 +132,9 @@ PIECE2
 
 1354 states examined.
 
+Retrospective:
+Chloe Nash - worked on the initialization and set up of the state structure and puzzle structure. Learned about creating objects and the struggles of developing puzzles. There are a LOT of states to consider.
+
+Vik Pandher - wrote the heuristic functions and play mehtods. 
+
+Both- worked to develop and implement all methods and also debug.
