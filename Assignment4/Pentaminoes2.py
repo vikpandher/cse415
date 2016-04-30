@@ -62,6 +62,9 @@ def DESCRIBE_STATE(s):
   
   return txt
 
+def h_hamming(s):
+  return len(s[1])
+
 # Make a string and return it as the hash code
 def HASHCODE(s):
   '''The result should be an immutable object such as a string
@@ -236,3 +239,7 @@ GOAL_TEST = lambda s: goal_test(s)
 #<GOAL_MESSAGE_FUNCTION> (optional)
 GOAL_MESSAGE_FUNCTION = lambda s: goal_message(s)
 #</GOAL_MESSAGE_FUNCTION>
+
+#<HEURISTICS>
+HEURISTICS = {'h_hamming':h_hamming}
+#</HEURISTICS>
