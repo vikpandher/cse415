@@ -159,11 +159,16 @@ def generate_operators():
         print()
   return operators
 
+def h_hamming(s):
+  return len(s[1])
 
-print(len(generate_operators())) # Thats 5760 operators
+def h_custom(s):
+  board = s[0]
+  available_pieces = s[1]
+  
+
+print(h_hamming(INITIAL_STATE))
 print()
-
-print(is_available)
   
 '''
 def place(old_state, piece, x, y):

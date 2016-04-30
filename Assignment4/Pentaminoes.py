@@ -38,8 +38,8 @@ It is designed to work accordingly to the QUIET tools interface.
 def DEEP_EQUALS(s1, s2):
   state1 = s1[0]
   state2 = s2[0]
-  for row in range(0,10):
-    for col in range (0,6):
+  for row in range(0,STATE_HEIGHT):
+    for col in range (0,STATE_WIDTH):
       if state1[row][col] != state2[row][col] :
         return False
   return True
@@ -49,9 +49,9 @@ def DESCRIBE_STATE(s):
   # Might not be needed in normal operation with GUIs.
   state = s[0]
   txt = ""
-  for row in range(0,10):
-    for col in range (0,6):
-      if state[row][col] < 10 :
+  for row in range(0,STATE_HEIGHT):
+    for col in range (0,STATE_WIDTH):
+      if state[row][col] < STATE_HEIGHT :
         txt += str(state[row][col]) + "  "
       else :
         txt += str(state[row][col]) + " "
@@ -68,18 +68,18 @@ def HASHCODE(s):
   that is unique for the state s.'''
   state = s[0]
   hash = ""
-  for row in range(0,10):
-    for col in range (0,6):
+  for row in range(0,STATE_HEIGHT):
+    for col in range (0,STATE_WIDTH):
       hash += str(state[row][col])
   return hash
 
 def copy_state(s):
   old_board = s[0]
   old_list = s[1]
-  new_board = [[0 for x in range(6)] for y in range(10)]
+  new_board = [[0 for x in range(STATE_WIDTH)] for y in range(STATE_HEIGHT)]
   new_list = []
-  for row in range(0,10):
-    for col in range (0,6):
+  for row in range(0,STATE_HEIGHT):
+    for col in range (0,STATE_WIDTH):
       new_board[row][col] = old_board[row][col]
   for piece in old_list:
     new_list.append(piece)
@@ -158,8 +158,8 @@ def goal_test(s):
   '''If the puzzle is completely full
   Then the goal is reached.'''
   state = s[0]
-  for row in range(0,10):
-    for col in range (0,6):
+  for row in range(0,STATE_HEIGHT):
+    for col in range (0,STATE_WIDTH):
       if state[row][col] == 0 :
         return False
   return True
