@@ -120,14 +120,14 @@ def generate_pieces(piece):
   pieces.append(pieceflip270)
   return pieces
 
-def place(state, piece, row, col):
+def place(state, piece, orientation, row, col):
   board = state[0]
   available_pieces = state[1]
-  piece_row_count = len(piece)
-  piece_col_count = len(piece[0])
+  piece_row_count = len(orientation)
+  piece_col_count = len(orientation[0])
   for j in range(0, piece_col_count):
     for i in range(0, piece_row_count):
-      board[i+col][j+row] = piece[i][j]
+      board[i+col][j+row] = orientation[i][j]
   available_pieces.remove(piece)
   return(state)
   
@@ -217,18 +217,18 @@ LOCATIONS = [(x, y) for x in range(STATE_WIDTH) for y in range(STATE_HEIGHT)]
 
 def generate_operators():
   operators = []
-  piece_list = PIECES.values();
-  for piece in piece_list:
-    for orientation in piece:
+  for piece in ["PIECE" + str(x) for x in range(1,13)]:
+    orientations = PIECES[piece]
+    for orientation in orientations:
       operators.extend(
       [Operator("Place pentamino " + str(orientation) + " in location " +\
       str(x) + " " + str(y) + ".",
       
-      lambda s,x=x,y=y : is_available(s[1], orientation) and can_place(s[0],orientation,x,y),
+      lambda s,x=x,y=y : is_available(s[1], piece) and can_place(s[0], orientation, x, y),
       # The default value construct is needed
       # here to capture the values of p&q separately
       # in each iteration of the list comp. iteration.
-      lambda s,x=x,y=y: place(s,orientation,x,y))
+      lambda s,x=x,y=y: place(s, piece, orientation, x, y) )
       
       for (x, y) in LOCATIONS])
   return operators

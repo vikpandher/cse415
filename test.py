@@ -128,14 +128,18 @@ OPERATORS = [Operator("Place pentamino " + str(PIECE1) + " in location " + str(x
 # UPDATED
 def generate_operators():
   operators = []
-  piece_list = PIECES.values();
-  for piece in piece_list:
-    for orientation in piece:
+  for piece in ["PIECE" + str(x) for x in range(1,13)]:
+    print('piece = ' + str(piece))
+    orientations = PIECES[piece]
+    orientation_count = 1;
+    for orientation in orientations:
+      print("orientation_count = " + str(orientation_count))
+      orientation_count += 1
       operators.append(
       [Operator("Place pentamino " + str(orientation) + " in location " +\
       str(x) + " " + str(y) + ".",
       
-      lambda s,x=x,y=y : is_available(s[1], orientation) and can_place(s[0],orientation,x,y),
+      lambda s,x=x,y=y : is_available(s[1], piece) and can_place(s[0],orientation,x,y),
       # The default value construct is needed
       # here to capture the values of p&q separately
       # in each iteration of the list comp. iteration.
@@ -144,9 +148,11 @@ def generate_operators():
       for (x, y) in LOCATIONS])
   return operators
 
+
 print(len(generate_operators())) # Thats 96 operators
 print()
-  
+
+print(is_available)
   
 '''
 def place(old_state, piece, x, y):
