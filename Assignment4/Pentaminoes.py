@@ -142,8 +142,8 @@ def can_place(board, piece, row, col):
         return False
   return True
   
-def is_available(list, piece):
-  for p in list:
+def is_available(available_pieces, piece):
+  for p in available_pieces:
     if p == piece:
       return True
   return False
