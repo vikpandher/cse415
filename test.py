@@ -160,6 +160,8 @@ def generate_operators():
   return operators
 
 
+TEST_STATE = [SPACE,["PIECE" + str(x) for x in range(1,13)]]
+  
 def h_hamming(s):
   return len(s[1])
 
@@ -191,6 +193,12 @@ def pit_search(board, row, col):
   return 0;
 '''
 
+#############################
+# THIS IS THE SECOND HURISTIC FUNCTION
+
+TO_VISIT = []
+VISITED = []
+
 def h_custom(s):
   board = s[0]
   smallest_depth = 1000;
@@ -198,37 +206,39 @@ def h_custom(s):
     for col in range (0,STATE_WIDTH):
       if(board[row][col] == 0):
         depth = 0
-        pits.append([row, col])
-        while(len(pits) > 0):
-          current = pits.pop()
+        TO_VISIT.append([row, col])
+        while(len(TO_VISIT) > 0):
+          current = TO_VISIT.pop()
+          VISITED.append(current)
           depth += 1
-          pit_search(board, current)   
+          pit_search(board, current)
+        
         if(depth < smallest_depth):
           smallest_depth = depth
-  return 1000000 / smallest_depth
+  return 1000000 / smallest_depth + len(s[1])
   
-pits = []
-visited_pist = []
-
 def visited(pit):
-  for v in visited_pist:
-    if v == pit:
+  row = pit[0]
+  col = pit[1]
+  for v in VISITED:
+    if v[0] == row and v[1] == col:
       return True
   return False
-
 
 def pit_search(board, pit):
   row = pit[0]
   col = pit[1]
   if((board[row][col] == 0)):
     if(row - 1 > 0 and not visited([row - 1, col])):
-      pits.append([row - 1, col])
+      TO_VISIT.append([row - 1, col])
     if(row + 1 < STATE_HEIGHT and not visited([row + 1, col])):
-      pits.append([row + 1, col])
+      TO_VISIT.append([row + 1, col])
     if(col - 1 > 0 and not visited([row, col - 1])):
-      pits.append([row, col - 1])
+      TO_VISIT.append([row, col - 1])
     if(col + 1 < STATE_WIDTH and not visited([row, col + 1])):
-      pits.append([row, col + 1])
+      TO_VISIT.append([row, col + 1])
+
+############################################### HERE IT ENDS
 
 print(h_custom(INITIAL_STATE))
 print()
