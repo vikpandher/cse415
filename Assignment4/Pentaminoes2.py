@@ -22,16 +22,12 @@ The pentominoes states are repersented by a board and a list of available_pieces
 So, the state is a list of 2 things.
 An empty board would look like this: with a 6 by 10 board
 Initial State:
-0  0  0  0  0  0
-0  0  0  0  0  0
-0  0  0  0  0  0
-0  0  0  0  0  0
-0  0  0  0  0  0
-0  0  0  0  0  0
-0  0  0  0  0  0
-0  0  0  0  0  0
-0  0  0  0  0  0
-0  0  0  0  0  0
+0  0  0  0  0  
+0  0  0  0  0  
+0  0  0  0  0  
+0  0  0  0  0  
+0  0  0  0  0  
+
 
 Each peice is represented by a number
 
@@ -104,6 +100,7 @@ def copy_state(s):
   new_state = [new_board, new_list]
   return new_state
 
+# Rotates a piece 90 degrees right
 def rotate(old_list):
   old_row_count = len(old_list)
   old_col_count = len(old_list[0])
@@ -115,6 +112,7 @@ def rotate(old_list):
       new_list[i][j] = old_list[old_row_count-1-j][i]
   return(new_list)
 
+# fligs a piece along the y-axis
 def flip(old_list):
   old_row_count = len(old_list)
   old_col_count = len(old_list[0])
@@ -124,6 +122,7 @@ def flip(old_list):
       new_list[i][j] = old_list[i][old_col_count-1-j]
   return(new_list)
 
+# populates pieces
 def generate_pieces(piece):
   pieces = [piece]
   piece90 = rotate(piece)
@@ -142,6 +141,7 @@ def generate_pieces(piece):
   pieces.append(pieceflip270)
   return pieces
 
+# puts piece into current state
 def place(old_state, piece, orientation, row, col):
   state = copy_state(old_state)
   board = state[0]
@@ -154,7 +154,8 @@ def place(old_state, piece, orientation, row, col):
         board[i+col][j+row] = orientation[i][j]
   available_pieces.remove(piece)
   return(state)
-  
+
+# checks if can place a piece
 def can_place(board, piece, row, col):
   piece_row_count = len(piece)
   piece_col_count = len(piece[0])
@@ -165,7 +166,8 @@ def can_place(board, piece, row, col):
       if(piece[i][j] != 0 and board[i+col][j+row] != 0):
         return False
   return True
-  
+
+# checks if piece has not been placed yet
 def is_available(available_pieces, piece):
   for p in available_pieces:
     if p == piece:
@@ -197,12 +199,14 @@ class Operator:
   def apply(self, s):
     return self.state_transf(s)
 
+# heuristic 1
 def h_hamming(s):
   return len(s[1])
 
 TO_VISIT = []
 VISITED = []
 
+# heuristic 2
 def h_custom(s):
   board = s[0]
   smallest_depth = 1000;
