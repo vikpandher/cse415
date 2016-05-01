@@ -1,0 +1,175 @@
+Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
+Instructor:  S. Tanimoto.
+Assignment 4 Option A: Pentaminoes. 
+
+This file contains comments for functions implemented in Assignment 4 along
+along with explanations on why certain design choices were made. I have emailed
+the professor and he has gave permission to submit this comment file a day
+late.
+
+OVERVIEW:
+Our Pentaminoes puzzle is represented by a state containing a 2d list along
+with a 1d list. The 2d list is used to represent the board and the 1d list
+tracks the pieces that havent been placed onto the board yet. So state[0] is
+often called the board and state[1] is called the available pieces, in code.
+
+The demensions of the board are detemined by constants. A traditional
+Pentaminoes board is 6 by 10, with 12 unique available pieces. Due to the
+number of possible successor states this results in, we had to decrease our
+board size to 5 by 5, with 5 unique pieces. There are two pentaminoes files
+turned in. The one called Pentaminoes.py has the code for a 6 by 10 board
+with 12 pieces and the one called Pentaminoes2.py has the code for a 5 by 5
+board with 5 pieces.
+
+The board dimensions were decreased because a 6 by 10 board with 12 pieces
+resulted in 5760 operatores from the first state alone. This is because the
+a piece has 8 orientations. I could be turned and flipped. There were also
+around 60 spots to check when placing a piece as it could be placed anywhere.
+This was not going to be solved anytime soon by either depth first search or
+breadth first search. So we dropped down to a 5 by 5 board with 5 pieces in
+Pentaminoes2.py. (That is the file you should be grading.)
+
+Details on the states.
+
+An empty board state would look like the following:
+ 0  0  0  0  0
+ 0  0  0  0  0
+ 0  0  0  0  0
+ 0  0  0  0  0
+ 0  0  0  0  0
+ 
+And it would be accompanied by a list of available pieces.
+
+Each piece would be represented by a number so say piece4 was placed placed in
+location 2,2. The output state would look like the following and piece4 would
+be removed from the list of available pieces.
+ 0  0  0  0  0
+ 0  0  0  0  0
+ 0  0  4  0  0
+ 0  0  4  4  0
+ 0  0  0  4  4
+ 
+Pieces are represented by 2d array's similar to the state's board. Here are
+each of the pieces for Pentaminoes2.py (not including their other orientations)
+PIECE1:
+ 1  0
+ 1  0
+ 1  0
+ 1  1
+
+PEICE2:
+ 0  2
+ 2  2
+ 2  0
+ 2  0
+
+PEICE3:
+ 3  0  3
+ 3  3  3
+
+PEICE4:
+ 4  0  0
+ 4  4  0
+ 0  4  4
+
+PEICE5:
+ 0  5
+ 5  5
+ 0  5
+ 0  5
+
+COMMON_CODE METHODS:
+
+DEEP_EQUALS(s1, s2):
+This method compares all the locations in the boards  of 2 states and checks if
+they are equal. If so it returns true, else it returns false.
+
+DESCRIBE_STATE(s):
+This method outputs a text representation of the state. This includes the board
+in the formats shown above and a list of available pieces.
+
+HASHCODE(s):
+This method creats a has function by addition up the states board as a string
+and outputting the result.
+
+copy_state(s):
+This method copies a state and outputs a new_state that's has the same board and
+available pieces list.
+
+rotate(old_list):
+This method takes a piece and returns the same piece roated 90 degrees.
+
+flip(old_list):
+This method takes a piece and returns the same piece flipped horizontally.
+
+generate_pieces(piece):
+This method takes a piece and uses the rotate and flip methods to generate all
+orientations for the given piece. This then returns that list.
+
+place(old_state, piece, orientation, row, col):
+This method takes a state and places a piece onto it in a given orientation and
+location. The input state is old_state. The argument piece is just the pieces
+name so it can be removed from the available list. The argument orientation is
+the piece as a 2d array in its specific orientation. The row and col arguments
+determine where the top right corner of the piece goes when being placed. This
+method returns the new state with the piece placed.
+
+can_place(board, piece, row, col):
+This method checks the state's board to see if a given piece would fit onto it.
+If there is space at the given location, then it can be placed and the output
+is true, else it is false.
+
+is_available(available_pieces, piece):
+This method checks the state's available pieces list to see if the given piece
+is on it. If it is, then it is available to be placed and this method outputs
+true.
+
+goal_test(s):
+This method checks the state's board to ensure that all spots are filled. If so
+the goal has been reached. Alternativly this methdo could have also checked the
+state's available pieces list to see if it's empty. If the goal has been 
+reached, this method returns true.
+
+goal_message(s):
+This method returns a victory message as a string.
+
+HURISTIC METHODS:
+
+h_hamming(s):
+This huristic simply returns the number of pieces that sill need to be placed.
+
+h_custom(s):
+This method searchs the state's board to find spots that are not occupied by
+pieces. Onces a spot is found it continues to check adjacent locations to find
+the size of the pit. It then returns 1000000 / (the smallest pit) + h_hamming.
+So the following board:
+ 1  0  0  0  0
+ 1  0  0  0  0
+ 1  0  4  0  0
+ 1  1  4  4  0
+ 0  0  0  4  4
+Has a smallest pit size of 3.
+
+visited(pit):
+This method aids the pit_search method by tracking which locations have already
+been looked at. The visited locations are in a list called VISITED, and the
+locations that need to be visited are in a list called TO_VISIT.
+
+pit_search(board, pit):
+This method is part of the h_custom huristic. It adds adjacent locations to the
+TO_VISIT list.
+
+!!!NOTE: The h_custom huristic doesn't work correctly and acts like the hamming
+huristic becuase in the submitted code the list of visited locations is never
+cleared.
+
+generate_operators():
+This method is used to generate the operators for a state. It outputs a list of
+operaters that is in the operator format of: name, preconditions, state
+trasition. The list of operators includes an attempt to place every piece at
+every location in every orientation. The preconditions check if the piece is
+available to the state and if it can be placed without overlapping some other
+piece. The state trasition places the piece onto the state's board and removes
+the piece from the states available pieces list.
+
+
