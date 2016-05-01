@@ -161,7 +161,7 @@ TO_VISIT list.
 
 !!!NOTE: The h_custom huristic doesn't work correctly and acts like the hamming
 huristic becuase in the submitted code the list of visited locations is never
-cleared.
+cleared. To fix this it must be cleared every time h_custom is called.
 
 generate_operators():
 This method is used to generate the operators for a state. It outputs a list of
