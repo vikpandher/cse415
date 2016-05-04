@@ -11,6 +11,11 @@ def makeMove(currentState, currentRemark, timelimit):
     newMoveDesc = 'No move'
     newRemark = "I don't even know how to move!"
     return [[newMoveDesc, currentState], newRemark]
+    
+def identifyPieces(currentState):
+    our_pieces = []
+
+    
 
 def nickname():
     return "Nobachess"
