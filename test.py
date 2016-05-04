@@ -215,7 +215,7 @@ def h_custom(s):
         
         if(depth < smallest_depth):
           smallest_depth = depth
-  return 1000000 / smallest_depth + len(s[1])
+  return 1 / smallest_depth * 100 + len(s[1])
   
 def visited(pit):
   row = pit[0]
