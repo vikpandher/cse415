@@ -63,17 +63,24 @@ def look_for_successors(state):
       current_piece = board[i][j]
       if(who(current_piece) == player):
         print("current_piece = " + str(CODE_TO_INIT[current_piece]) + ", (" + str(i) + ", " + str(j) + ")")
-        #successors.extend(analyze_piece(current_piece))
         analyze_piece(current_piece, i, j, board)
         print()
 
 def analyze_piece(piece, row, col, board):
+  new_boards = []
+  
   if(piece == 3 or piece == 4):
     # checking horizortal movement to the 8th collumn
     for i in range(col + 1, 8):
       print("H8: " + str(board[row][i]))
       if(board[row][i] == 0):
         #add a state
+        new_board = copy_board(board)
+        new_board[row][i] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+        
         print("ADDING STATE H8: " + str(row) + ", " + str(i))
       else:
         print("break")
@@ -82,6 +89,12 @@ def analyze_piece(piece, row, col, board):
       print("H0: " + str(board[row][i]))
       if(board[row][i] == 0):
         #add a state
+        new_board = copy_board(board)
+        new_board[row][i] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+        
         print("ADDING STATE H0: " + str(row) + ", " + str(i))
       else:
         print("break")
@@ -90,6 +103,12 @@ def analyze_piece(piece, row, col, board):
       print("V8: " + str(board[j][col]))
       if(board[j][col] == 0):
         #add a state
+        new_board = copy_board(board)
+        new_board[j][col] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+        
         print("ADDING STATE V8: " + str(j) + ", " + str(col))
       else:
         print("break")
@@ -98,13 +117,44 @@ def analyze_piece(piece, row, col, board):
       print("V0: " + str(board[j][col]))
       if(board[j][col] == 0):
         #add a state
+        new_board = copy_board(board)
+        new_board[j][col] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+        
         print("ADDING STATE V0: " + str(j) + ", " + str(col))
       else:
         print("break")
         break
+    
+    return new_boards 
           
-          
-          
+def print_boards(boards):
+  s = ''
+  for b in boards:
+    for r in range(8):
+      for c in range(8):
+        s += CODE_TO_INIT[b[r][c]] + " "
+      s += "\n"
+    s += "\n"
+  return s
+  
+def print_board(board):
+  s = ''
+  for r in range(8):
+    for c in range(8):
+      s += CODE_TO_INIT[board[r][c]] + " "
+    s += "\n"
+  s += "\n"
+  return s
+  
+def copy_board(old_board):
+  new_board = [[0,0,0,0,0,0,0,0] for r in range(8)]
+  for i in range(8):
+    for j in range(8):
+      new_board[i][j] = old_board[i][j]
+  return new_board
 
 init_state = BC_state(INITIAL, WHITE)
 print(init_state)
