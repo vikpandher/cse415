@@ -31,6 +31,61 @@ P P P P P P P P
 F L I W K I L C
 ''')
 
+KING_TEST_0 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - K - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+''')
+
+KING_TEST_1 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - I I I - - -
+- - I K I - - -
+- - I I I - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+''')
+
+KING_TEST_2 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - i i i - - -
+- - i K i - - -
+- - i i i - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+''')
+
+WITHDRAWER_TEST_0 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - W - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+''')
+
+WITHDRAWER_TEST_1 = parse('''
+- - - - - - - i
+- i - i - - - -
+- - - - - - - -
+- - - W - i - -
+- - - - - - - -
+- i - - - i - -
+- - - - - - - -
+- - - i - - - -
+''')
+
 class BC_state:
   def __init__(self, old_board=INITIAL, whose_move=WHITE):
     new_board = [r[:] for r in old_board]
@@ -63,16 +118,17 @@ def look_for_successors(state):
       current_piece = board[i][j]
       if(who(current_piece) == player):
         print("current_piece = " + str(CODE_TO_INIT[current_piece]) + ", (" + str(i) + ", " + str(j) + ")")
-        analyze_piece(current_piece, i, j, board)
+        analyze_piece(current_piece, i, j, board, player)
         print()
 
-def analyze_piece(piece, row, col, board):
+def analyze_piece(piece, row, col, board, player):
   new_boards = []
   
+  # Pincer
   if(piece == 3 or piece == 4):
-    # checking horizortal movement to the 8th collumn
+    # checking horizontal movement to the 8th collumn
     for i in range(col + 1, 8):
-      print("H8: " + str(board[row][i]))
+      #print("H8: " + str(board[row][i]))
       if(board[row][i] == 0):
         #add a state
         new_board = copy_board(board)
@@ -81,12 +137,13 @@ def analyze_piece(piece, row, col, board):
         new_boards.append(new_board)
         print(print_board(new_board))
         
-        print("ADDING STATE H8: " + str(row) + ", " + str(i))
+        #print("ADDING STATE H8: " + str(row) + ", " + str(i))
       else:
-        print("break")
+        #print("break")
         break
+    # checking horizontal movement to the 0th collumn
     for i in range(col - 1, -1, -1):
-      print("H0: " + str(board[row][i]))
+      #print("H0: " + str(board[row][i]))
       if(board[row][i] == 0):
         #add a state
         new_board = copy_board(board)
@@ -95,12 +152,13 @@ def analyze_piece(piece, row, col, board):
         new_boards.append(new_board)
         print(print_board(new_board))
         
-        print("ADDING STATE H0: " + str(row) + ", " + str(i))
+        #print("ADDING STATE H0: " + str(row) + ", " + str(i))
       else:
-        print("break")
+        #print("break")
         break
+    # checking vertical movement to the 8th row
     for j in range(row + 1, 8):
-      print("V8: " + str(board[j][col]))
+      #print("V8: " + str(board[j][col]))
       if(board[j][col] == 0):
         #add a state
         new_board = copy_board(board)
@@ -109,12 +167,13 @@ def analyze_piece(piece, row, col, board):
         new_boards.append(new_board)
         print(print_board(new_board))
         
-        print("ADDING STATE V8: " + str(j) + ", " + str(col))
+        #print("ADDING STATE V8: " + str(j) + ", " + str(col))
       else:
-        print("break")
+        #print("break")
         break
+    # checking vertical movement to the 0th row
     for j in range(row - 1, -1, -1):
-      print("V0: " + str(board[j][col]))
+      #print("V0: " + str(board[j][col]))
       if(board[j][col] == 0):
         #add a state
         new_board = copy_board(board)
@@ -123,12 +182,203 @@ def analyze_piece(piece, row, col, board):
         new_boards.append(new_board)
         print(print_board(new_board))
         
-        print("ADDING STATE V0: " + str(j) + ", " + str(col))
+        #print("ADDING STATE V0: " + str(j) + ", " + str(col))
       else:
-        print("break")
+        #print("break")
+        break
+  
+  # King
+  if(piece == 13 or piece == 14):
+    # checking horizontal movement toward the 8th collumn
+    if(col < 7 and who(board[row][col + 1]) != player):
+      #add a state
+      new_board = copy_board(board)
+      new_board[row][col + 1] = piece;
+      new_board[row][col] = 0;
+      new_boards.append(new_board)
+      print(print_board(new_board))
+      
+    # checking horizontal movement toward the 0th collumn
+    if(col > 0 and who(board[row][col - 1]) != player):
+      #add a state
+      new_board = copy_board(board)
+      new_board[row][col - 1] = piece;
+      new_board[row][col] = 0;
+      new_boards.append(new_board)
+      print(print_board(new_board))
+      
+    # checking vertical movement toward the 8th row
+    if(row < 7 and who(board[row + 1][col]) != player):
+      #add a state
+      new_board = copy_board(board)
+      new_board[row + 1][col] = piece;
+      new_board[row][col] = 0;
+      new_boards.append(new_board)
+      print(print_board(new_board))
+    
+    # checking vertical movement toward the 0th row
+    if(row > 0 and who(board[row - 1][col]) != player):
+      #add a state
+      new_board = copy_board(board)
+      new_board[row - 1][col] = piece;
+      new_board[row][col] = 0;
+      new_boards.append(new_board)
+      print(print_board(new_board))
+    
+    # checking diagonal movement towards the 8th collumn and 8th row
+    if(col < 7 and row < 7 and who(board[row + 1][col + 1]) != player):
+      #add a state
+      new_board = copy_board(board)
+      new_board[row + 1][col + 1] = piece;
+      new_board[row][col] = 0;
+      new_boards.append(new_board)
+      print(print_board(new_board))
+    
+    # checking diagonal movement towards the 8th collumn and 0th row
+    if(col < 7 and row > 0 and who(board[row - 1][col + 1]) != player):
+      #add a state
+      new_board = copy_board(board)
+      new_board[row - 1][col + 1] = piece;
+      new_board[row][col] = 0;
+      new_boards.append(new_board)
+      print(print_board(new_board))
+    
+    # checking diagonal movement towards the 0th collumn and 8th row
+    if(col > 0 and row < 7 and who(board[row + 1][col - 1]) != player):
+      #add a state
+      new_board = copy_board(board)
+      new_board[row + 1][col - 1] = piece;
+      new_board[row][col] = 0;
+      new_boards.append(new_board)
+      print(print_board(new_board))
+    
+    # checking diagonal movement towards the 0th collumn and 0th row
+    if(col > 0 and row > 0 and who(board[row - 1][col - 1]) != player):
+      #add a state
+      new_board = copy_board(board)
+      new_board[row - 1][col - 1] = piece;
+      new_board[row][col] = 0;
+      new_boards.append(new_board)
+      print(print_board(new_board))
+      
+  # Withdrawer
+  if(piece == 11 or piece == 12):
+    # checking horizontal movement towards the 8th collumn
+    for i in range(col + 1, 8):
+      if(board[row][i] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row][i] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
         break
     
-    return new_boards 
+    # checking horizontal movement towards the 0th collumn
+    for i in range(col - 1, -1, -1):
+      if(board[row][i] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row][i] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+        
+      # a piece is in the way
+      else:
+        break
+    
+    # checking vertical movement towards the 8th row
+    for j in range(row + 1, 8):
+      if(board[j][col] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[j][col] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      
+      # a piece is in the way
+      else:
+        break
+    
+    # checking vertical movement towards the 0th row
+    for j in range(row - 1, -1, -1):
+      if(board[j][col] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[j][col] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+        
+      # a piece is in the way
+      else:
+        break
+    
+    # checking diagonal movement towards the 8th collumn and 8th row
+    k = 1
+    while (k + row < 8 and k + col < 8):
+      if(board[row + k][col + k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row + k][col + k] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+    
+    # checking diagonal movement towards the 8th collumn and 0th row
+    k = 1
+    while (row - k > -1 and col + k < 8):
+      if(board[row - k][col + k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row - k][col + k] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+      
+    # checking diagonal movement towards the 0th collumn and 8th row
+    k = 1
+    while (k + row < 8 and col - k > -1):
+      if(board[row + k][col - k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row + k][col - k] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+      
+    # checking diagonal movement towards the 0th collumn and 0th row
+    k = 1
+    while (row - k > -1 and col - k > -1):
+      if(board[row - k][col - k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row - k][col - k] = piece;
+        new_board[row][col] = 0;
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+    
+  return new_boards 
           
 def print_boards(boards):
   s = ''
@@ -156,6 +406,6 @@ def copy_board(old_board):
       new_board[i][j] = old_board[i][j]
   return new_board
 
-init_state = BC_state(INITIAL, WHITE)
-print(init_state)
-look_for_successors(init_state)
+test_state = BC_state(WITHDRAWER_TEST_1, WHITE)
+print(test_state)
+look_for_successors(test_state)
