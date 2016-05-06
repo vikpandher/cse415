@@ -69,26 +69,17 @@ def look_for_successors(state):
 def check_kill_pawn(board, row, col, player):
   new_board = copy_board(board)
   if row > 1 and who(board[row-1][col]) != player and board[row-1][col] != 0 and who(board[row-2][col]) == player :
-    print("HERE1 row: " + str(row) + " col: " + str(col) + " whoPlayer: " + str(player) + " whoNext: " +\
-          str(who(board[row-1][col])) + " whoSecond: " + str(who(board[row-2][col])))
     new_board[row-1][col] = 0
-    print("Should be new: ")
-    print(print_board(new_board))
-    print()
   if row < 6 and who(board[row+1][col]) != player and board[row+1][col] != 0 and who(board[row+2][col]) == player :
-    print("HERE2")
     new_board[row+1][col] = 0
   if col > 1 and who(board[row][col-1]) != player and board[row][col-1] != 0 and who(board[row][col-2]) == player :
-    print("HERE3")
     new_board[row][col-1] = 0
   if col < 6 and who(board[row][col+1]) != player and board[row][col+1] != 0 and who(board[row][col+2]) == player :
-    print("HERE4")
     new_board[row][col+1] = 0
   return new_board
 
 def analyze_piece(piece, row, col, board, player):
   new_boards = []
-  
   if(piece == 3 or piece == 4):
     # checking horizortal movement to the 8th collumn
     for i in range(col + 1, 8):
@@ -155,7 +146,6 @@ def analyze_piece(piece, row, col, board, player):
       else:
         print("break")
         break
-    print(print_boards(new_boards))
     return new_boards 
           
 def print_boards(boards):
