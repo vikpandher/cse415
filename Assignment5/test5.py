@@ -86,11 +86,44 @@ WITHDRAWER_TEST_1 = parse('''
 - - - i - - - -
 ''')
 
+LEAPER_TEST_0 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - L - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+''')
+
+LEAPER_TEST_1 = parse('''
+- - - - - - - -
+- i - i - i - -
+- - - - - - - -
+- i - L - - i -
+- - - - - - - -
+- i - - - i - -
+- - - i - - - -
+- - - - - - - -
+''')
+
+LEAPER_TEST_2 = parse('''
+- - - - - - - -
+- I - I - I - -
+- - - - - - - -
+- I - L - - I -
+- - - - - - - -
+- I - - - I - -
+- - - I - - - -
+- - - - - - - -
+''')
+
 class BC_state:
   def __init__(self, old_board=INITIAL, whose_move=WHITE):
     new_board = [r[:] for r in old_board]
     self.board = new_board
-    self.whose_move = whose_move;
+    self.whose_move = whose_move
 
   def __repr__(self):
     s = ''
@@ -121,6 +154,17 @@ def look_for_successors(state):
         analyze_piece(current_piece, i, j, board, player)
         print()
 
+'''
+READ THIS:
+  ok, so far the pincer movement is done, but it's killing is not included in
+  this.
+  the king's movement is done and since it was so simple, the kings killing is
+  done too.
+  the withdrawer's movement is done, but it's killing is not
+  the leaper's movement and killing is done.
+  
+  I haven't taken into account the imobalizer yet.
+'''
 def analyze_piece(piece, row, col, board, player):
   new_boards = []
   
@@ -132,8 +176,8 @@ def analyze_piece(piece, row, col, board, player):
       if(board[row][i] == 0):
         #add a state
         new_board = copy_board(board)
-        new_board[row][i] = piece;
-        new_board[row][col] = 0;
+        new_board[row][i] = piece
+        new_board[row][col] = 0
         new_boards.append(new_board)
         print(print_board(new_board))
         
@@ -147,8 +191,8 @@ def analyze_piece(piece, row, col, board, player):
       if(board[row][i] == 0):
         #add a state
         new_board = copy_board(board)
-        new_board[row][i] = piece;
-        new_board[row][col] = 0;
+        new_board[row][i] = piece
+        new_board[row][col] = 0
         new_boards.append(new_board)
         print(print_board(new_board))
         
@@ -162,8 +206,8 @@ def analyze_piece(piece, row, col, board, player):
       if(board[j][col] == 0):
         #add a state
         new_board = copy_board(board)
-        new_board[j][col] = piece;
-        new_board[row][col] = 0;
+        new_board[j][col] = piece
+        new_board[row][col] = 0
         new_boards.append(new_board)
         print(print_board(new_board))
         
@@ -177,8 +221,8 @@ def analyze_piece(piece, row, col, board, player):
       if(board[j][col] == 0):
         #add a state
         new_board = copy_board(board)
-        new_board[j][col] = piece;
-        new_board[row][col] = 0;
+        new_board[j][col] = piece
+        new_board[row][col] = 0
         new_boards.append(new_board)
         print(print_board(new_board))
         
@@ -193,8 +237,8 @@ def analyze_piece(piece, row, col, board, player):
     if(col < 7 and who(board[row][col + 1]) != player):
       #add a state
       new_board = copy_board(board)
-      new_board[row][col + 1] = piece;
-      new_board[row][col] = 0;
+      new_board[row][col + 1] = piece
+      new_board[row][col] = 0
       new_boards.append(new_board)
       print(print_board(new_board))
       
@@ -202,8 +246,8 @@ def analyze_piece(piece, row, col, board, player):
     if(col > 0 and who(board[row][col - 1]) != player):
       #add a state
       new_board = copy_board(board)
-      new_board[row][col - 1] = piece;
-      new_board[row][col] = 0;
+      new_board[row][col - 1] = piece
+      new_board[row][col] = 0
       new_boards.append(new_board)
       print(print_board(new_board))
       
@@ -211,8 +255,8 @@ def analyze_piece(piece, row, col, board, player):
     if(row < 7 and who(board[row + 1][col]) != player):
       #add a state
       new_board = copy_board(board)
-      new_board[row + 1][col] = piece;
-      new_board[row][col] = 0;
+      new_board[row + 1][col] = piece
+      new_board[row][col] = 0
       new_boards.append(new_board)
       print(print_board(new_board))
     
@@ -220,8 +264,8 @@ def analyze_piece(piece, row, col, board, player):
     if(row > 0 and who(board[row - 1][col]) != player):
       #add a state
       new_board = copy_board(board)
-      new_board[row - 1][col] = piece;
-      new_board[row][col] = 0;
+      new_board[row - 1][col] = piece
+      new_board[row][col] = 0
       new_boards.append(new_board)
       print(print_board(new_board))
     
@@ -229,8 +273,8 @@ def analyze_piece(piece, row, col, board, player):
     if(col < 7 and row < 7 and who(board[row + 1][col + 1]) != player):
       #add a state
       new_board = copy_board(board)
-      new_board[row + 1][col + 1] = piece;
-      new_board[row][col] = 0;
+      new_board[row + 1][col + 1] = piece
+      new_board[row][col] = 0
       new_boards.append(new_board)
       print(print_board(new_board))
     
@@ -247,8 +291,8 @@ def analyze_piece(piece, row, col, board, player):
     if(col > 0 and row < 7 and who(board[row + 1][col - 1]) != player):
       #add a state
       new_board = copy_board(board)
-      new_board[row + 1][col - 1] = piece;
-      new_board[row][col] = 0;
+      new_board[row + 1][col - 1] = piece
+      new_board[row][col] = 0
       new_boards.append(new_board)
       print(print_board(new_board))
     
@@ -256,8 +300,8 @@ def analyze_piece(piece, row, col, board, player):
     if(col > 0 and row > 0 and who(board[row - 1][col - 1]) != player):
       #add a state
       new_board = copy_board(board)
-      new_board[row - 1][col - 1] = piece;
-      new_board[row][col] = 0;
+      new_board[row - 1][col - 1] = piece
+      new_board[row][col] = 0
       new_boards.append(new_board)
       print(print_board(new_board))
       
@@ -268,8 +312,8 @@ def analyze_piece(piece, row, col, board, player):
       if(board[row][i] == 0):
         #add a state
         new_board = copy_board(board)
-        new_board[row][i] = piece;
-        new_board[row][col] = 0;
+        new_board[row][i] = piece
+        new_board[row][col] = 0
         new_boards.append(new_board)
         print(print_board(new_board))
       # a piece is in the way
@@ -281,8 +325,8 @@ def analyze_piece(piece, row, col, board, player):
       if(board[row][i] == 0):
         #add a state
         new_board = copy_board(board)
-        new_board[row][i] = piece;
-        new_board[row][col] = 0;
+        new_board[row][i] = piece
+        new_board[row][col] = 0
         new_boards.append(new_board)
         print(print_board(new_board))
         
@@ -295,8 +339,8 @@ def analyze_piece(piece, row, col, board, player):
       if(board[j][col] == 0):
         #add a state
         new_board = copy_board(board)
-        new_board[j][col] = piece;
-        new_board[row][col] = 0;
+        new_board[j][col] = piece
+        new_board[row][col] = 0
         new_boards.append(new_board)
         print(print_board(new_board))
       
@@ -309,14 +353,176 @@ def analyze_piece(piece, row, col, board, player):
       if(board[j][col] == 0):
         #add a state
         new_board = copy_board(board)
-        new_board[j][col] = piece;
-        new_board[row][col] = 0;
+        new_board[j][col] = piece
+        new_board[row][col] = 0
         new_boards.append(new_board)
         print(print_board(new_board))
         
       # a piece is in the way
       else:
         break
+    
+    # checking diagonal movement towards the 8th collumn and 8th row
+    k = 1
+    while (k + row < 8 and k + col < 8):
+      if(board[row + k][col + k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row + k][col + k] = piece
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+    
+    # checking diagonal movement towards the 8th collumn and 0th row
+    k = 1
+    while (row - k > -1 and col + k < 8):
+      if(board[row - k][col + k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row - k][col + k] = piece
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+      
+    # checking diagonal movement towards the 0th collumn and 8th row
+    k = 1
+    while (k + row < 8 and col - k > -1):
+      if(board[row + k][col - k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row + k][col - k] = piece
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+      
+    # checking diagonal movement towards the 0th collumn and 0th row
+    k = 1
+    while (row - k > -1 and col - k > -1):
+      if(board[row - k][col - k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row - k][col - k] = piece
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+    
+  # Leaper
+  if(piece == 6 or piece == 7):
+    # checking horizontal movement towards the 8th collumn
+    k = 1
+    while (col + k < 8):
+      if(board[row][col + k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row][col + k] = piece
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+    # there is space to jump
+    if (col + k < 7 and board[row][col + k + 1] == 0):
+      # the piece to jump is the oponent's
+      if (who(board[row][col + k]) != player):
+        new_board = copy_board(board)
+        new_board[row][col + k + 1] = piece
+        new_board[row][col + k] = 0
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+    
+    # checking horizontal movement towards the 0th collumn
+    k = 1
+    while (col - k > -1):
+      if(board[row][col - k] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row][col - k] = piece
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+    # there is space to jump
+    if (col + k > 0 and board[row][col - k - 1] == 0):
+      # the piece to jump is the oponent's
+      if (who(board[row][col - k]) != player):
+        new_board = copy_board(board)
+        new_board[row][col - k - 1] = piece
+        new_board[row][col - k] = 0
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+
+    # checking vertical movement towards the 8th row
+    k = 1
+    while (row + k < 8):
+      if(board[row + k][col] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row + k][col] = piece
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+    # there is space to jump
+    if (row + k < 7 and board[row + k + 1][col] == 0):
+      # the piece to jump is the oponent's
+      if (who(board[row + k][col]) != player):
+        new_board = copy_board(board)
+        new_board[row + k + 1][col] = piece
+        new_board[row + k][col] = 0
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+    
+    # checking vertical movement towards the 0th row
+    k = 1
+    while (row - k > -1):
+      if(board[row - k][col] == 0):
+        #add a state
+        new_board = copy_board(board)
+        new_board[row - k][col] = piece
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+      # a piece is in the way
+      else:
+        break
+      k = k + 1
+    # there is space to jump
+    if (row - k > 0 and board[row - k - 1][col] == 0):
+      # the piece to jump is the oponent's
+      if (who(board[row - k][col]) != player):
+        new_board = copy_board(board)
+        new_board[row - k - 1][col] = piece
+        new_board[row - k][col] = 0
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
     
     # checking diagonal movement towards the 8th collumn and 8th row
     k = 1
@@ -332,6 +538,16 @@ def analyze_piece(piece, row, col, board, player):
       else:
         break
       k = k + 1
+    # there is space to jump
+    if (row + k < 7 and col + k < 7 and board[row + k + 1][col + k + 1] == 0):
+      # the piece to jump is the oponent's
+      if (who(board[row + k][col + k]) != player):
+        new_board = copy_board(board)
+        new_board[row + k + 1][col + k + 1] = piece
+        new_board[row + k][col + k] = 0
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
     
     # checking diagonal movement towards the 8th collumn and 0th row
     k = 1
@@ -347,7 +563,17 @@ def analyze_piece(piece, row, col, board, player):
       else:
         break
       k = k + 1
-      
+    # there is space to jump
+    if (row - k > 0 and col + k < 7 and board[row - k - 1][col + k + 1] == 0):
+      # the piece to jump is the oponent's
+      if (who(board[row - k][col + k]) != player):
+        new_board = copy_board(board)
+        new_board[row - k - 1][col + k + 1] = piece
+        new_board[row - k][col + k] = 0
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+    
     # checking diagonal movement towards the 0th collumn and 8th row
     k = 1
     while (k + row < 8 and col - k > -1):
@@ -362,7 +588,17 @@ def analyze_piece(piece, row, col, board, player):
       else:
         break
       k = k + 1
-      
+    # there is space to jump
+    if (row + k < 7 and col - k > 0 and board[row + k + 1][col - k - 1] == 0):
+      # the piece to jump is the oponent's
+      if (who(board[row + k][col - k]) != player):
+        new_board = copy_board(board)
+        new_board[row + k + 1][col - k - 1] = piece
+        new_board[row + k][col - k] = 0
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+    
     # checking diagonal movement towards the 0th collumn and 0th row
     k = 1
     while (row - k > -1 and col - k > -1):
@@ -377,17 +613,23 @@ def analyze_piece(piece, row, col, board, player):
       else:
         break
       k = k + 1
-    
+    # there is space to jump
+    if (row - k > 0 and col - k > 0 and board[row - k + 1][col - k - 1] == 0):
+      # the piece to jump is the oponent's
+      if (who(board[row - k][col - k]) != player):
+        new_board = copy_board(board)
+        new_board[row - k - 1][col - k - 1] = piece
+        new_board[row - k][col - k] = 0
+        new_board[row][col] = 0
+        new_boards.append(new_board)
+        print(print_board(new_board))
+  
   return new_boards 
           
 def print_boards(boards):
   s = ''
   for b in boards:
-    for r in range(8):
-      for c in range(8):
-        s += CODE_TO_INIT[b[r][c]] + " "
-      s += "\n"
-    s += "\n"
+    s += print_board(b)
   return s
   
 def print_board(board):
@@ -406,6 +648,6 @@ def copy_board(old_board):
       new_board[i][j] = old_board[i][j]
   return new_board
 
-test_state = BC_state(WITHDRAWER_TEST_1, WHITE)
+test_state = BC_state(LEAPER_TEST_1, WHITE)
 print(test_state)
 look_for_successors(test_state)
