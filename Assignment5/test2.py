@@ -323,11 +323,11 @@ CODE_TO_INIT = {0:'-',2:'p',3:'P',4:'c',5:'C',6:'l',7:'L',8:'i',9:'I',
   10:'w',11:'W',12:'k',13:'K',14:'f',15:'F'}
 
 CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
-                 10:-40,11:40,12:0,13:0,14:-50,15:50}
+                 10:-40,11:40,12:-100,13:100,14:-50,15:50}
 
-# 1000(B_IsCheckMate) + 800(B_IsCheck) + 80(W_NumLeapers) + 70(W_NumImmitators) +\
+# 1000(B_IsCheckMate) + 100(W_HaveKing) + 80(W_NumLeapers) + 70(W_NumImmitators) +\
 # 60(W_HaveCoordinator) + 50(W_HaveImmobilizer) + 40(W_HaveWithdrawer) +\
-# 10(W_NumPincers) - [1000(W_IsCheckMate) + 800(W_IsCheck) + 80(B_NumLeapers) +\
+# 10(W_NumPincers) - [1000(W_IsCheckMate) + 100(B_HaveKing) + 80(B_NumLeapers) +\
 # 70(B_NumImmitators) + 60(B_HaveCoordinator) + 50(B_HaveImmobilizer) +\
 # 40(B_HaveWithdrawer) + 10(B_NumPincers)]
 def staticEval(state):
@@ -339,25 +339,14 @@ def staticEval(state):
     for col in range(8):
       if board[row][col] == 12:
         B_IsCheckMate = False
-          B_IsCheck = check(board, row, col, BLACK)
-          if B_IsCheck:
-            value += 800
-      elif board[row][col] == 13:
+      if board[row][col] == 13:
         W_IsCheckMate = False
-        W_IsCheck = check(board, row, col, WHITE)
-          if W_IsCheck:
-            value -= 800
-      else:
-        value += CODE_TO_VALUE[board[row][col]]
+      value += CODE_TO_VALUE[board[row][col]]
   if B_IsCheckMate:
     value += 1000
   if W_IsCheckMate:
     value -= 1000
   return value
-
-def check(board, row, col, whoKing):
-  # check if the king is in check
-  return False
 
 def look_for_successors(state):
   board = state.board
@@ -1053,7 +1042,7 @@ def apply_coordinator_kill(piece, row, col, board):
             for k in range(row - i - 1):
               if (who(board[i-k][j]) != CURRENT_PLAYER and board[i-k][j] != 0) :
                 board[i-k][j] = 0
-        return
+  return
 
 def analyze_freezer_movement(piece, row, col, board):
   new_boards = []
