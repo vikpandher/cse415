@@ -6,7 +6,7 @@ INIT_TO_CODE = {'p':2, 'P':3, 'c':4, 'C':5, 'l':6, 'L':7, 'i':8, 'I':9,
 
 CODE_TO_INIT = {0:'-',2:'p',3:'P',4:'c',5:'C',6:'l',7:'L',8:'i',9:'I',
   10:'w',11:'W',12:'k',13:'K',14:'f',15:'F'}
-  
+
 def who(piece): return piece % 2
 
 def parse(bs): # bs is board string
@@ -296,7 +296,52 @@ def test_starting_board():
   init_state = BC_state(INITIAL, WHITE)
   print(init_state)
 
-CURRENT_PLAYER = WHITE;
+CURRENT_PLAYER = WHITE
+
+def makeMove(currentState, currentRemark, timeLimit=10000):
+  newState = decideBest(currentState, CURRENT_PLAYER)
+  return  [["", newState], "Your turn!"]
+
+def other(player):
+  if player == WHITE:
+    return BLACK
+  else:
+    return WHITE
+
+def decideBest(state, whoseMove, plyLeft=2):
+  if plyLeft == 0: return (staticEval(state), state)
+  if whoseMove == WHITE: provisional = (-100000, [])
+  else: provisional = (100000, [])
+  for s in look_for_successors(state):
+    newVal = decideBest(BC_state(s, whoseMove), other(whoseMove), plyLeft-1)
+    if (whoseMove == WHITE and newVal[0] > provisional[0]) \
+       or (whoseMove == BLACK and newVal[0] < provisional[0]):
+      provisional = newVal
+  return provisional
+
+CODE_TO_INIT = {0:'-',2:'p',3:'P',4:'c',5:'C',6:'l',7:'L',8:'i',9:'I',
+  10:'w',11:'W',12:'k',13:'K',14:'f',15:'F'}
+
+CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
+                 10:-40,11:40,12:0,13:0,14:-50,15:50}
+
+# 1000(B_IsCheckMate) + 800(B_IsCheck) + 80(W_NumLeapers) + 70(W_NumImmitators) +\
+# 60(W_HaveCoordinator) + 50(W_HaveImmobilizer) + 40(W_HaveWithdrawer) +\
+# 10(W_NumPincers) - [1000(W_IsCheckMate) + 800(W_IsCheck) + 80(B_NumLeapers) +\
+# 70(B_NumImmitators) + 60(B_HaveCoordinator) + 50(B_HaveImmobilizer) +\
+# 40(B_HaveWithdrawer) + 10(B_NumPincers)]
+def staticEval(state):
+  value = 0
+  board = state.board
+  for row in range(8):
+    for col in range(8):
+      if board[row][col] == 12:
+        value -= 1000
+      elif board[row][col] == 13:
+        value += 1000
+      else:
+        value += CODE_TO_VALUE[board[row][col]]
+  return 
 
 def look_for_successors(state):
   board = state.board
@@ -309,9 +354,12 @@ def look_for_successors(state):
       current_piece = board[i][j]
       if(who(current_piece) == CURRENT_PLAYER):
         print("current_piece = " + str(CODE_TO_INIT[current_piece]) + ", (" + str(i) + ", " + str(j) + ")")
-        analyze_piece(current_piece, i, j, board)
+# Check this
+        successors.extend(analyze_piece(current_piece, i, j, board))
         print()
-
+  print(successors)
+  return successors
+  
 def analyze_pincer_movement(piece, row, col, board):
   new_boards = []
   
@@ -1586,6 +1634,6 @@ def copy_board(old_board):
       new_board[i][j] = old_board[i][j]
   return new_board
 
-test_state = BC_state(IMITATOR_TEST_5, WHITE)
-print(test_state)
-look_for_successors(test_state)
+#test_state = BC_state(INITIAL, WHITE)
+#print(test_state)
+#look_for_successors(test_state)
