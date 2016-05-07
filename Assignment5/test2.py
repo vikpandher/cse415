@@ -319,9 +319,6 @@ def decideBest(state, whoseMove, plyLeft=2):
       provisional = newVal
   return provisional
 
-CODE_TO_INIT = {0:'-',2:'p',3:'P',4:'c',5:'C',6:'l',7:'L',8:'i',9:'I',
-  10:'w',11:'W',12:'k',13:'K',14:'f',15:'F'}
-
 CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
                  10:-40,11:40,12:-100,13:100,14:-50,15:50}
 
