@@ -333,15 +333,31 @@ CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
 def staticEval(state):
   value = 0
   board = state.board
+  B_IsCheckMate = True
+  W_IsCheckMate = True
   for row in range(8):
     for col in range(8):
       if board[row][col] == 12:
-        value -= 1000
+        B_IsCheckMate = False
+          B_IsCheck = check(board, row, col, BLACK)
+          if B_IsCheck:
+            value += 800
       elif board[row][col] == 13:
-        value += 1000
+        W_IsCheckMate = False
+        W_IsCheck = check(board, row, col, WHITE)
+          if W_IsCheck:
+            value -= 800
       else:
         value += CODE_TO_VALUE[board[row][col]]
-  return 
+  if B_IsCheckMate:
+    value += 1000
+  if W_IsCheckMate:
+    value -= 1000
+  return value
+
+def check(board, row, col, whoKing):
+  # check if the king is in check
+  return False
 
 def look_for_successors(state):
   board = state.board
