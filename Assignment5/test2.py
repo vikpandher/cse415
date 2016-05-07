@@ -1,3 +1,5 @@
+import time
+
 BLACK = 0
 WHITE = 1
 
@@ -298,8 +300,9 @@ def test_starting_board():
 
 CURRENT_PLAYER = WHITE
 
-def makeMove(currentState, currentRemark, timeLimit=10000):
-  newState = decideBest(currentState, CURRENT_PLAYER)
+def makeMove(currentState, currentRemark, timeLimit=30):
+  initTime = time.clock()
+  newState = decideBest(currentState, CURRENT_PLAYER, initTime, timeLimit)
   return  [["", newState], "Your turn!"]
 
 def other(player):
@@ -308,12 +311,15 @@ def other(player):
   else:
     return WHITE
 
-def decideBest(state, whoseMove, plyLeft=2):
+def decideBest(state, whoseMove, plyLeft=2, initTime, timeLimit):
   if plyLeft == 0: return (staticEval(state), state)
-  if whoseMove == WHITE: provisional = (-100000, [])
-  else: provisional = (100000, [])
+  if whoseMove == WHITE: provisional = (-100000, state)
+  else: provisional = (100000, state)
   for s in look_for_successors(state):
-    newVal = decideBest(BC_state(s, whoseMove), other(whoseMove), plyLeft-1)
+    currTime = time.clock()
+    if ((initTime + currTime) > (timelimit - 1)):
+      break
+    newVal = decideBest(BC_state(s, whoseMove), other(whoseMove), plyLeft-1, initTime, timeLimit)
     if (whoseMove == WHITE and newVal[0] > provisional[0]) \
        or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
