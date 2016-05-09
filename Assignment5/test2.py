@@ -311,7 +311,7 @@ def other(player):
   else:
     return WHITE
 
-def decideBest(state, whoseMove, plyLeft=2, initTime, timeLimit):
+def decideBest(state, whoseMove, initTime, timeLimit, plyLeft=2):
   if plyLeft == 0: return (staticEval(state), state)
   if whoseMove == WHITE: provisional = (-100000, state)
   else: provisional = (100000, state)
