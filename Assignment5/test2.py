@@ -22,6 +22,15 @@ def parse(bs): # bs is board string
       b[iy][jx] = INIT_TO_CODE[rss[jx]]
   return b
 
+def introduce():
+    return "TESTTTTTTT."
+    
+def prepare(player2Nickname):
+    pass
+    
+def nickname():
+    return "Test"
+  
 INITIAL = parse('''
 c l i w k i l f
 p p p p p p p p
@@ -303,7 +312,9 @@ CURRENT_PLAYER = WHITE
 def makeMove(currentState, currentRemark, timeLimit=30):
   initTime = time.clock()
   newState = decideBest(currentState, CURRENT_PLAYER, initTime, timeLimit)
-  return  [["", newState], "Your turn!"]
+  print("Our Move:")
+  print(newState[1])
+  return  [["", newState[1]], "Your turn!"]
 
 def other(player):
   if player == WHITE:
@@ -317,7 +328,7 @@ def decideBest(state, whoseMove, initTime, timeLimit, plyLeft=2):
   else: provisional = (100000, state)
   for s in look_for_successors(state):
     currTime = time.clock()
-    if ((initTime + currTime) > (timelimit - 1)):
+    if ((initTime + currTime) > (timeLimit - 1)):
       break
     newVal = decideBest(BC_state(s, whoseMove), other(whoseMove), plyLeft-1, initTime, timeLimit)
     if (whoseMove == WHITE and newVal[0] > provisional[0]) \
@@ -365,7 +376,7 @@ def look_for_successors(state):
 # Check this
         successors.extend(analyze_piece(current_piece, i, j, board))
         print()
-  print(successors)
+ # print(successors)
   return successors
   
 def analyze_pincer_movement(piece, row, col, board):
@@ -381,7 +392,7 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_pincer_kill(piece, row, col + k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -397,7 +408,7 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_pincer_kill(piece, row, col - k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -413,7 +424,7 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_pincer_kill(piece, row + k, col, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -429,13 +440,13 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_pincer_kill(piece, row - k, col, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
     k = k + 1
   
-  print("return new_boards")
+ # print("return new_boards")
   return new_boards
   
 def apply_pincer_kill(piece, row, col, board):
@@ -462,7 +473,7 @@ def analyze_king_movement(piece, row, col, board):
     new_board[row][col + 1] = piece
     new_board[row][col] = 0
     new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+ #   print(print_board(new_board)) # <<< FOR DEBUGGING
     
   # checking horizontal movement toward the 0th column
   if(col > 0 and who(board[row][col - 1]) != CURRENT_PLAYER):
@@ -471,7 +482,7 @@ def analyze_king_movement(piece, row, col, board):
     new_board[row][col - 1] = piece
     new_board[row][col] = 0
     new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+  #  print(print_board(new_board)) # <<< FOR DEBUGGING
     
   # checking vertical movement toward the 8th row
   if(row < 7 and who(board[row + 1][col]) != CURRENT_PLAYER):
@@ -480,7 +491,7 @@ def analyze_king_movement(piece, row, col, board):
     new_board[row + 1][col] = piece
     new_board[row][col] = 0
     new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+  #  print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking vertical movement toward the 0th row
   if(row > 0 and who(board[row - 1][col]) != CURRENT_PLAYER):
@@ -498,7 +509,7 @@ def analyze_king_movement(piece, row, col, board):
     new_board[row + 1][col + 1] = piece
     new_board[row][col] = 0
     new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+  #  print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 8th column and 0th row
   if(col < 7 and row > 0 and who(board[row - 1][col + 1]) != CURRENT_PLAYER):
@@ -507,7 +518,7 @@ def analyze_king_movement(piece, row, col, board):
     new_board[row - 1][col + 1] = piece;
     new_board[row][col] = 0;
     new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+  #  print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 0th column and 8th row
   if(col > 0 and row < 7 and who(board[row + 1][col - 1]) != CURRENT_PLAYER):
@@ -516,7 +527,7 @@ def analyze_king_movement(piece, row, col, board):
     new_board[row + 1][col - 1] = piece
     new_board[row][col] = 0
     new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+  #  print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 0th column and 0th row
   if(col > 0 and row > 0 and who(board[row - 1][col - 1]) != CURRENT_PLAYER):
@@ -525,8 +536,8 @@ def analyze_king_movement(piece, row, col, board):
     new_board[row - 1][col - 1] = piece
     new_board[row][col] = 0
     new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
-  
+  #  print(print_board(new_board)) # <<< FOR DEBUGGING
+  #
   return new_boards
 
 def analyze_withdrawer_movement(piece, row, col, board):
@@ -544,7 +555,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       if (col > 0 and who(board[row][col - 1]) != CURRENT_PLAYER):
         new_board[row][col - 1] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+  #    print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -562,7 +573,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       if (col < 7 and who(board[row][col + 1]) != CURRENT_PLAYER):
         new_board[row][col + 1] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+   #   print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -580,7 +591,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       if (row > 0 and who(board[row - 1][col]) != CURRENT_PLAYER):
         new_board[row - 1][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -598,7 +609,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       if (row < 7 and who(board[row + 1][col]) != CURRENT_PLAYER):
         new_board[row + 1][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -616,7 +627,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       if (row > 0 and col > 0 and who(board[row - 1][col - 1]) != CURRENT_PLAYER):
         new_board[row - 1][col - 1] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -634,7 +645,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       if (row < 7 and col > 0 and who(board[row + 1][col - 1]) != CURRENT_PLAYER):
         new_board[row + 1][col - 1] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -652,7 +663,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       if (row > 0 and col < 7 and who(board[row - 1][col + 1]) != CURRENT_PLAYER):
         new_board[row - 1][col + 1] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -670,7 +681,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       if (row < 7 and col < 7 and who(board[row + 1][col + 1]) != CURRENT_PLAYER):
         new_board[row + 1][col + 1] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -690,7 +701,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row][col + k] = piece
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -704,7 +715,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row][col + k] = 0
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking horizontal movement towards the 0th column
   k = 1
@@ -715,7 +726,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row][col - k] = piece
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+    #  print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -729,7 +740,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row][col - k] = 0
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+     # print(print_board(new_board)) # <<< FOR DEBUGGING
 
   # checking vertical movement towards the 8th row
   k = 1
@@ -740,7 +751,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k][col] = piece
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -754,7 +765,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k][col] = 0
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking vertical movement towards the 0th row
   k = 1
@@ -765,7 +776,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row - k][col] = piece
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -779,7 +790,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row - k][col] = 0
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 8th column and 8th row
   k = 1
@@ -790,7 +801,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k][col + k] = piece;
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -804,7 +815,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k][col + k] = 0
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 8th column and 0th row
   k = 1
@@ -815,7 +826,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row - k][col + k] = piece;
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -829,7 +840,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row - k][col + k] = 0
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 0th column and 8th row
   k = 1
@@ -840,7 +851,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k][col - k] = piece;
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -854,7 +865,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k][col - k] = 0
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 0th column and 0th row
   k = 1
@@ -865,7 +876,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row - k][col - k] = piece;
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -879,7 +890,7 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row - k][col - k] = 0
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   return new_boards
 
@@ -896,7 +907,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row, col + k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -912,7 +923,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row, col - k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -928,7 +939,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row + k, col, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -944,7 +955,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row - k, col, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -960,7 +971,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row + k, col + k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -976,7 +987,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row - k, col + k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -992,7 +1003,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row + k, col - k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1008,7 +1019,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row - k, col - k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1059,7 +1070,7 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board[row][col + k] = piece
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1074,7 +1085,7 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board[row][col - k] = piece
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1089,7 +1100,7 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board[row + k][col] = piece
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1104,7 +1115,7 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board[row - k][col] = piece
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1119,7 +1130,7 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board[row + k][col + k] = piece;
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1134,7 +1145,7 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board[row - k][col + k] = piece;
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1149,7 +1160,7 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board[row + k][col - k] = piece;
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1164,7 +1175,7 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board[row - k][col - k] = piece;
       new_board[row][col] = 0
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1264,7 +1275,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row, col + k, new_board)
       apply_imitator_pincer_kill(piece, row, col + k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1283,7 +1294,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row, col + k + 1, new_board)
       apply_imitator_pincer_kill(piece, row, col + k + 1, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking horizontal movement towards the 0th column
   k = 1
@@ -1299,7 +1310,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row, col - k, new_board)
       apply_imitator_pincer_kill(piece, row, col - k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1318,7 +1329,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row, col - k - 1, new_board)
       apply_imitator_pincer_kill(piece, row, col - k - 1, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
 
   # checking vertical movement towards the 8th row
   k = 1
@@ -1334,7 +1345,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row + k, col, new_board)
       apply_imitator_pincer_kill(piece, row + k, col, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+     # print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1353,7 +1364,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row + k + 1, col, new_board)
       apply_imitator_pincer_kill(piece, row + k + 1, col, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking vertical movement towards the 0th row
   k = 1
@@ -1369,7 +1380,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row - k, col, new_board)
       apply_imitator_pincer_kill(piece, row - k, col, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1388,7 +1399,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row - k - 1, col, new_board)
       apply_imitator_pincer_kill(piece, row - k - 1, col, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 8th column and 8th row
   k = 1
@@ -1404,7 +1415,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row + k, col + k, new_board)
       apply_imitator_pincer_kill(piece, row + k, col + k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1423,7 +1434,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row + k + 1, col + k + 1, new_board)
       apply_imitator_pincer_kill(piece, row + k + 1, col + k + 1, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 8th column and 0th row
   k = 1
@@ -1439,7 +1450,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row - k, col + k, new_board)
       apply_imitator_pincer_kill(piece, row - k, col + k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1458,7 +1469,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row - k - 1, col + k + 1, new_board)
       apply_imitator_pincer_kill(piece, row - k - 1, col + k + 1, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 0th column and 8th row
   k = 1
@@ -1474,7 +1485,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row + k, col - k, new_board)
       apply_imitator_pincer_kill(piece, row + k, col - k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1493,7 +1504,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row + k + 1, col - k - 1, new_board)
       apply_imitator_pincer_kill(piece, row + k + 1, col - k - 1, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+     # print(print_board(new_board)) # <<< FOR DEBUGGING
   
   # checking diagonal movement towards the 0th column and 0th row
   k = 1
@@ -1509,7 +1520,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row - k, col - k, new_board)
       apply_imitator_pincer_kill(piece, row - k, col - k, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
     # a piece is in the way
     else:
       break
@@ -1528,7 +1539,7 @@ def analyze_imitator_movement(piece, row, col, board):
       apply_imitator_coordinator_kill(piece, row - k - 1, col - k - 1, new_board)
       apply_imitator_pincer_kill(piece, row - k - 1, col - k - 1, new_board)
       new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      #print(print_board(new_board)) # <<< FOR DEBUGGING
   
   return new_boards
 
