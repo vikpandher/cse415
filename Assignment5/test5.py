@@ -1,3 +1,5 @@
+import boardTests
+
 BLACK = 0
 WHITE = 1
 
@@ -6,6 +8,13 @@ INIT_TO_CODE = {'p':2, 'P':3, 'c':4, 'C':5, 'l':6, 'L':7, 'i':8, 'I':9,
 
 CODE_TO_INIT = {0:'-',2:'p',3:'P',4:'c',5:'C',6:'l',7:'L',8:'i',9:'I',
   10:'w',11:'W',12:'k',13:'K',14:'f',15:'F'}
+  
+CODE_TO_NAME = {0:'blank space', 2:'Black Pincer', 3:'White Pincer',
+  4:'Black Coordinator', 5:'White Coordinator', 6:'Black Leaper', 7:'White Leaper',
+  8:'Black Imitator', 9:'White Imitator', 10:'Black Withdrawer', 11:'White Withdrawer',
+  12:'Black King', 13:'White King', 14:'Black Freezer', 15:'White Freezer'}
+
+COL_TO_LETTER = {0:'a', 1:'b', 2:'c', 3:'d', 4:'e', 5:'f', 6:'g', 7:'h'}
   
 def who(piece): return piece % 2
 
@@ -31,305 +40,6 @@ P P P P P P P P
 F L I W K I L C
 ''')
 
-PINCER_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - P - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-PINCER_TEST_1 = parse('''
-- - - K - - - -
-- - - i - - - -
-- - - - - - - -
-I p - P - i I -
-- - - - - - - -
-- - - p - - - -
-- - I P I - - -
-- - - I - - - -
-''')
-
-PINCER_TEST_2 = parse('''
-- - - i - - - -
-- - - i - - - -
-- - - - - - - -
-- p - P - i i -
-- - - - - - - -
-- I p - p I - -
-- - - p - - - -
-- - - I - - - -
-''')
-
-KING_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - K - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-KING_TEST_1 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - I I I - - -
-- - I K I - - -
-- - I I I - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-KING_TEST_2 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - i i i - - -
-- - i K i - - -
-- - i i i - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-WITHDRAWER_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - W - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-WITHDRAWER_TEST_1 = parse('''
-- - - - - - - i
-- i - i - - - -
-- - - - - - - -
-- - - W - i - -
-- - - - - - - -
-- i - - - i - -
-- - - - - - - -
-- - - i - - - -
-''')
-
-WITHDRAWER_TEST_2 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - i i i - - -
-- - i W - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-WITHDRAWER_TEST_3 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - W p - - -
-- - p p p - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-LEAPER_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - L - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-LEAPER_TEST_1 = parse('''
-- - - - - - - -
-- i - i - i - -
-- - - - - - - -
-- i - L - - i -
-- - - - - - - -
-- i - - - i - -
-- - - i - - - -
-- - - - - - - -
-''')
-
-LEAPER_TEST_2 = parse('''
-- - - - - - - -
-- I - I - I - -
-- - - - - - - -
-- I - L - - I -
-- - - - - - - -
-- I - - - I - -
-- - - I - - - -
-- - - - - - - -
-''')
-
-COORDINATOR_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - C - - - -
-p - - K - p - -
-- - - - - - - -
-- - - p - - - -
-- - - - - - - -
-''')
-
-COORDINATOR_TEST_1 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-f K p C - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-COORDINATOR_TEST_2 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - C - - - -
-- - - - p - - -
-- - - - p - - -
-- - - - K - - -
-- - - - f - - -
-''')
-
-FREEZER_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - F - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-FREEZER_TEST_1 = parse('''
-- - - - - - - -
-- K - - - - - -
-- - - - - - - -
-- - - P P P - -
-- - - P f P - -
-- - - P P K - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - I - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_1 = parse('''
-- - - - - - - -
-- - - i - - - -
-- i - - - i - -
-- - - - - - - -
-- i - I - - i -
-- - i - - - - -
-- - - i - i - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_2 = parse('''
-- - - - - - - -
-- - - l - - - -
-- l - - - l - -
-- - - - - - - -
-- l - I - - l -
-- - l - - - - -
-- - - l - l - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_3 = parse('''
-- - - - - - - -
-- - - P - - - -
-- - - p - - - -
-- P p - - - - -
-P p - I - p P -
-- - - - - - - -
-- - - p - - - -
-- - - P - - - -
-''')
-
-IMITATOR_TEST_4 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - P - - -
-- - - - p - - -
-w I - l - p P -
-- - - - p - - -
-- - - - P - - -
-K - - - c - - -
-''')
-
-IMITATOR_TEST_5 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - w w w - - -
-- - w I - l - -
-- - - - - - - -
-- l - l - - - -
-- - - - - - l -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_6 = parse('''
-- - - - - - - -
-- l l l l l - -
-- l k k k l - -
-- l k I k l - -
-- l k k k l - -
-- l l l l l - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_7 = parse('''
-- - - - - - - -
-- l l l F l - -
-- l k k p f - -
-- l w I k p F -
-- l k k p f - -
-- l l l F l - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_8 = parse('''
-- - - - - - - -
-- l F l l l - -
-- f p k k l - -
-F p k I w l - -
-- f p k k l - -
-- l F l l l - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-
-
 class BC_state:
   def __init__(self, old_board=INITIAL, whose_move=WHITE):
     new_board = [r[:] for r in old_board]
@@ -351,7 +61,9 @@ def test_starting_board():
   init_state = BC_state(INITIAL, WHITE)
   print(init_state)
 
+#######################
 CURRENT_PLAYER = WHITE;
+#######################
 
 def look_for_successors(state):
   board = state.board
@@ -362,11 +74,16 @@ def look_for_successors(state):
   for i in range(8): # look through row
     for j in range(8): # look through column
       current_piece = board[i][j]
-      if(who(current_piece) == CURRENT_PLAYER):
-        print("current_piece = " + str(CODE_TO_INIT[current_piece]) + ", (" + str(i) + ", " + str(j) + ")")
-        analyze_piece(current_piece, i, j, board)
+      if(who(current_piece) == CURRENT_PLAYER and current_piece != 0):
+        print("current_piece = " + CODE_TO_NAME[current_piece] + " (" + CODE_TO_INIT[current_piece] + "), (" + str(i) + ", " + str(j) + ")")
+        print()
+        new_boards = analyze_piece(current_piece, i, j, board)
+        print(print_boards(new_boards)) # <<< FOR DEBUGGING
         print()
 
+def get_move_desc(piece, old_row, old_col, new_row, new_col):
+  return CODE_TO_NAME[piece] + " from " +  COL_TO_LETTER[old_col] + str(8 - old_row) + " to " + COL_TO_LETTER[new_col] + str(8 - new_row)
+        
 def analyze_pincer_movement(piece, row, col, board):
   new_boards = []
   
@@ -379,8 +96,8 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board[row][col + k] = piece
       new_board[row][col] = 0
       apply_pincer_kill(piece, row, col + k, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -395,8 +112,8 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board[row][col - k] = piece
       new_board[row][col] = 0
       apply_pincer_kill(piece, row, col - k, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -411,8 +128,8 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board[row + k][col] = piece
       new_board[row][col] = 0
       apply_pincer_kill(piece, row + k, col, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -427,14 +144,13 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board[row - k][col] = piece
       new_board[row][col] = 0
       apply_pincer_kill(piece, row - k, col, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
     k = k + 1
   
-  print("return new_boards")
   return new_boards
   
 def apply_pincer_kill(piece, row, col, board):
@@ -455,76 +171,76 @@ def analyze_king_movement(piece, row, col, board):
   new_boards = []
   
   # checking horizontal movement toward the 8th column
-  if(col < 7 and who(board[row][col + 1]) != CURRENT_PLAYER):
+  if(col < 7 and (who(board[row][col + 1]) != CURRENT_PLAYER or board[row][col + 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row][col + 1] = piece
     new_board[row][col] = 0
-    new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+    move_desc = get_move_desc(piece, row, col, row, col + 1)
+    new_boards.append([move_desc, new_board])
     
   # checking horizontal movement toward the 0th column
-  if(col > 0 and who(board[row][col - 1]) != CURRENT_PLAYER):
+  if(col > 0 and (who(board[row][col - 1]) != CURRENT_PLAYER or board[row][col - 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row][col - 1] = piece
     new_board[row][col] = 0
-    new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+    move_desc = get_move_desc(piece, row, col, row, col - 1)
+    new_boards.append([move_desc, new_board])
     
   # checking vertical movement toward the 8th row
-  if(row < 7 and who(board[row + 1][col]) != CURRENT_PLAYER):
+  if(row < 7 and (who(board[row + 1][col]) != CURRENT_PLAYER or board[row + 1][col] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col] = piece
     new_board[row][col] = 0
-    new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+    move_desc = get_move_desc(piece, row, col, row + 1, col)
+    new_boards.append([move_desc, new_board])
   
   # checking vertical movement toward the 0th row
-  if(row > 0 and who(board[row - 1][col]) != CURRENT_PLAYER):
+  if(row > 0 and (who(board[row - 1][col]) != CURRENT_PLAYER or board[row - 1][col] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col] = piece
     new_board[row][col] = 0
-    new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+    move_desc = get_move_desc(piece, row, col, row - 1, col)
+    new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 8th column and 8th row
-  if(col < 7 and row < 7 and who(board[row + 1][col + 1]) != CURRENT_PLAYER):
+  if(col < 7 and row < 7 and (who(board[row + 1][col + 1]) != CURRENT_PLAYER or board[row + 1][col + 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col + 1] = piece
     new_board[row][col] = 0
-    new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+    move_desc = get_move_desc(piece, row, col, row + 1, col + 1)
+    new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 8th column and 0th row
-  if(col < 7 and row > 0 and who(board[row - 1][col + 1]) != CURRENT_PLAYER):
+  if(col < 7 and row > 0 and (who(board[row - 1][col + 1]) != CURRENT_PLAYER or board[row - 1][col + 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col + 1] = piece;
     new_board[row][col] = 0;
-    new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+    move_desc = get_move_desc(piece, row, col, row - 1, col + 1)
+    new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 0th column and 8th row
-  if(col > 0 and row < 7 and who(board[row + 1][col - 1]) != CURRENT_PLAYER):
+  if(col > 0 and row < 7 and (who(board[row + 1][col - 1]) != CURRENT_PLAYER or board[row + 1][col - 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col - 1] = piece
     new_board[row][col] = 0
-    new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+    move_desc = get_move_desc(piece, row, col, row + 1, col - 1)
+    new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 0th column and 0th row
-  if(col > 0 and row > 0 and who(board[row - 1][col - 1]) != CURRENT_PLAYER):
+  if(col > 0 and row > 0 and (who(board[row - 1][col - 1]) != CURRENT_PLAYER or board[row - 1][col - 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col - 1] = piece
     new_board[row][col] = 0
-    new_boards.append(new_board)
-    print(print_board(new_board)) # <<< FOR DEBUGGING
+    move_desc = get_move_desc(piece, row, col, row - 1, col - 1)
+    new_boards.append([move_desc, new_board])
   
   return new_boards
 
@@ -540,10 +256,10 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row][col + k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (col > 0 and who(board[row][col - 1]) != CURRENT_PLAYER):
+      if (col > 0 and who(board[row][col - 1]) != CURRENT_PLAYER and board[row][col - 1] != 0):
         new_board[row][col - 1] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -558,10 +274,10 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row][col - k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (col < 7 and who(board[row][col + 1]) != CURRENT_PLAYER):
+      if (col < 7 and who(board[row][col + 1]) != CURRENT_PLAYER and board[row][col + 1] != 0):
         new_board[row][col + 1] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -576,10 +292,10 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row + k][col] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row > 0 and who(board[row - 1][col]) != CURRENT_PLAYER):
+      if (row > 0 and who(board[row - 1][col]) != CURRENT_PLAYER and board[row - 1][col] != 0):
         new_board[row - 1][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -594,10 +310,10 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row - k][col] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row < 7 and who(board[row + 1][col]) != CURRENT_PLAYER):
+      if (row < 7 and who(board[row + 1][col]) != CURRENT_PLAYER and board[row + 1][col] != 0):
         new_board[row + 1][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -612,10 +328,10 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row + k][col + k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row > 0 and col > 0 and who(board[row - 1][col - 1]) != CURRENT_PLAYER):
+      if (row > 0 and col > 0 and who(board[row - 1][col - 1]) != CURRENT_PLAYER and board[row - 1][col - 1] != 0):
         new_board[row - 1][col - 1] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -630,10 +346,10 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row - k][col + k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row < 7 and col > 0 and who(board[row + 1][col - 1]) != CURRENT_PLAYER):
+      if (row < 7 and col > 0 and who(board[row + 1][col - 1]) != CURRENT_PLAYER and board[row + 1][col - 1] != 0):
         new_board[row + 1][col - 1] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -648,10 +364,10 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row + k][col - k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row > 0 and col < 7 and who(board[row - 1][col + 1]) != CURRENT_PLAYER):
+      if (row > 0 and col < 7 and who(board[row - 1][col + 1]) != CURRENT_PLAYER and board[row - 1][col + 1] != 0):
         new_board[row - 1][col + 1] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -666,10 +382,10 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row - k][col - k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row < 7 and col < 7 and who(board[row + 1][col + 1]) != CURRENT_PLAYER):
+      if (row < 7 and col < 7 and who(board[row + 1][col + 1]) != CURRENT_PLAYER and board[row + 1][col + 1] != 0):
         new_board[row + 1][col + 1] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -688,8 +404,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row][col + k] = piece
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -702,8 +418,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row][col + k + 1] = piece
       new_board[row][col + k] = 0
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col + k + 1)
+      new_boards.append([move_desc, new_board])
   
   # checking horizontal movement towards the 0th column
   k = 1
@@ -713,8 +429,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row][col - k] = piece
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -727,8 +443,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row][col - k - 1] = piece
       new_board[row][col - k] = 0
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col - k - 1)
+      new_boards.append([move_desc, new_board])
 
   # checking vertical movement towards the 8th row
   k = 1
@@ -738,8 +454,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col] = piece
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -752,8 +468,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k + 1][col] = piece
       new_board[row + k][col] = 0
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k + 1, col)
+      new_boards.append([move_desc, new_board])
   
   # checking vertical movement towards the 0th row
   k = 1
@@ -763,8 +479,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col] = piece
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -777,8 +493,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row - k - 1][col] = piece
       new_board[row - k][col] = 0
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k - 1, col)
+      new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 8th column and 8th row
   k = 1
@@ -788,8 +504,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col + k] = piece;
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -802,8 +518,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k + 1][col + k + 1] = piece
       new_board[row + k][col + k] = 0
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k + 1, col + k + 1)
+      new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 8th column and 0th row
   k = 1
@@ -813,8 +529,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col + k] = piece;
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -827,8 +543,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row - k - 1][col + k + 1] = piece
       new_board[row - k][col + k] = 0
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k - 1, col + k + 1)
+      new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 0th column and 8th row
   k = 1
@@ -838,8 +554,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col - k] = piece;
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -852,8 +568,8 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board[row + k + 1][col - k - 1] = piece
       new_board[row + k][col - k] = 0
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k + 1, col - k - 1)
+      new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 0th column and 0th row
   k = 1
@@ -863,22 +579,22 @@ def analyze_leaper_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col - k] = piece;
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
     k = k + 1
   # there is space to jump
-  if (row - k > 0 and col - k > 0 and board[row - k + 1][col - k - 1] == 0):
+  if (row - k > 0 and col - k > 0 and board[row - k - 1][col - k - 1] == 0):
     # the piece to jump is the oponent's
     if (who(board[row - k][col - k]) != CURRENT_PLAYER):
       new_board = copy_board(board)
       new_board[row - k - 1][col - k - 1] = piece
       new_board[row - k][col - k] = 0
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k - 1, col - k - 1)
+      new_boards.append([move_desc, new_board])
   
   return new_boards
 
@@ -894,8 +610,8 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col + k] = piece
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row, col + k, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -910,8 +626,8 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row][col - k] = piece
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row, col - k, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -926,8 +642,8 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row + k][col] = piece
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row + k, col, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -942,8 +658,8 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row - k][col] = piece
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row - k, col, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -958,8 +674,8 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row + k][col + k] = piece;
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row + k, col + k, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -974,8 +690,8 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row - k][col + k] = piece;
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row - k, col + k, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -990,8 +706,8 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row + k][col - k] = piece;
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row + k, col - k, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1006,8 +722,8 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board[row - k][col - k] = piece;
       new_board[row][col] = 0
       apply_coordinator_kill(piece, row - k, col - k, new_board)
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1026,6 +742,7 @@ def apply_coordinator_kill(piece, row, col, board):
           board[row][j] = 0
         if (who(board[i][col]) != CURRENT_PLAYER and board[i][col] != 0):
           board[i][col] = 0
+        '''
         # kill enemies in the same row
         if i == row :
           if col > j:
@@ -1046,6 +763,7 @@ def apply_coordinator_kill(piece, row, col, board):
             for k in range(row - i - 1):
               if (who(board[i-k][j]) != CURRENT_PLAYER and board[i-k][j] != 0) :
                 board[i-k][j] = 0
+        '''
         return
 
 def analyze_freezer_movement(piece, row, col, board):
@@ -1059,8 +777,8 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row][col + k] = piece
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1074,8 +792,8 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row][col - k] = piece
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1089,8 +807,8 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col] = piece
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1104,8 +822,8 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col] = piece
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1119,8 +837,8 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col + k] = piece;
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1134,8 +852,8 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col + k] = piece;
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col + k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1149,8 +867,8 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col - k] = piece;
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row + k, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1164,8 +882,8 @@ def analyze_freezer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col - k] = piece;
       new_board[row][col] = 0
-      new_boards.append(new_board)
-      print(print_board(new_board)) # <<< FOR DEBUGGING
+      move_desc = get_move_desc(piece, row, col, row - k, col - k)
+      new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
       break
@@ -1651,7 +1369,8 @@ def analyze_piece(piece, row, col, board):
 def print_boards(boards):
   s = ''
   for b in boards:
-    s += print_board(b)
+    s += b[0] + "\n"
+    s += print_board(b[1])
   return s
   
 def print_board(board):
@@ -1670,6 +1389,6 @@ def copy_board(old_board):
       new_board[i][j] = old_board[i][j]
   return new_board
 
-test_state = BC_state(COORDINATOR_TEST_2, WHITE)
+test_state = BC_state(boardTests.W_COORDINATOR_TEST_0, CURRENT_PLAYER)
 print(test_state)
 look_for_successors(test_state)
