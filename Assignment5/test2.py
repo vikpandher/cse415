@@ -334,6 +334,8 @@ def decideBest(state, whoseMove, initTime, timeLimit, plyLeft=2):
     if (whoseMove == WHITE and newVal[0] > provisional[0]) \
        or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
+
+  print(provisional)
   return provisional
 
 CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
@@ -1656,3 +1658,4 @@ def copy_board(old_board):
 #test_state = BC_state(INITIAL, WHITE)
 #print(test_state)
 #look_for_successors(test_state)
+makeMove(BC_state(INITIAL, WHITE), "Go")
