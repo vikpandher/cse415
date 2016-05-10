@@ -1293,16 +1293,16 @@ def analyze_imitator_movement(piece, row, col, board, current_player):
 
 def apply_imitator_pincer_kill(piece, row, col, board, current_player):
   # squish towards 0th row
-  if row > 1 and board[row-1][col] == 3 - current_player and who(board[row-2][col]) == current_player :
+  if row > 1 and board[row-1][col] == 3 - current_player and who(board[row-2][col]) == current_player and board[row-2][col] != 0 :
     board[row-1][col] = 0
   # squish towards 8th row
-  if row < 6 and board[row+1][col] == 3 - current_player and who(board[row+2][col]) == current_player :
+  if row < 6 and board[row+1][col] == 3 - current_player and who(board[row+2][col]) == current_player and board[row+2][col] != 0 :
     board[row+1][col] = 0
   # squish towards 0th column
-  if col > 1 and board[row][col-1] == 3 - current_player and who(board[row][col-2]) == current_player :
+  if col > 1 and board[row][col-1] == 3 - current_player and who(board[row][col-2]) == current_player and board[row][col-2] != 0 :
     board[row][col-1] = 0
   # squish towards 8th column
-  if col < 6 and board[row][col+1] == 3 - current_player and who(board[row][col+2]) == current_player :
+  if col < 6 and board[row][col+1] == 3 - current_player and who(board[row][col+2]) == current_player and board[row][col+2] != 0 :
     board[row][col+1] = 0
 
 def apply_imitator_coordinator_kill(piece, row, col, board, current_player):
