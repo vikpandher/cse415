@@ -1401,6 +1401,6 @@ def copy_board(old_board):
       new_board[i][j] = old_board[i][j]
   return new_board
 
-test_state = BC_state(boardTests.B_PINCER_TEST_2, BLACK)
+test_state = BC_state(boardTests.W_LEAPER_TEST_4, WHITE)
 print(test_state)
 look_for_successors(test_state)

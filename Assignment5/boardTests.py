@@ -490,3 +490,14 @@ c l i w k i l f
 - - - - - - - -
 F L I W K I L C
 ''')
+
+W_LEAPER_TEST_4 = parse('''
+c l i w k i l f
+p p p p p p - p
+- - - - - - - P
+- - - - C - - -
+- - - - - - - -
+- - - - - - p -
+P P P P P P P L
+F L I W K I - -
+''')
