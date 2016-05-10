@@ -17,8 +17,8 @@ if len(sys.argv) > 1:
     if len(sys.argv) > 3:
         TIME_PER_MOVE = float(sys.argv[3])
 else:
-    import TestAgent1 as player1
-    import TestAgent1 as player2
+    import test2 as player1
+    import test2 as player2
 
 
 # Specify details of a match here: 

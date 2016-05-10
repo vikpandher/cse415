@@ -359,9 +359,53 @@ P - - k - P - -
 - - - - - - - -
 ''')
 
+# white coordinator kill row and col to 0
+W_COORDINATOR_TEST_1 = parse('''
+K f f - - - - -
+f - - - - - - -
+f - - - - - - -
+- - - C - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+''')
 
+# white coordinator kill row and col to 8
+W_COORDINATOR_TEST_2 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - C - - -
+- - - - - - - f
+- - - - - - - f
+- - - - - f f K
+''')
 
+# black coordinator kill row and col to 0
+B_COORDINATOR_TEST_1 = parse('''
+k F F - - P - -
+F - - - - - - -
+F - - - - - - -
+- - - c - - - -
+- - - - - - - -
+P - - - - - - -
+- - - - - - - -
+- - - - - - - -
+''')
 
+# black coordinator kill row and col to 8
+B_COORDINATOR_TEST_2 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - - - - - - P
+- - - - - - - -
+- - - - c - - -
+- - - - - - - F
+- - - - - - - F
+- - P - - F F k
+''')
 
 
 
