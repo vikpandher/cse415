@@ -30,6 +30,16 @@ def parse(bs): # bs is board string
       b[iy][jx] = INIT_TO_CODE[rss[jx]]
   return b
 
+def introduce():
+    return "TESTTTTTTT."
+    
+def prepare(player2Nickname):
+    pass
+    
+def nickname():
+    return "Test"
+  
+  
 INITIAL = parse('''
 c l i w k i l f
 p p p p p p p p
@@ -70,6 +80,7 @@ def makeMove(currentState, currentRemark, timeLimit=5):
   initTime = time.clock()
   newState = decideBest(currentState, "", currentState.whose_move, initTime, timeLimit)
   print("Our Move:")
+  print(newState[0])
   print(newState[1])
   print(newState[2])
   return  [[newState[2], newState[1]], "Your turn!"]
@@ -94,8 +105,8 @@ def decideBest(state, desc, whoseMove, initTime, timeLimit, plyLeft=1):
     if (whoseMove == WHITE and newVal[0] > provisional[0]) \
        or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
-      print("Updated current best:")
-      print(provisional)
+      #print("Updated current best:")
+      #print(provisional)
   return provisional
 
 CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
@@ -214,16 +225,16 @@ def analyze_pincer_movement(piece, row, col, board, current_player):
   
 def apply_pincer_kill(piece, row, col, board, current_player):
   # squish towards 0th row
-  if row > 1 and who(board[row-1][col]) != current_player and board[row-1][col] != 0 and who(board[row-2][col]) == current_player :
+  if row > 1 and who(board[row-1][col]) != current_player and board[row-1][col] != 0 and who(board[row-2][col]) == current_player and board[row-2][col] != 0 :
     board[row-1][col] = 0
   # squish towards 8th row
-  if row < 6 and who(board[row+1][col]) != current_player and board[row+1][col] != 0 and who(board[row+2][col]) == current_player :
+  if row < 6 and who(board[row+1][col]) != current_player and board[row+1][col] != 0 and who(board[row+2][col]) == current_player and board[row+2][col] != 0 :
     board[row+1][col] = 0
   # squish towards 0th column
-  if col > 1 and who(board[row][col-1]) != current_player and board[row][col-1] != 0 and who(board[row][col-2]) == current_player :
+  if col > 1 and who(board[row][col-1]) != current_player and board[row][col-1] != 0 and who(board[row][col-2]) == current_player and board[row][col-2] != 0 :
     board[row][col-1] = 0
   # squish towards 8th column
-  if col < 6 and who(board[row][col+1]) != current_player and board[row][col+1] != 0 and who(board[row][col+2]) == current_player :
+  if col < 6 and who(board[row][col+1]) != current_player and board[row][col+1] != 0 and who(board[row][col+2]) == current_player and board[row][col+2] != 0 :
     board[row][col+1] = 0
 
 def analyze_king_movement(piece, row, col, board, current_player):
@@ -1462,4 +1473,4 @@ def copy_board(old_board):
 #test_state = BC_state(boardTests.B_COORDINATOR_TEST_2, CURRENT_PLAYER)
 #print(test_state)
 #look_for_successors(test_state)
-makeMove(BC_state(INITIAL, WHITE), "Go")
+#makeMove(BC_state(INITIAL, WHITE), "Go")

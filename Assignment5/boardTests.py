@@ -95,6 +95,18 @@ i F - p - F i -
 - - - i - - - -
 ''')
 
+# black pincer kill pincer
+B_PINCER_TEST_2 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - p - - - -
+- - - - - - - -
+- - - P - - - -
+- - - - - - - -
+- - - - - - - -
+''')
+
 # white king movement
 W_KING_TEST_0 = parse('''
 - - - - - - - -

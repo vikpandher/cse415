@@ -156,16 +156,16 @@ def analyze_pincer_movement(piece, row, col, board, current_player):
   
 def apply_pincer_kill(piece, row, col, board, current_player):
   # squish towards 0th row
-  if row > 1 and who(board[row-1][col]) != current_player and board[row-1][col] != 0 and who(board[row-2][col]) == current_player :
+  if row > 1 and who(board[row-1][col]) != current_player and board[row-1][col] != 0 and who(board[row-2][col]) == current_player and board[row-2][col] != 0 :
     board[row-1][col] = 0
   # squish towards 8th row
-  if row < 6 and who(board[row+1][col]) != current_player and board[row+1][col] != 0 and who(board[row+2][col]) == current_player :
+  if row < 6 and who(board[row+1][col]) != current_player and board[row+1][col] != 0 and who(board[row+2][col]) == current_player and board[row+2][col] != 0 :
     board[row+1][col] = 0
   # squish towards 0th column
-  if col > 1 and who(board[row][col-1]) != current_player and board[row][col-1] != 0 and who(board[row][col-2]) == current_player :
+  if col > 1 and who(board[row][col-1]) != current_player and board[row][col-1] != 0 and who(board[row][col-2]) == current_player and board[row][col-2] != 0 :
     board[row][col-1] = 0
   # squish towards 8th column
-  if col < 6 and who(board[row][col+1]) != current_player and board[row][col+1] != 0 and who(board[row][col+2]) == current_player :
+  if col < 6 and who(board[row][col+1]) != current_player and board[row][col+1] != 0 and who(board[row][col+2]) == current_player and board[row][col+2] != 0 :
     board[row][col+1] = 0
 
 def analyze_king_movement(piece, row, col, board, current_player):
@@ -1401,6 +1401,6 @@ def copy_board(old_board):
       new_board[i][j] = old_board[i][j]
   return new_board
 
-test_state = BC_state(boardTests.QUEENS_TEST_0, BLACK)
+test_state = BC_state(boardTests.B_PINCER_TEST_2, BLACK)
 print(test_state)
 look_for_successors(test_state)

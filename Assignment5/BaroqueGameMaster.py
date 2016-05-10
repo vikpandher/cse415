@@ -9,7 +9,7 @@ VERSION = '0.8-BETA'
 # Get names of players and time limit from the command line.
 
 import sys
-TIME_PER_MOVE = 0.5 # default time limit is half a second.
+TIME_PER_MOVE = 3 # default time limit is half a second.
 if len(sys.argv) > 1:
     import importlib    
     player1 = importlib.import_module(sys.argv[1])
@@ -17,8 +17,8 @@ if len(sys.argv) > 1:
     if len(sys.argv) > 3:
         TIME_PER_MOVE = float(sys.argv[3])
 else:
-    import test2 as player1
-    import test2 as player2
+    import testnew as player1
+    import testnew as player2
 
 
 # Specify details of a match here: 
