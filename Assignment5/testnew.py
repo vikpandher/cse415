@@ -78,12 +78,12 @@ def test_starting_board():
 
 def makeMove(currentState, currentRemark, timeLimit=5):
   initTime = time.clock()
-  newState = decideBest(currentState, "", currentState.whose_move, initTime, timeLimit)
+  newState = decideBest(currentState, "", currentState.whose_move, initTime, timeLimit, [])
   print("Our Move:")
   print(newState[0])
   print(newState[1])
   print(newState[2])
-  return  [[newState[2], newState[1]], "Your turn!"]
+  return  [[newState[2], newState[3][0]], "Your turn!"]
 
 def other(player):
   if player == WHITE:
@@ -91,17 +91,20 @@ def other(player):
   else:
     return WHITE
 
-def decideBest(state, desc, whoseMove, initTime, timeLimit, plyLeft=1):
-  if plyLeft == 0: return (staticEval(state), state, desc)
-  if whoseMove == WHITE: provisional = (-100000, state, desc)
-  else: provisional = (100000, state, desc)
+def decideBest(state, desc, whoseMove, initTime, timeLimit, plyLeft=1, path):
+  if plyLeft == 0: return (staticEval(state), state, desc, path[:])
+  if whoseMove == WHITE: provisional = (-100000, state, desc, path[:])
+  else: provisional = (100000, state, desc, path[:])
   for s in look_for_successors(state):
     #print("successor:")
     #print(s)
     currTime = time.clock()
     if ((initTime + currTime) > (timeLimit - 1)):
       break
-    newVal = decideBest(BC_state(s[1], other(whoseMove)), s[0], other(whoseMove), initTime, timeLimit, plyLeft-1)
+    new_path = path[:]
+    new_path.append(s)
+    provisional[3] = new_path
+    newVal = decideBest(BC_state(s[1], other(whoseMove)), s[0], other(whoseMove), initTime, timeLimit, plyLeft-1, new_path)
     if (whoseMove == WHITE and newVal[0] > provisional[0]) \
        or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
