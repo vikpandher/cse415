@@ -1,5 +1,6 @@
 import boardTests
 import time
+import random
 
 BLACK = 0
 WHITE = 1
@@ -117,6 +118,11 @@ def decideBest(state, desc, whoseMove, initTime, path, timeLimit, plyLeft=2):
       #print(provisional[0])
       #print(">>> Lowest ply path")
       #print(print_boards(provisional[3]))
+    if (whoseMove == WHITE and newVal[0] = provisional[0]) or (whoseMove == BLACK and newVal[0] = provisional[0]):
+      rint = random.randint(0,1)
+      if rint == 0:
+        provisional = newVal
+        provisional[3] = new_path
       
   return provisional
 
