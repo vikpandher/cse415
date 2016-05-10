@@ -109,14 +109,14 @@ def decideBest(state, desc, whoseMove, initTime, path, timeLimit, plyLeft=2):
     if (whoseMove == WHITE and newVal[0] > provisional[0]) or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
       provisional[3] = new_path
-      print(">>> Updated current best:")
-      print(print_board(provisional[3][0][1]))
-      print(">>> Lowest ply:")
-      print(print_board(provisional[3][-1][1]))
-      print(">>> Eval of lowest ply:")
-      print(provisional[0])
-      print(">>> Lowest ply path")
-      print(print_boards(provisional[3]))
+      #print(">>> Updated current best:")
+      #print(print_board(provisional[3][0][1]))
+      #print(">>> Lowest ply:")
+      #print(print_board(provisional[3][-1][1]))
+      #print(">>> Eval of lowest ply:")
+      #print(provisional[0])
+      #print(">>> Lowest ply path")
+      #print(print_boards(provisional[3]))
       
   return provisional
 

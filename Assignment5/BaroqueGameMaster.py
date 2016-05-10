@@ -70,7 +70,7 @@ def runGame():
     FINISHED = False
     turnCount = 1
     print(currentState)
-    while not FINISHED and turnCount < 2:
+    while not FINISHED :#and turnCount < 2:
         who = currentState.whose_move
         if who==bcs.WHITE: side = 'WHITE'
         global CURRENT_PLAYER
