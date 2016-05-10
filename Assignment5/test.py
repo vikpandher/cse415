@@ -34,6 +34,28 @@ P P P P P P P P
 F L I W K I L C
 ''')
 
+TEST_5 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - w w w - - -
+- - w I - l - -
+- - - - - - - -
+- l - l - - - -
+- - - - - - l -
+- - - - - - - -
+''')
+
+PINCER_TEST_2 = parse('''
+- - - i - - - -
+- - - i - - - -
+- - - - - - - -
+- p - P - i i -
+- - - - - - - -
+- I p - p I - -
+- - - p - - - -
+- - - I - - - -
+''')
+
 class BC_state:
   def __init__(self, old_board=INITIAL, whose_move=WHITE):
     new_board = [r[:] for r in old_board]
@@ -69,5 +91,5 @@ def staticEval(state):
     value -= 1000
   return value
 
-print(INITIAL)
-print(staticEval(BC_state(INITIAL, WHITE)))
+print(PINCER_TEST_2)
+print(staticEval(BC_state(PINCER_TEST_2, WHITE)))

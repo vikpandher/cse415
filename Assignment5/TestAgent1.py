@@ -4,9 +4,6 @@ Baroque Chess.
 
 '''
 
-import baroque_succ as bcs
-import random
-
 def makeMove(currentState, currentRemark, timelimit):
     newMoveDesc = 'No move'
     newRemark = "I don't even know how to move!"

@@ -2,9 +2,9 @@
 '''TimedGameMaster.py based on GameMaster.py which in turn is 
  based on code from RunKInARow.py
 
-S. Tanimoto, May 3
+S. Tanimoto, May 9
 '''
-VERSION = '0.6-BETA'
+VERSION = '0.8-BETA'
 
 # Get names of players and time limit from the command line.
 
@@ -17,13 +17,14 @@ if len(sys.argv) > 1:
     if len(sys.argv) > 3:
         TIME_PER_MOVE = float(sys.argv[3])
 else:
-    import test2 as player1
+    import TestAgent1 as player1
     import TestAgent1 as player2
 
 
 # Specify details of a match here: 
 
-import baroque_succ as bcs
+#import baroque_succ as bcs
+import new_succ as bcs
 
 VALIDATE_MOVES = True # If players are trusted not to cheat, this could be turned off to save time.
 
@@ -73,6 +74,10 @@ def runGame():
         if who==bcs.WHITE: side = 'WHITE'
         global CURRENT_PLAYER
         CURRENT_PLAYER = who
+        if VALIDATE_MOVES:
+            legal_states = bcs.successors(currentState)
+            if legal_states==[]:
+                print("Stalemate: "+side+" has no moves!"); break
         if WHITEsTurn:
             playerResult = timeout(player1.makeMove,args=(currentState, currentRemark, TIME_PER_MOVE), kwargs={}, timeout_duration=TIME_PER_MOVE, default=(None,"I give up!"));
             name = player1.nickname()
@@ -85,7 +90,6 @@ def runGame():
         if moveAndState==None:
             FINISHED = True; continue
         if VALIDATE_MOVES:
-            legal_states = bcs.successors(currentState)
             if not OCCURS_IN(moveAndState[1], legal_states):
                 print("Illegal move by "+side)  # Returned state is:\n" + str(currentState))
                 break

@@ -284,6 +284,16 @@ IMITATOR_TEST_5 = parse('''
 - - - - - - - -
 ''')
 
+TEST_5 = parse('''
+- - - - - - - -
+- - - - - - - -
+- - w w w - - -
+- - w I - l - -
+- - - - - - - -
+- l - l - - - -
+- - - - - - l -
+- - - - - - - -
+''')
 
 
 class BC_state:
@@ -309,7 +319,7 @@ def test_starting_board():
 
 CURRENT_PLAYER = WHITE
 
-def makeMove(currentState, currentRemark, timeLimit=30):
+def makeMove(currentState, currentRemark, timeLimit=5):
   initTime = time.clock()
   newState = decideBest(currentState, CURRENT_PLAYER, initTime, timeLimit)
   print("Our Move:")
@@ -330,12 +340,12 @@ def decideBest(state, whoseMove, initTime, timeLimit, plyLeft=2):
     currTime = time.clock()
     if ((initTime + currTime) > (timeLimit - 1)):
       break
-    newVal = decideBest(BC_state(s, whoseMove), other(whoseMove), plyLeft-1, initTime, timeLimit)
+    newVal = decideBest(BC_state(s, whoseMove), other(whoseMove), initTime, timeLimit, plyLeft-1)
     if (whoseMove == WHITE and newVal[0] > provisional[0]) \
        or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
-
-  print(provisional)
+      print("current best:")
+      print(provisional)
   return provisional
 
 CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
@@ -374,7 +384,7 @@ def look_for_successors(state):
     for j in range(8): # look through column
       current_piece = board[i][j]
       if(who(current_piece) == CURRENT_PLAYER):
-        print("current_piece = " + str(CODE_TO_INIT[current_piece]) + ", (" + str(i) + ", " + str(j) + ")")
+        #print("current_piece = " + str(CODE_TO_INIT[current_piece]) + ", (" + str(i) + ", " + str(j) + ")")
 # Check this
         successors.extend(analyze_piece(current_piece, i, j, board))
         print()
