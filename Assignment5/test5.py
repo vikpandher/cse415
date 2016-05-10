@@ -82,6 +82,7 @@ def look_for_successors(state):
         print()
 
 def get_move_desc(piece, old_row, old_col, new_row, new_col):
+  print("get_move_desc(" + str(piece) + ", " + str(old_row) + ", " + str(old_col) + ", " + str(new_row) + ", " + str(new_col) + ")")
   return CODE_TO_NAME[piece] + " from " +  COL_TO_LETTER[old_col] + str(8 - old_row) + " to " + COL_TO_LETTER[new_col] + str(8 - new_row)
         
 def analyze_pincer_movement(piece, row, col, board):
@@ -413,7 +414,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (col + k < 7 and board[row][col + k + 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row][col + k]) != CURRENT_PLAYER):
+    if (who(board[row][col + k]) != CURRENT_PLAYER and board[row][col + k] != 0):
       new_board = copy_board(board)
       new_board[row][col + k + 1] = piece
       new_board[row][col + k] = 0
@@ -438,11 +439,12 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (col + k > 0 and board[row][col - k - 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row][col - k]) != CURRENT_PLAYER):
+    if (who(board[row][col - k]) != CURRENT_PLAYER and board[row][col - k] != 0):
       new_board = copy_board(board)
       new_board[row][col - k - 1] = piece
       new_board[row][col - k] = 0
       new_board[row][col] = 0
+      print("JUMPING")
       move_desc = get_move_desc(piece, row, col, row, col - k - 1)
       new_boards.append([move_desc, new_board])
 
@@ -463,7 +465,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and board[row + k + 1][col] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row + k][col]) != CURRENT_PLAYER):
+    if (who(board[row + k][col]) != CURRENT_PLAYER and board[row + k][col] != 0):
       new_board = copy_board(board)
       new_board[row + k + 1][col] = piece
       new_board[row + k][col] = 0
@@ -488,7 +490,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and board[row - k - 1][col] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row - k][col]) != CURRENT_PLAYER):
+    if (who(board[row - k][col]) != CURRENT_PLAYER and board[row - k][col] != 0):
       new_board = copy_board(board)
       new_board[row - k - 1][col] = piece
       new_board[row - k][col] = 0
@@ -513,7 +515,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and col + k < 7 and board[row + k + 1][col + k + 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row + k][col + k]) != CURRENT_PLAYER):
+    if (who(board[row + k][col + k]) != CURRENT_PLAYER and board[row + k][col + k] != 0):
       new_board = copy_board(board)
       new_board[row + k + 1][col + k + 1] = piece
       new_board[row + k][col + k] = 0
@@ -538,7 +540,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and col + k < 7 and board[row - k - 1][col + k + 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row - k][col + k]) != CURRENT_PLAYER):
+    if (who(board[row - k][col + k]) != CURRENT_PLAYER and board[row - k][col + k] != 0):
       new_board = copy_board(board)
       new_board[row - k - 1][col + k + 1] = piece
       new_board[row - k][col + k] = 0
@@ -563,7 +565,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and col - k > 0 and board[row + k + 1][col - k - 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row + k][col - k]) != CURRENT_PLAYER):
+    if (who(board[row + k][col - k]) != CURRENT_PLAYER and board[row + k][col - k] != 0):
       new_board = copy_board(board)
       new_board[row + k + 1][col - k - 1] = piece
       new_board[row + k][col - k] = 0
@@ -588,7 +590,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and col - k > 0 and board[row - k - 1][col - k - 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row - k][col - k]) != CURRENT_PLAYER):
+    if (who(board[row - k][col - k]) != CURRENT_PLAYER and board[row - k][col - k] != 0):
       new_board = copy_board(board)
       new_board[row - k - 1][col - k - 1] = piece
       new_board[row - k][col - k] = 0
@@ -1400,6 +1402,6 @@ def copy_board(old_board):
       new_board[i][j] = old_board[i][j]
   return new_board
 
-test_state = BC_state(boardTests.B_COORDINATOR_TEST_2, CURRENT_PLAYER)
+test_state = BC_state(boardTests.B_IMITATOR_TEST_1, CURRENT_PLAYER)
 print(test_state)
 look_for_successors(test_state)

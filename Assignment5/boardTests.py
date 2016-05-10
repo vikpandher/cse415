@@ -311,6 +311,18 @@ f - - F - - f -
 - - - f - - - -
 ''')
 
+# white leaper shouldn't kill friendly
+W_LEAPER_TEST_3 = parse('''
+- - - - - - - -
+- - - F f F - -
+- f F - - - - -
+- - F L - - F -
+- - - - - - f -
+- F - - - F - -
+- - f F - - f -
+- - - - - - - -
+''')
+
 # white freezer movement collision
 W_FREEZER_TEST_0 = parse('''
 f F - f F - f -
@@ -407,81 +419,8 @@ B_COORDINATOR_TEST_2 = parse('''
 - - P - - F F k
 ''')
 
-
-
-
-
-
-
-
-LEAPER_TEST_2 = parse('''
-- - - - - - - -
-- I - I - I - -
-- - - - - - - -
-- I - L - - I -
-- - - - - - - -
-- I - - - I - -
-- - - I - - - -
-- - - - - - - -
-''')
-
-COORDINATOR_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - C - - - -
-p - - K - p - -
-- - - - - - - -
-- - - p - - - -
-- - - - - - - -
-''')
-
-COORDINATOR_TEST_1 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-f K p C - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-COORDINATOR_TEST_2 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - C - - - -
-- - - - p - - -
-- - - - p - - -
-- - - - K - - -
-- - - - f - - -
-''')
-
-FREEZER_TEST_0 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-- - - F - - - -
-- - - - - - - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-FREEZER_TEST_1 = parse('''
-- - - - - - - -
-- K - - - - - -
-- - - - - - - -
-- - - P P P - -
-- - - P f P - -
-- - - P P K - -
-- - - - - - - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_0 = parse('''
-- - - - - - - -
+# white imitator movement
+W_IMITATOR_TEST_0 = parse('''
 - - - - - - - -
 - - - - - - - -
 - - - - - - - -
@@ -489,92 +428,31 @@ IMITATOR_TEST_0 = parse('''
 - - - - - - - -
 - - - - - - - -
 - - - - - - - -
+- - - - - - - -
 ''')
 
-IMITATOR_TEST_1 = parse('''
+# black imitator movement
+B_IMITATOR_TEST_0 = parse('''
+- - - - - - - -
+- - - - - - - -
 - - - - - - - -
 - - - i - - - -
-- i - - - i - -
-- - - - - - - -
-- i - I - - i -
-- - i - - - - -
-- - - i - i - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_2 = parse('''
-- - - - - - - -
-- - - l - - - -
-- l - - - l - -
-- - - - - - - -
-- l - I - - l -
-- - l - - - - -
-- - - l - l - -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_3 = parse('''
-- - - - - - - -
-- - - P - - - -
-- - - p - - - -
-- P p - - - - -
-P p - I - p P -
-- - - - - - - -
-- - - p - - - -
-- - - P - - - -
-''')
-
-IMITATOR_TEST_4 = parse('''
 - - - - - - - -
 - - - - - - - -
-- - - - P - - -
-- - - - p - - -
-w I - l - p P -
-- - - - p - - -
-- - - - P - - -
-K - - - c - - -
-''')
-
-IMITATOR_TEST_5 = parse('''
-- - - - - - - -
-- - - - - - - -
-- - w w w - - -
-- - w I - l - -
-- - - - - - - -
-- l - l - - - -
-- - - - - - l -
-- - - - - - - -
-''')
-
-IMITATOR_TEST_6 = parse('''
-- - - - - - - -
-- l l l l l - -
-- l k k k l - -
-- l k I k l - -
-- l k k k l - -
-- l l l l l - -
 - - - - - - - -
 - - - - - - - -
 ''')
 
-IMITATOR_TEST_7 = parse('''
+# black imitator kill, king, coordinator, withdrawer, leaper
+B_IMITATOR_TEST_1 = parse('''
 - - - - - - - -
-- l l l F l - -
-- l k k p f - -
-- l w I k p F -
-- l k k p f - -
-- l l l F l - -
+- - - - - - - f
+- - K W C - k F
+- - L i K - - -
+- - W K C - - -
+- - - - - - - -
 - - - - - - - -
 - - - - - - - -
 ''')
 
-IMITATOR_TEST_8 = parse('''
-- - - - - - - -
-- l F l l l - -
-- f p k k l - -
-F p k I w l - -
-- f p k k l - -
-- l F l l l - -
-- - - - - - - -
-- - - - - - - -
-''')
+
