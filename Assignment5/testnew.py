@@ -84,7 +84,7 @@ def makeMove(currentState, currentRemark, timeLimit=5):
   #print(newState[1])
   #print(newState[2])
   #print(newState[3])
-  print(newState[3][0][1])
+  print(print_board(newState[3][0][1]))
   return  [[newState[3][0][0], BC_state(newState[3][0][1], other(currentState.whose_move))], "Your turn!"]
 
 def other(player):
@@ -105,11 +105,10 @@ def decideBest(state, desc, whoseMove, initTime, path, timeLimit, plyLeft=2):
       #break
     new_path = path[:]
     new_path.append(s)
-    provisional[3] = new_path
     newVal = decideBest(BC_state(s[1], other(whoseMove)), s[0], other(whoseMove), initTime, new_path, timeLimit, plyLeft-1)
-    if (whoseMove == WHITE and newVal[0] > provisional[0]) \
-       or (whoseMove == BLACK and newVal[0] < provisional[0]):
+    if (whoseMove == WHITE and newVal[0] > provisional[0]) or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
+      provisional[3] = new_path
       print(">>> Updated current best:")
       print(print_board(provisional[3][0][1]))
       print(">>> Lowest ply:")
