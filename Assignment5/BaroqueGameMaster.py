@@ -35,7 +35,8 @@ CURRENT_PLAYER = bcs.WHITE
 
 FINISHED = False
 def runGame():
-    currentState = bcs.BC_state()
+    #currentState = bcs.BC_state()
+    currentState = player1.BC_state()
     print('Baroque Chess Gamemaster v'+VERSION)
     print('The Gamemaster says, "Players, introduce yourselves."')
     print('     (Playing WHITE:) '+player1.introduce())
@@ -69,7 +70,7 @@ def runGame():
     FINISHED = False
     turnCount = 1
     print(currentState)
-    while not FINISHED:
+    while not FINISHED and turnCount < 2:
         who = currentState.whose_move
         if who==bcs.WHITE: side = 'WHITE'
         global CURRENT_PLAYER

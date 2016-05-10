@@ -42,12 +42,12 @@ def nickname():
   
 INITIAL = parse('''
 c l i w k i l f
-p p p p p p p p
+p p p p - p p p
 - - - - - - - -
+- - - - P - - -
+- - - - p - - -
 - - - - - - - -
-- - - - - - - -
-- - - - - - - -
-P P P P P P P P
+P P P - P P P P
 F L I W K I L C
 ''')
 
@@ -101,8 +101,8 @@ def decideBest(state, desc, whoseMove, initTime, path, timeLimit, plyLeft=2):
     #print("successor:")
     #print(s)
     currTime = time.clock()
-    if ((initTime + currTime) > (timeLimit - 1)):
-      break
+    #if ((initTime + currTime) > (timeLimit - 1)):
+      #break
     new_path = path[:]
     new_path.append(s)
     provisional[3] = new_path
@@ -110,8 +110,15 @@ def decideBest(state, desc, whoseMove, initTime, path, timeLimit, plyLeft=2):
     if (whoseMove == WHITE and newVal[0] > provisional[0]) \
        or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
-      #print("Updated current best:")
-      #print(provisional)
+      print(">>> Updated current best:")
+      print(print_board(provisional[3][0][1]))
+      print(">>> Lowest ply:")
+      print(print_board(provisional[3][-1][1]))
+      print(">>> Eval of lowest ply:")
+      print(provisional[0])
+      print(">>> Lowest ply path")
+      print(print_boards(provisional[3]))
+      
   return provisional
 
 CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
