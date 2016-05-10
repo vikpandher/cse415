@@ -443,7 +443,7 @@ B_IMITATOR_TEST_0 = parse('''
 - - - - - - - -
 ''')
 
-# black imitator kill, king, coordinator, withdrawer, leaper
+# black imitator kill king, coordinator, withdrawer, leaper
 B_IMITATOR_TEST_1 = parse('''
 - - - - - - - -
 - - - - - - - f
@@ -455,4 +455,26 @@ B_IMITATOR_TEST_1 = parse('''
 - - - - - - - -
 ''')
 
+# black imitator kill pincher
+B_IMITATOR_TEST_2 = parse('''
+- - F f - - - -
+- F f P - - F -
+F f P - - P f -
+f P - i - - P f
+- f P - - P f F
+- F f P - - - -
+- - F f - - - -
+- - - - - - - -
+''')
 
+# test 2nd rows
+QUEENS_TEST_0 = parse('''
+c l i w k i l f
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+F L I W K I L C
+''')

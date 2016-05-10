@@ -62,30 +62,30 @@ def test_starting_board():
   print(init_state)
 
 #######################
-CURRENT_PLAYER = BLACK;
+#CURRENT_PLAYER = BLACK <<< THIS IS NOW A PARAMETER called current_player
 #######################
 
 def look_for_successors(state):
   board = state.board
-  CURRENT_PLAYER = state.whose_move
+  current_player = state.whose_move
   
   successors = []
   
   for i in range(8): # look through row
     for j in range(8): # look through column
       current_piece = board[i][j]
-      if(who(current_piece) == CURRENT_PLAYER and current_piece != 0):
+      if(who(current_piece) == current_player and current_piece != 0):
         print("current_piece = " + CODE_TO_NAME[current_piece] + " (" + CODE_TO_INIT[current_piece] + "), (" + str(i) + ", " + str(j) + ")")
         print()
-        new_boards = analyze_piece(current_piece, i, j, board)
+        new_boards = analyze_piece(current_piece, i, j, board, current_player)
         print(print_boards(new_boards)) # <<< FOR DEBUGGING
         print()
 
 def get_move_desc(piece, old_row, old_col, new_row, new_col):
-  print("get_move_desc(" + str(piece) + ", " + str(old_row) + ", " + str(old_col) + ", " + str(new_row) + ", " + str(new_col) + ")")
+  #print("get_move_desc(" + str(piece) + ", " + str(old_row) + ", " + str(old_col) + ", " + str(new_row) + ", " + str(new_col) + ")")
   return CODE_TO_NAME[piece] + " from " +  COL_TO_LETTER[old_col] + str(8 - old_row) + " to " + COL_TO_LETTER[new_col] + str(8 - new_row)
         
-def analyze_pincer_movement(piece, row, col, board):
+def analyze_pincer_movement(piece, row, col, board, current_player):
   new_boards = []
   
   # checking horizontal movement to the 8th column
@@ -96,7 +96,7 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row][col + k] = piece
       new_board[row][col] = 0
-      apply_pincer_kill(piece, row, col + k, new_board)
+      apply_pincer_kill(piece, row, col + k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col + k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -112,7 +112,7 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row][col - k] = piece
       new_board[row][col] = 0
-      apply_pincer_kill(piece, row, col - k, new_board)
+      apply_pincer_kill(piece, row, col - k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col - k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -128,7 +128,7 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col] = piece
       new_board[row][col] = 0
-      apply_pincer_kill(piece, row + k, col, new_board)
+      apply_pincer_kill(piece, row + k, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row + k, col)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -144,7 +144,7 @@ def analyze_pincer_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col] = piece
       new_board[row][col] = 0
-      apply_pincer_kill(piece, row - k, col, new_board)
+      apply_pincer_kill(piece, row - k, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row - k, col)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -154,25 +154,25 @@ def analyze_pincer_movement(piece, row, col, board):
   
   return new_boards
   
-def apply_pincer_kill(piece, row, col, board):
+def apply_pincer_kill(piece, row, col, board, current_player):
   # squish towards 0th row
-  if row > 1 and who(board[row-1][col]) != CURRENT_PLAYER and board[row-1][col] != 0 and who(board[row-2][col]) == CURRENT_PLAYER :
+  if row > 1 and who(board[row-1][col]) != current_player and board[row-1][col] != 0 and who(board[row-2][col]) == current_player :
     board[row-1][col] = 0
   # squish towards 8th row
-  if row < 6 and who(board[row+1][col]) != CURRENT_PLAYER and board[row+1][col] != 0 and who(board[row+2][col]) == CURRENT_PLAYER :
+  if row < 6 and who(board[row+1][col]) != current_player and board[row+1][col] != 0 and who(board[row+2][col]) == current_player :
     board[row+1][col] = 0
   # squish towards 0th column
-  if col > 1 and who(board[row][col-1]) != CURRENT_PLAYER and board[row][col-1] != 0 and who(board[row][col-2]) == CURRENT_PLAYER :
+  if col > 1 and who(board[row][col-1]) != current_player and board[row][col-1] != 0 and who(board[row][col-2]) == current_player :
     board[row][col-1] = 0
   # squish towards 8th column
-  if col < 6 and who(board[row][col+1]) != CURRENT_PLAYER and board[row][col+1] != 0 and who(board[row][col+2]) == CURRENT_PLAYER :
+  if col < 6 and who(board[row][col+1]) != current_player and board[row][col+1] != 0 and who(board[row][col+2]) == current_player :
     board[row][col+1] = 0
 
-def analyze_king_movement(piece, row, col, board):
+def analyze_king_movement(piece, row, col, board, current_player):
   new_boards = []
   
   # checking horizontal movement toward the 8th column
-  if(col < 7 and (who(board[row][col + 1]) != CURRENT_PLAYER or board[row][col + 1] == 0)):
+  if(col < 7 and (who(board[row][col + 1]) != current_player or board[row][col + 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row][col + 1] = piece
@@ -181,7 +181,7 @@ def analyze_king_movement(piece, row, col, board):
     new_boards.append([move_desc, new_board])
     
   # checking horizontal movement toward the 0th column
-  if(col > 0 and (who(board[row][col - 1]) != CURRENT_PLAYER or board[row][col - 1] == 0)):
+  if(col > 0 and (who(board[row][col - 1]) != current_player or board[row][col - 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row][col - 1] = piece
@@ -190,7 +190,7 @@ def analyze_king_movement(piece, row, col, board):
     new_boards.append([move_desc, new_board])
     
   # checking vertical movement toward the 8th row
-  if(row < 7 and (who(board[row + 1][col]) != CURRENT_PLAYER or board[row + 1][col] == 0)):
+  if(row < 7 and (who(board[row + 1][col]) != current_player or board[row + 1][col] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col] = piece
@@ -199,7 +199,7 @@ def analyze_king_movement(piece, row, col, board):
     new_boards.append([move_desc, new_board])
   
   # checking vertical movement toward the 0th row
-  if(row > 0 and (who(board[row - 1][col]) != CURRENT_PLAYER or board[row - 1][col] == 0)):
+  if(row > 0 and (who(board[row - 1][col]) != current_player or board[row - 1][col] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col] = piece
@@ -208,7 +208,7 @@ def analyze_king_movement(piece, row, col, board):
     new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 8th column and 8th row
-  if(col < 7 and row < 7 and (who(board[row + 1][col + 1]) != CURRENT_PLAYER or board[row + 1][col + 1] == 0)):
+  if(col < 7 and row < 7 and (who(board[row + 1][col + 1]) != current_player or board[row + 1][col + 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col + 1] = piece
@@ -217,7 +217,7 @@ def analyze_king_movement(piece, row, col, board):
     new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 8th column and 0th row
-  if(col < 7 and row > 0 and (who(board[row - 1][col + 1]) != CURRENT_PLAYER or board[row - 1][col + 1] == 0)):
+  if(col < 7 and row > 0 and (who(board[row - 1][col + 1]) != current_player or board[row - 1][col + 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col + 1] = piece;
@@ -226,7 +226,7 @@ def analyze_king_movement(piece, row, col, board):
     new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 0th column and 8th row
-  if(col > 0 and row < 7 and (who(board[row + 1][col - 1]) != CURRENT_PLAYER or board[row + 1][col - 1] == 0)):
+  if(col > 0 and row < 7 and (who(board[row + 1][col - 1]) != current_player or board[row + 1][col - 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col - 1] = piece
@@ -235,7 +235,7 @@ def analyze_king_movement(piece, row, col, board):
     new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 0th column and 0th row
-  if(col > 0 and row > 0 and (who(board[row - 1][col - 1]) != CURRENT_PLAYER or board[row - 1][col - 1] == 0)):
+  if(col > 0 and row > 0 and (who(board[row - 1][col - 1]) != current_player or board[row - 1][col - 1] == 0)):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col - 1] = piece
@@ -245,7 +245,7 @@ def analyze_king_movement(piece, row, col, board):
   
   return new_boards
 
-def analyze_withdrawer_movement(piece, row, col, board):
+def analyze_withdrawer_movement(piece, row, col, board, current_player):
   new_boards = []
   
   # checking horizontal movement towards the 8th column
@@ -257,7 +257,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row][col + k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (col > 0 and who(board[row][col - 1]) != CURRENT_PLAYER and board[row][col - 1] != 0):
+      if (col > 0 and who(board[row][col - 1]) != current_player and board[row][col - 1] != 0):
         new_board[row][col - 1] = 0
       move_desc = get_move_desc(piece, row, col, row, col + k)
       new_boards.append([move_desc, new_board])
@@ -275,7 +275,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row][col - k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (col < 7 and who(board[row][col + 1]) != CURRENT_PLAYER and board[row][col + 1] != 0):
+      if (col < 7 and who(board[row][col + 1]) != current_player and board[row][col + 1] != 0):
         new_board[row][col + 1] = 0
       move_desc = get_move_desc(piece, row, col, row, col - k)
       new_boards.append([move_desc, new_board])
@@ -293,7 +293,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row + k][col] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row > 0 and who(board[row - 1][col]) != CURRENT_PLAYER and board[row - 1][col] != 0):
+      if (row > 0 and who(board[row - 1][col]) != current_player and board[row - 1][col] != 0):
         new_board[row - 1][col] = 0
       move_desc = get_move_desc(piece, row, col, row + k, col)
       new_boards.append([move_desc, new_board])
@@ -311,7 +311,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row - k][col] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row < 7 and who(board[row + 1][col]) != CURRENT_PLAYER and board[row + 1][col] != 0):
+      if (row < 7 and who(board[row + 1][col]) != current_player and board[row + 1][col] != 0):
         new_board[row + 1][col] = 0
       move_desc = get_move_desc(piece, row, col, row - k, col)
       new_boards.append([move_desc, new_board])
@@ -329,7 +329,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row + k][col + k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row > 0 and col > 0 and who(board[row - 1][col - 1]) != CURRENT_PLAYER and board[row - 1][col - 1] != 0):
+      if (row > 0 and col > 0 and who(board[row - 1][col - 1]) != current_player and board[row - 1][col - 1] != 0):
         new_board[row - 1][col - 1] = 0
       move_desc = get_move_desc(piece, row, col, row + k, col + k)
       new_boards.append([move_desc, new_board])
@@ -347,7 +347,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row - k][col + k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row < 7 and col > 0 and who(board[row + 1][col - 1]) != CURRENT_PLAYER and board[row + 1][col - 1] != 0):
+      if (row < 7 and col > 0 and who(board[row + 1][col - 1]) != current_player and board[row + 1][col - 1] != 0):
         new_board[row + 1][col - 1] = 0
       move_desc = get_move_desc(piece, row, col, row - k, col + k)
       new_boards.append([move_desc, new_board])
@@ -365,7 +365,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row + k][col - k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row > 0 and col < 7 and who(board[row - 1][col + 1]) != CURRENT_PLAYER and board[row - 1][col + 1] != 0):
+      if (row > 0 and col < 7 and who(board[row - 1][col + 1]) != current_player and board[row - 1][col + 1] != 0):
         new_board[row - 1][col + 1] = 0
       move_desc = get_move_desc(piece, row, col, row + k, col - k)
       new_boards.append([move_desc, new_board])
@@ -383,7 +383,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
       new_board[row - k][col - k] = piece
       new_board[row][col] = 0
       # if moving away from enemy piece, kill it
-      if (row < 7 and col < 7 and who(board[row + 1][col + 1]) != CURRENT_PLAYER and board[row + 1][col + 1] != 0):
+      if (row < 7 and col < 7 and who(board[row + 1][col + 1]) != current_player and board[row + 1][col + 1] != 0):
         new_board[row + 1][col + 1] = 0
       move_desc = get_move_desc(piece, row, col, row - k, col - k)
       new_boards.append([move_desc, new_board])
@@ -394,7 +394,7 @@ def analyze_withdrawer_movement(piece, row, col, board):
   
   return new_boards
 
-def analyze_leaper_movement(piece, row, col, board):
+def analyze_leaper_movement(piece, row, col, board, current_player):
   new_boards = []
   
   # checking horizontal movement towards the 8th column
@@ -414,7 +414,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (col + k < 7 and board[row][col + k + 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row][col + k]) != CURRENT_PLAYER and board[row][col + k] != 0):
+    if (who(board[row][col + k]) != current_player and board[row][col + k] != 0):
       new_board = copy_board(board)
       new_board[row][col + k + 1] = piece
       new_board[row][col + k] = 0
@@ -439,12 +439,11 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (col + k > 0 and board[row][col - k - 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row][col - k]) != CURRENT_PLAYER and board[row][col - k] != 0):
+    if (who(board[row][col - k]) != current_player and board[row][col - k] != 0):
       new_board = copy_board(board)
       new_board[row][col - k - 1] = piece
       new_board[row][col - k] = 0
       new_board[row][col] = 0
-      print("JUMPING")
       move_desc = get_move_desc(piece, row, col, row, col - k - 1)
       new_boards.append([move_desc, new_board])
 
@@ -465,7 +464,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and board[row + k + 1][col] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row + k][col]) != CURRENT_PLAYER and board[row + k][col] != 0):
+    if (who(board[row + k][col]) != current_player and board[row + k][col] != 0):
       new_board = copy_board(board)
       new_board[row + k + 1][col] = piece
       new_board[row + k][col] = 0
@@ -490,7 +489,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and board[row - k - 1][col] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row - k][col]) != CURRENT_PLAYER and board[row - k][col] != 0):
+    if (who(board[row - k][col]) != current_player and board[row - k][col] != 0):
       new_board = copy_board(board)
       new_board[row - k - 1][col] = piece
       new_board[row - k][col] = 0
@@ -515,7 +514,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and col + k < 7 and board[row + k + 1][col + k + 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row + k][col + k]) != CURRENT_PLAYER and board[row + k][col + k] != 0):
+    if (who(board[row + k][col + k]) != current_player and board[row + k][col + k] != 0):
       new_board = copy_board(board)
       new_board[row + k + 1][col + k + 1] = piece
       new_board[row + k][col + k] = 0
@@ -540,7 +539,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and col + k < 7 and board[row - k - 1][col + k + 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row - k][col + k]) != CURRENT_PLAYER and board[row - k][col + k] != 0):
+    if (who(board[row - k][col + k]) != current_player and board[row - k][col + k] != 0):
       new_board = copy_board(board)
       new_board[row - k - 1][col + k + 1] = piece
       new_board[row - k][col + k] = 0
@@ -565,7 +564,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and col - k > 0 and board[row + k + 1][col - k - 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row + k][col - k]) != CURRENT_PLAYER and board[row + k][col - k] != 0):
+    if (who(board[row + k][col - k]) != current_player and board[row + k][col - k] != 0):
       new_board = copy_board(board)
       new_board[row + k + 1][col - k - 1] = piece
       new_board[row + k][col - k] = 0
@@ -590,7 +589,7 @@ def analyze_leaper_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and col - k > 0 and board[row - k - 1][col - k - 1] == 0):
     # the piece to jump is the oponent's
-    if (who(board[row - k][col - k]) != CURRENT_PLAYER and board[row - k][col - k] != 0):
+    if (who(board[row - k][col - k]) != current_player and board[row - k][col - k] != 0):
       new_board = copy_board(board)
       new_board[row - k - 1][col - k - 1] = piece
       new_board[row - k][col - k] = 0
@@ -600,7 +599,7 @@ def analyze_leaper_movement(piece, row, col, board):
   
   return new_boards
 
-def analyze_coordinator_movement(piece, row, col, board):
+def analyze_coordinator_movement(piece, row, col, board, current_player):
   new_boards = []
   
   # checking horizontal movement towards the 8th column
@@ -611,7 +610,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row][col + k] = piece
       new_board[row][col] = 0
-      apply_coordinator_kill(piece, row, col + k, new_board)
+      apply_coordinator_kill(piece, row, col + k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col + k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -627,7 +626,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row][col - k] = piece
       new_board[row][col] = 0
-      apply_coordinator_kill(piece, row, col - k, new_board)
+      apply_coordinator_kill(piece, row, col - k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col - k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -643,7 +642,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col] = piece
       new_board[row][col] = 0
-      apply_coordinator_kill(piece, row + k, col, new_board)
+      apply_coordinator_kill(piece, row + k, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row + k, col)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -659,7 +658,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col] = piece
       new_board[row][col] = 0
-      apply_coordinator_kill(piece, row - k, col, new_board)
+      apply_coordinator_kill(piece, row - k, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row - k, col)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -675,7 +674,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col + k] = piece;
       new_board[row][col] = 0
-      apply_coordinator_kill(piece, row + k, col + k, new_board)
+      apply_coordinator_kill(piece, row + k, col + k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row + k, col + k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -691,7 +690,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col + k] = piece;
       new_board[row][col] = 0
-      apply_coordinator_kill(piece, row - k, col + k, new_board)
+      apply_coordinator_kill(piece, row - k, col + k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row - k, col + k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -707,7 +706,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row + k][col - k] = piece;
       new_board[row][col] = 0
-      apply_coordinator_kill(piece, row + k, col - k, new_board)
+      apply_coordinator_kill(piece, row + k, col - k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row + k, col - k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -723,7 +722,7 @@ def analyze_coordinator_movement(piece, row, col, board):
       new_board = copy_board(board)
       new_board[row - k][col - k] = piece;
       new_board[row][col] = 0
-      apply_coordinator_kill(piece, row - k, col - k, new_board)
+      apply_coordinator_kill(piece, row - k, col - k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row - k, col - k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -733,16 +732,16 @@ def analyze_coordinator_movement(piece, row, col, board):
   
   return new_boards
 
-def apply_coordinator_kill(piece, row, col, board):
+def apply_coordinator_kill(piece, row, col, board, current_player):
   # locate your king
   for i in range(8): # look through row
     for j in range(8): # look through column
       current_piece = board[i][j]
       # kill corners
-      if (current_piece == 12 + CURRENT_PLAYER):
-        if (who(board[row][j]) != CURRENT_PLAYER and board[row][j] != 0):
+      if (current_piece == 12 + current_player):
+        if (who(board[row][j]) != current_player and board[row][j] != 0):
           board[row][j] = 0
-        if (who(board[i][col]) != CURRENT_PLAYER and board[i][col] != 0):
+        if (who(board[i][col]) != current_player and board[i][col] != 0):
           board[i][col] = 0
         # kill enemies in the same row
         if i == row :
@@ -750,14 +749,14 @@ def apply_coordinator_kill(piece, row, col, board):
           if col > j :
             k = j
             while col > k :
-              if (who(board[i][k]) != CURRENT_PLAYER and board[i][k] != 0) :
+              if (who(board[i][k]) != current_player and board[i][k] != 0) :
                   board[i][k] = 0
               k = k + 1
           # kill towards the 8th row
           if col < j :
             k = j
             while col < k :
-              if (who(board[i][k]) != CURRENT_PLAYER and board[i][k] != 0) :
+              if (who(board[i][k]) != current_player and board[i][k] != 0) :
                   board[i][k] = 0
               k = k - 1
         # kill enemies on the same collumn
@@ -766,19 +765,19 @@ def apply_coordinator_kill(piece, row, col, board):
           if row > i :
             k = i
             while row > k :
-              if (who(board[k][j]) != CURRENT_PLAYER and board[k][j] != 0) :
+              if (who(board[k][j]) != current_player and board[k][j] != 0) :
                   board[k][j] = 0
               k = k + 1
           # kill towards the 8th collumn
           if row < i :
             k = i
             while row < k :
-              if (who(board[k][j]) != CURRENT_PLAYER and board[k][j] != 0) :
+              if (who(board[k][j]) != current_player and board[k][j] != 0) :
                   board[k][j] = 0
               k = k - 1
         return
 
-def analyze_freezer_movement(piece, row, col, board):
+def analyze_freezer_movement(piece, row, col, board, current_player):
   new_boards = []
   
   # checking horizontal movement towards the 8th column
@@ -903,7 +902,7 @@ def analyze_freezer_movement(piece, row, col, board):
 
   return new_boards
 
-def analyze_imitator_movement(piece, row, col, board):
+def analyze_imitator_movement(piece, row, col, board, current_player):
   new_boards = []
   
   # checking horizontal movement towards the 8th column
@@ -915,10 +914,10 @@ def analyze_imitator_movement(piece, row, col, board):
       new_board[row][col + k] = piece
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (col > 0 and board[row][col - 1] == 11 - CURRENT_PLAYER):
+      if (col > 0 and board[row][col - 1] == 11 - current_player):
         new_board[row][col - 1] = 0
-      apply_imitator_coordinator_kill(piece, row, col + k, new_board)
-      apply_imitator_pincer_kill(piece, row, col + k, new_board)
+      apply_imitator_coordinator_kill(piece, row, col + k, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row, col + k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col + k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -928,29 +927,29 @@ def analyze_imitator_movement(piece, row, col, board):
   # there is space to jump
   if (col + k < 7 and board[row][col + k + 1] == 0):
     # the piece to jump is the oponent's leaper
-    if (board[row][col + k] == 7 - CURRENT_PLAYER):
+    if (board[row][col + k] == 7 - current_player):
       new_board = copy_board(board)
       new_board[row][col + k + 1] = piece
       new_board[row][col + k] = 0
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (col > 0 and board[row][col - 1] == 11 - CURRENT_PLAYER):
+      if (col > 0 and board[row][col - 1] == 11 - current_player):
         new_board[row][col - 1] = 0
-      apply_imitator_coordinator_kill(piece, row, col + k + 1, new_board)
-      apply_imitator_pincer_kill(piece, row, col + k + 1, new_board)
+      apply_imitator_coordinator_kill(piece, row, col + k + 1, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row, col + k + 1, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col + k + 1)
       new_boards.append([move_desc, new_board])
   # checking if next to an enemy king
-  if(col < 7 and board[row][col + 1] == 13 - CURRENT_PLAYER):
+  if(col < 7 and board[row][col + 1] == 13 - current_player):
     #add a state
     new_board = copy_board(board)
     new_board[row][col + 1] = piece
     new_board[row][col] = 0
     # if moving away from enemy withdrawer, kill it
-    if (col > 0 and board[row][col - 1] == 11 - CURRENT_PLAYER):
+    if (col > 0 and board[row][col - 1] == 11 - current_player):
       new_board[row][col - 1] = 0
-    apply_imitator_coordinator_kill(piece, row, col + 1, new_board)
-    apply_imitator_pincer_kill(piece, row, col + 1, new_board)
+    apply_imitator_coordinator_kill(piece, row, col + 1, new_board, current_player)
+    apply_imitator_pincer_kill(piece, row, col + 1, new_board, current_player)
     move_desc = get_move_desc(piece, row, col, row, col + 1)
     new_boards.append([move_desc, new_board])
   
@@ -963,10 +962,10 @@ def analyze_imitator_movement(piece, row, col, board):
       new_board[row][col - k] = piece
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (col < 7 and board[row][col + 1] == 11 - CURRENT_PLAYER):
+      if (col < 7 and board[row][col + 1] == 11 - current_player):
         new_board[row][col + 1] = 0
-      apply_imitator_coordinator_kill(piece, row, col - k, new_board)
-      apply_imitator_pincer_kill(piece, row, col - k, new_board)
+      apply_imitator_coordinator_kill(piece, row, col - k, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row, col - k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col - k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -976,29 +975,29 @@ def analyze_imitator_movement(piece, row, col, board):
   # there is space to jump
   if (col + k > 0 and board[row][col - k - 1] == 0):
     # the piece to jump is the oponent's leaper
-    if (board[row][col - k] == 7 - CURRENT_PLAYER):
+    if (board[row][col - k] == 7 - current_player):
       new_board = copy_board(board)
       new_board[row][col - k - 1] = piece
       new_board[row][col - k] = 0
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (col < 7 and board[row][col + 1] == 11 - CURRENT_PLAYER):
+      if (col < 7 and board[row][col + 1] == 11 - current_player):
         new_board[row][col + 1] = 0
-      apply_imitator_coordinator_kill(piece, row, col - k - 1, new_board)
-      apply_imitator_pincer_kill(piece, row, col - k - 1, new_board)
+      apply_imitator_coordinator_kill(piece, row, col - k - 1, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row, col - k - 1, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col - k - 1)
       new_boards.append([move_desc, new_board])
   # checking if next to an enemy king
-  if(col > 0 and board[row][col - 1] == 13 - CURRENT_PLAYER):
+  if(col > 0 and board[row][col - 1] == 13 - current_player):
     #add a state
     new_board = copy_board(board)
     new_board[row][col - 1] = piece
     new_board[row][col] = 0
     # if moving away from enemy withdrawer, kill it
-    if (col < 7 and board[row][col + 1] == 11 - CURRENT_PLAYER):
+    if (col < 7 and board[row][col + 1] == 11 - current_player):
       new_board[row][col + 1] = 0
-    apply_imitator_coordinator_kill(piece, row, col - 1, new_board)
-    apply_imitator_pincer_kill(piece, row, col - 1, new_board)
+    apply_imitator_coordinator_kill(piece, row, col - 1, new_board, current_player)
+    apply_imitator_pincer_kill(piece, row, col - 1, new_board, current_player)
     move_desc = get_move_desc(piece, row, col, row, col - 1)
     new_boards.append([move_desc, new_board])
 
@@ -1011,10 +1010,10 @@ def analyze_imitator_movement(piece, row, col, board):
       new_board[row + k][col] = piece
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row > 0 and board[row - 1][col] == 11 - CURRENT_PLAYER):
+      if (row > 0 and board[row - 1][col] == 11 - current_player):
         new_board[row - 1][col] = 0
-      apply_imitator_coordinator_kill(piece, row + k, col, new_board)
-      apply_imitator_pincer_kill(piece, row + k, col, new_board)
+      apply_imitator_coordinator_kill(piece, row + k, col, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row + k, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row + k, col)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -1024,29 +1023,29 @@ def analyze_imitator_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and board[row + k + 1][col] == 0):
     # the piece to jump is the oponent's leaper
-    if (board[row + k][col] == 7 - CURRENT_PLAYER):
+    if (board[row + k][col] == 7 - current_player):
       new_board = copy_board(board)
       new_board[row + k + 1][col] = piece
       new_board[row + k][col] = 0
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row > 0 and board[row - 1][col] == 11 - CURRENT_PLAYER):
+      if (row > 0 and board[row - 1][col] == 11 - current_player):
         new_board[row - 1][col] = 0
-      apply_imitator_coordinator_kill(piece, row + k + 1, col, new_board)
-      apply_imitator_pincer_kill(piece, row + k + 1, col, new_board)
+      apply_imitator_coordinator_kill(piece, row + k + 1, col, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row + k + 1, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row + k + 1, col)
       new_boards.append([move_desc, new_board])
   # checking if next to an enemy king
-  if(row < 7 and board[row + 1][col] == 13 - CURRENT_PLAYER):
+  if(row < 7 and board[row + 1][col] == 13 - current_player):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col] = piece
     new_board[row][col] = 0
     # if moving away from enemy withdrawer, kill it
-    if (row > 0 and board[row - 1][col] == 11 - CURRENT_PLAYER):
+    if (row > 0 and board[row - 1][col] == 11 - current_player):
       new_board[row - 1][col] = 0
-    apply_imitator_coordinator_kill(piece, row + 1, col, new_board)
-    apply_imitator_pincer_kill(piece, row + 1, col, new_board)
+    apply_imitator_coordinator_kill(piece, row + 1, col, new_board, current_player)
+    apply_imitator_pincer_kill(piece, row + 1, col, new_board, current_player)
     move_desc = get_move_desc(piece, row, col, row + 1, col)
     new_boards.append([move_desc, new_board])
   
@@ -1059,10 +1058,10 @@ def analyze_imitator_movement(piece, row, col, board):
       new_board[row - k][col] = piece
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row < 7 and board[row + 1][col] == 11 - CURRENT_PLAYER):
+      if (row < 7 and board[row + 1][col] == 11 - current_player):
         new_board[row + 1][col] = 0
-      apply_imitator_coordinator_kill(piece, row - k, col, new_board)
-      apply_imitator_pincer_kill(piece, row - k, col, new_board)
+      apply_imitator_coordinator_kill(piece, row - k, col, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row - k, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row - k, col)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -1072,29 +1071,29 @@ def analyze_imitator_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and board[row - k - 1][col] == 0):
     # the piece to jump is the oponent's
-    if (board[row - k][col] == 7 - CURRENT_PLAYER):
+    if (board[row - k][col] == 7 - current_player):
       new_board = copy_board(board)
       new_board[row - k - 1][col] = piece
       new_board[row - k][col] = 0
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row < 7 and board[row + 1][col] == 11 - CURRENT_PLAYER):
+      if (row < 7 and board[row + 1][col] == 11 - current_player):
         new_board[row + 1][col] = 0
-      apply_imitator_coordinator_kill(piece, row - k - 1, col, new_board)
-      apply_imitator_pincer_kill(piece, row - k - 1, col, new_board)
+      apply_imitator_coordinator_kill(piece, row - k - 1, col, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row - k - 1, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row - k - 1, col)
       new_boards.append([move_desc, new_board])
   # checking if next to an enemy king
-  if(row > 0 and board[row - 1][col] == 13 - CURRENT_PLAYER):
+  if(row > 0 and board[row - 1][col] == 13 - current_player):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col] = piece
     new_board[row][col] = 0
     # if moving away from enemy withdrawer, kill it
-    if (col < 7 and board[row + 1][col] == 11 - CURRENT_PLAYER):
+    if (col < 7 and board[row + 1][col] == 11 - current_player):
       new_board[row + 1][col] = 0
-    apply_imitator_coordinator_kill(piece, row - 1, col, new_board)
-    apply_imitator_pincer_kill(piece, row - 1, col, new_board)
+    apply_imitator_coordinator_kill(piece, row - 1, col, new_board, current_player)
+    apply_imitator_pincer_kill(piece, row - 1, col, new_board, current_player)
     move_desc = get_move_desc(piece, row, col, row - 1, col)
     new_boards.append([move_desc, new_board])
   
@@ -1107,11 +1106,11 @@ def analyze_imitator_movement(piece, row, col, board):
       new_board[row + k][col + k] = piece;
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row > 0 and col > 0 and board[row - 1][col - 1] == 11 - CURRENT_PLAYER):
+      if (row > 0 and col > 0 and board[row - 1][col - 1] == 11 - current_player):
         new_board[row - 1][col - 1] = 0
-      apply_imitator_coordinator_kill(piece, row + k, col + k, new_board)
-      apply_imitator_pincer_kill(piece, row + k, col + k, new_board)
-      move_desc = get_move_desc(piece, row, col + k, row + k, col)
+      apply_imitator_coordinator_kill(piece, row + k, col + k, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row + k, col + k, new_board, current_player)
+      move_desc = get_move_desc(piece, row, col, row + k, col + k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
@@ -1120,30 +1119,30 @@ def analyze_imitator_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and col + k < 7 and board[row + k + 1][col + k + 1] == 0):
     # the piece to jump is the oponent's
-    if (board[row + k][col + k] == 7 - CURRENT_PLAYER):
+    if (board[row + k][col + k] == 7 - current_player):
       new_board = copy_board(board)
       new_board[row + k + 1][col + k + 1] = piece
       new_board[row + k][col + k] = 0
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row > 0 and col > 0 and board[row - 1][col - 1] == 11 - CURRENT_PLAYER):
+      if (row > 0 and col > 0 and board[row - 1][col - 1] == 11 - current_player):
         new_board[row - 1][col - 1] = 0
-      apply_imitator_coordinator_kill(piece, row + k + 1, col + k + 1, new_board)
-      apply_imitator_pincer_kill(piece, row + k + 1, col + k + 1, new_board)
-      move_desc = get_move_desc(piece, row, col + k + 1, row + k + 1, col)
+      apply_imitator_coordinator_kill(piece, row + k + 1, col + k + 1, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row + k + 1, col + k + 1, new_board, current_player)
+      move_desc = get_move_desc(piece, row, col, row + k + 1, col + k + 1)
       new_boards.append([move_desc, new_board])
   # checking if next to an enemy king
-  if(row < 7 and col < 7 and board[row + 1][col + 1] == 13 - CURRENT_PLAYER):
+  if(row < 7 and col < 7 and board[row + 1][col + 1] == 13 - current_player):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col + 1] = piece
     new_board[row][col] = 0
     # if moving away from enemy withdrawer, kill it
-    if (row > 0 and col > 0 and board[row - 1][col - 1] == 11 - CURRENT_PLAYER):
+    if (row > 0 and col > 0 and board[row - 1][col - 1] == 11 - current_player):
       new_board[row - 1][col - 1] = 0
-    apply_imitator_coordinator_kill(piece, row + 1, col + 1, new_board)
-    apply_imitator_pincer_kill(piece, row + 1, col + 1, new_board)
-    move_desc = get_move_desc(piece, row, col + 1, row + 1, col)
+    apply_imitator_coordinator_kill(piece, row + 1, col + 1, new_board, current_player)
+    apply_imitator_pincer_kill(piece, row + 1, col + 1, new_board, current_player)
+    move_desc = get_move_desc(piece, row, col, row + 1, col + 1)
     new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 8th column and 0th row
@@ -1155,11 +1154,11 @@ def analyze_imitator_movement(piece, row, col, board):
       new_board[row - k][col + k] = piece;
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row < 7 and col > 0 and board[row + 1][col - 1] == 11 - CURRENT_PLAYER):
+      if (row < 7 and col > 0 and board[row + 1][col - 1] == 11 - current_player):
         new_board[row + 1][col - 1] = 0
-      apply_imitator_coordinator_kill(piece, row - k, col + k, new_board)
-      apply_imitator_pincer_kill(piece, row - k, col + k, new_board)
-      move_desc = get_move_desc(piece, row, col - k, row + k, col)
+      apply_imitator_coordinator_kill(piece, row - k, col + k, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row - k, col + k, new_board, current_player)
+      move_desc = get_move_desc(piece, row, col, row - k, col + k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
@@ -1168,30 +1167,30 @@ def analyze_imitator_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and col + k < 7 and board[row - k - 1][col + k + 1] == 0):
     # the piece to jump is the oponent's
-    if (board[row - k][col + k] == 7 - CURRENT_PLAYER):
+    if (board[row - k][col + k] == 7 - current_player):
       new_board = copy_board(board)
       new_board[row - k - 1][col + k + 1] = piece
       new_board[row - k][col + k] = 0
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row < 7 and col > 0 and board[row + 1][col - 1] == 11 - CURRENT_PLAYER):
+      if (row < 7 and col > 0 and board[row + 1][col - 1] == 11 - current_player):
         new_board[row + 1][col - 1] = 0
-      apply_imitator_coordinator_kill(piece, row - k - 1, col + k + 1, new_board)
-      apply_imitator_pincer_kill(piece, row - k - 1, col + k + 1, new_board)
-      move_desc = get_move_desc(piece, row, col - k - 1, row + k + 1, col)
+      apply_imitator_coordinator_kill(piece, row - k - 1, col + k + 1, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row - k - 1, col + k + 1, new_board, current_player)
+      move_desc = get_move_desc(piece, row, col, row - k - 1, col + k + 1)
       new_boards.append([move_desc, new_board])
   # checking if next to an enemy king
-  if(row > 0 and col < 7 and board[row - 1][col + 1] == 13 - CURRENT_PLAYER):
+  if(row > 0 and col < 7 and board[row - 1][col + 1] == 13 - current_player):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col + 1] = piece
     new_board[row][col] = 0
     # if moving away from enemy withdrawer, kill it
-    if (row < 7 and col > 0 and board[row + 1][col - 1] == 11 - CURRENT_PLAYER):
+    if (row < 7 and col > 0 and board[row + 1][col - 1] == 11 - current_player):
       new_board[row + 1][col - 1] = 0
-    apply_imitator_coordinator_kill(piece, row - 1, col + 1, new_board)
-    apply_imitator_pincer_kill(piece, row - 1, col + 1, new_board)
-    move_desc = get_move_desc(piece, row, col - 1, row + 1, col)
+    apply_imitator_coordinator_kill(piece, row - 1, col + 1, new_board, current_player)
+    apply_imitator_pincer_kill(piece, row - 1, col + 1, new_board, current_player)
+    move_desc = get_move_desc(piece, row, col, row - 1, col + 1)
     new_boards.append([move_desc, new_board])
   
   # checking diagonal movement towards the 0th column and 8th row
@@ -1203,11 +1202,11 @@ def analyze_imitator_movement(piece, row, col, board):
       new_board[row + k][col - k] = piece;
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row > 0 and col < 7 and board[row - 1][col + 1] == 11 - CURRENT_PLAYER):
+      if (row > 0 and col < 7 and board[row - 1][col + 1] == 11 - current_player):
         new_board[row - 1][col + 1] = 0
-      apply_imitator_coordinator_kill(piece, row + k, col - k, new_board)
-      apply_imitator_pincer_kill(piece, row + k, col - k, new_board)
-      move_desc = get_move_desc(piece, row, col + k, row - k, col)
+      apply_imitator_coordinator_kill(piece, row + k, col - k, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row + k, col - k, new_board, current_player)
+      move_desc = get_move_desc(piece, row, col, row + k, col - k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
@@ -1216,30 +1215,30 @@ def analyze_imitator_movement(piece, row, col, board):
   # there is space to jump
   if (row + k < 7 and col - k > 0 and board[row + k + 1][col - k - 1] == 0):
     # the piece to jump is the oponent's
-    if (board[row + k][col - k] == 7 - CURRENT_PLAYER):
+    if (board[row + k][col - k] == 7 - current_player):
       new_board = copy_board(board)
       new_board[row + k + 1][col - k - 1] = piece
       new_board[row + k][col - k] = 0
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row > 0 and col < 7 and board[row - 1][col + 1] == 11 - CURRENT_PLAYER):
+      if (row > 0 and col < 7 and board[row - 1][col + 1] == 11 - current_player):
         new_board[row - 1][col + 1] = 0
-      apply_imitator_coordinator_kill(piece, row + k + 1, col - k - 1, new_board)
-      apply_imitator_pincer_kill(piece, row + k + 1, col - k - 1, new_board)
-      move_desc = get_move_desc(piece, row, col + k + 1, row - k - 1, col)
+      apply_imitator_coordinator_kill(piece, row + k + 1, col - k - 1, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row + k + 1, col - k - 1, new_board, current_player)
+      move_desc = get_move_desc(piece, row, col, row + k + 1, col - k - 1)
       new_boards.append([move_desc, new_board])
   # checking if next to an enemy king
-  if(row > 7 and col > 0 and board[row + 1][col - 1] == 13 - CURRENT_PLAYER):
+  if(row > 7 and col > 0 and board[row + 1][col - 1] == 13 - current_player):
     #add a state
     new_board = copy_board(board)
     new_board[row + 1][col - 1] = piece
     new_board[row][col] = 0
     # if moving away from enemy withdrawer, kill it
-    if (row > 0 and col < 7 and board[row - 1][col + 1] == 11 - CURRENT_PLAYER):
+    if (row > 0 and col < 7 and board[row - 1][col + 1] == 11 - current_player):
       new_board[row - 1][col + 1] = 0
-    apply_imitator_coordinator_kill(piece, row + 1, col - 1, new_board)
-    apply_imitator_pincer_kill(piece, row + 1, col - 1, new_board)
-    move_desc = get_move_desc(piece, row, col + 1, row - 1, col)
+    apply_imitator_coordinator_kill(piece, row + 1, col - 1, new_board, current_player)
+    apply_imitator_pincer_kill(piece, row + 1, col - 1, new_board, current_player)
+    move_desc = get_move_desc(piece, row, col, row + 1, col - 1)
     new_boards.append([move_desc, new_board])
    
   # checking diagonal movement towards the 0th column and 0th row
@@ -1251,11 +1250,11 @@ def analyze_imitator_movement(piece, row, col, board):
       new_board[row - k][col - k] = piece;
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row < 7 and col < 7 and board[row + 1][col + 1] == 11 - CURRENT_PLAYER):
+      if (row < 7 and col < 7 and board[row + 1][col + 1] == 11 - current_player):
         new_board[row + 1][col + 1] = 0
-      apply_imitator_coordinator_kill(piece, row - k, col - k, new_board)
-      apply_imitator_pincer_kill(piece, row - k, col - k, new_board)
-      move_desc = get_move_desc(piece, row, col - k, row - k, col)
+      apply_imitator_coordinator_kill(piece, row - k, col - k, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row - k, col - k, new_board, current_player)
+      move_desc = get_move_desc(piece, row, col, row - k, col - k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
     else:
@@ -1264,117 +1263,117 @@ def analyze_imitator_movement(piece, row, col, board):
   # there is space to jump
   if (row - k > 0 and col - k > 0 and board[row - k + 1][col - k - 1] == 0):
     # the piece to jump is the oponent's
-    if (board[row - k][col - k] == 7 - CURRENT_PLAYER):
+    if (board[row - k][col - k] == 7 - current_player):
       new_board = copy_board(board)
       new_board[row - k - 1][col - k - 1] = piece
       new_board[row - k][col - k] = 0
       new_board[row][col] = 0
       # if moving away from enemy withdrawer, kill it
-      if (row < 7 and col < 7 and board[row + 1][col + 1] == 11 - CURRENT_PLAYER):
+      if (row < 7 and col < 7 and board[row + 1][col + 1] == 11 - current_player):
         new_board[row + 1][col + 1] = 0
-      apply_imitator_coordinator_kill(piece, row - k - 1, col - k - 1, new_board)
-      apply_imitator_pincer_kill(piece, row - k - 1, col - k - 1, new_board)
-      move_desc = get_move_desc(piece, row, col - k - 1, row - k - 1, col)
+      apply_imitator_coordinator_kill(piece, row - k - 1, col - k - 1, new_board, current_player)
+      apply_imitator_pincer_kill(piece, row - k - 1, col - k - 1, new_board, current_player)
+      move_desc = get_move_desc(piece, row, col, row - k - 1, col - k - 1)
       new_boards.append([move_desc, new_board])
   # checking if next to an enemy king
-  if(row > 0 and col > 0 and board[row - 1][col - 1] == 13 - CURRENT_PLAYER):
+  if(row > 0 and col > 0 and board[row - 1][col - 1] == 13 - current_player):
     #add a state
     new_board = copy_board(board)
     new_board[row - 1][col - 1] = piece
     new_board[row][col] = 0
     # if moving away from enemy withdrawer, kill it
-    if (row < 7 and col < 7 and board[row + 1][col + 1] == 11 - CURRENT_PLAYER):
+    if (row < 7 and col < 7 and board[row + 1][col + 1] == 11 - current_player):
       new_board[row + 1][col + 1] = 0
-    apply_imitator_coordinator_kill(piece, row - 1, col - 1, new_board)
-    apply_imitator_pincer_kill(piece, row - 1, col - 1, new_board)
-    move_desc = get_move_desc(piece, row, col - 1, row - 1, col)
+    apply_imitator_coordinator_kill(piece, row - 1, col - 1, new_board, current_player)
+    apply_imitator_pincer_kill(piece, row - 1, col - 1, new_board, current_player)
+    move_desc = get_move_desc(piece, row, row - 1, col - 1)
     new_boards.append([move_desc, new_board])
   
   return new_boards
 
-def apply_imitator_pincer_kill(piece, row, col, board):
+def apply_imitator_pincer_kill(piece, row, col, board, current_player):
   # squish towards 0th row
-  if row > 1 and board[row-1][col] == 3 - CURRENT_PLAYER and who(board[row-2][col]) == CURRENT_PLAYER :
+  if row > 1 and board[row-1][col] == 3 - current_player and who(board[row-2][col]) == current_player :
     board[row-1][col] = 0
   # squish towards 8th row
-  if row < 6 and board[row+1][col] == 3 - CURRENT_PLAYER and who(board[row+2][col]) == CURRENT_PLAYER :
+  if row < 6 and board[row+1][col] == 3 - current_player and who(board[row+2][col]) == current_player :
     board[row+1][col] = 0
   # squish towards 0th column
-  if col > 1 and board[row][col-1] == 3 - CURRENT_PLAYER and who(board[row][col-2]) == CURRENT_PLAYER :
+  if col > 1 and board[row][col-1] == 3 - current_player and who(board[row][col-2]) == current_player :
     board[row][col-1] = 0
   # squish towards 8th column
-  if col < 6 and board[row][col+1] == 3 - CURRENT_PLAYER and who(board[row][col+2]) == CURRENT_PLAYER :
+  if col < 6 and board[row][col+1] == 3 - current_player and who(board[row][col+2]) == current_player :
     board[row][col+1] = 0
 
-def apply_imitator_coordinator_kill(piece, row, col, board):
+def apply_imitator_coordinator_kill(piece, row, col, board, current_player):
   # locate your king
   for i in range(8): # look through row
     for j in range(8): # look through column
       current_piece = board[i][j]
       # kill corners
-      if (current_piece == 12 + CURRENT_PLAYER):
-        if (board[row][j] == 5 - CURRENT_PLAYER):
+      if (current_piece == 12 + current_player):
+        if (board[row][j] == 5 - current_player):
           board[row][j] = 0
-        if (board[i][col] == 5 - CURRENT_PLAYER):
+        if (board[i][col] == 5 - current_player):
           board[i][col] = 0
         return
 
-def is_adjacent_too(piece, row, col, board, other):
-  if(row > 0 and board[row - 1][col] == other - CURRENT_PLAYER):
+def is_adjacent_too(piece, row, col, board, other, current_player):
+  if(row > 0 and board[row - 1][col] == other - current_player):
     return True
-  if(row < 7 and board[row + 1][col] == other - CURRENT_PLAYER):
+  if(row < 7 and board[row + 1][col] == other - current_player):
     return True
-  if(col > 0 and board[row][col - 1] == other - CURRENT_PLAYER):
+  if(col > 0 and board[row][col - 1] == other - current_player):
     return True
-  if(col < 7 and board[row][col + 1] == other - CURRENT_PLAYER):
+  if(col < 7 and board[row][col + 1] == other - current_player):
     return True
-  if(row > 0 and col > 0 and board[row - 1][col - 1] == other - CURRENT_PLAYER):
+  if(row > 0 and col > 0 and board[row - 1][col - 1] == other - current_player):
     return True
-  if(row > 0 and col < 7 and board[row - 1][col + 1] == other - CURRENT_PLAYER):
+  if(row > 0 and col < 7 and board[row - 1][col + 1] == other - current_player):
     return True
-  if(row < 7 and col > 0 and board[row + 1][col - 1] == other - CURRENT_PLAYER):
+  if(row < 7 and col > 0 and board[row + 1][col - 1] == other - current_player):
     return True
-  if(row < 7 and col < 7 and board[row + 1][col + 1] == other - CURRENT_PLAYER):
+  if(row < 7 and col < 7 and board[row + 1][col + 1] == other - current_player):
     return True
   return False
 
-def analyze_piece(piece, row, col, board):
+def analyze_piece(piece, row, col, board, current_player):
   new_boards = []
   
   # check to see if this piece is frozen
-  if is_adjacent_too(piece, row, col, board, 15):
+  if is_adjacent_too(piece, row, col, board, 15, current_player):
     return new_boards
   
   # Pincer
   if(piece == 2 or piece == 3):
-    new_boards.extend(analyze_pincer_movement(piece, row, col, board))
+    new_boards.extend(analyze_pincer_movement(piece, row, col, board, current_player))
   
   # King
   if(piece == 12 or piece == 13):
-    new_boards.extend(analyze_king_movement(piece, row, col, board))
+    new_boards.extend(analyze_king_movement(piece, row, col, board, current_player))
   
   # Withdrawer
   if(piece == 10 or piece == 11):
-    new_boards.extend(analyze_withdrawer_movement(piece, row, col, board))
+    new_boards.extend(analyze_withdrawer_movement(piece, row, col, board, current_player))
   
   # Leaper
   if(piece == 6 or piece == 7):
-    new_boards.extend(analyze_leaper_movement(piece, row, col, board))
+    new_boards.extend(analyze_leaper_movement(piece, row, col, board, current_player))
   
   # Coordinator
   if(piece == 4 or piece == 5):
-    new_boards.extend(analyze_coordinator_movement(piece, row, col, board))
+    new_boards.extend(analyze_coordinator_movement(piece, row, col, board, current_player))
   
   # Freezer
   if(piece == 14 or piece == 15):
     # freezer can be frozen by an imitator, check for that
-    if is_adjacent_too(piece, row, col, board, 9):
+    if is_adjacent_too(piece, row, col, board, 9, current_player):
       return new_boards
-    new_boards.extend(analyze_freezer_movement(piece, row, col, board))
+    new_boards.extend(analyze_freezer_movement(piece, row, col, board, current_player))
   
   # Imitator
   if(piece == 8 or piece == 9):
-    new_boards.extend(analyze_imitator_movement(piece, row, col, board))
+    new_boards.extend(analyze_imitator_movement(piece, row, col, board, current_player))
   
   return new_boards 
   
@@ -1402,6 +1401,6 @@ def copy_board(old_board):
       new_board[i][j] = old_board[i][j]
   return new_board
 
-test_state = BC_state(boardTests.B_IMITATOR_TEST_1, CURRENT_PLAYER)
+test_state = BC_state(boardTests.QUEENS_TEST_0, BLACK)
 print(test_state)
 look_for_successors(test_state)
