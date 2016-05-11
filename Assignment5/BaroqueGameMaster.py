@@ -1,15 +1,17 @@
-
 '''TimedGameMaster.py based on GameMaster.py which in turn is 
  based on code from RunKInARow.py
 
-S. Tanimoto, May 9
+S. Tanimoto, May 3
+with enhancements by Tyler Williamson eliminating several bugs and
+adding better diagnostic printout when an agent makes an error.
+
 '''
-VERSION = '0.8-BETA'
+VERSION = '1.0-BETA'
 
 # Get names of players and time limit from the command line.
 
 import sys
-TIME_PER_MOVE = 10 # default time limit is half a second.
+TIME_PER_MOVE = 0.5 # default time limit is ten seconds.
 if len(sys.argv) > 1:
     import importlib    
     player1 = importlib.import_module(sys.argv[1])
@@ -17,8 +19,8 @@ if len(sys.argv) > 1:
     if len(sys.argv) > 3:
         TIME_PER_MOVE = float(sys.argv[3])
 else:
-    import testMove as player1
-    import testMove as player2
+    import Chetter_BC_Player as player1
+    import Baroque_Kasparov_BC_Player as player2
 
 
 # Specify details of a match here: 
@@ -27,16 +29,17 @@ else:
 import new_succ as bcs
 
 VALIDATE_MOVES = False # If players are trusted not to cheat, this could be turned off to save time.
+USE_HTML = False
 
 from winTester import winTester
 
 CURRENT_PLAYER = bcs.WHITE
 
+PLAYER_MAP = (player1.nickname(), player2.nickname())
 
 FINISHED = False
 def runGame():
-    #currentState = bcs.BC_state()
-    currentState = player1.BC_state()
+    currentState = bcs.BC_state()
     print('Baroque Chess Gamemaster v'+VERSION)
     print('The Gamemaster says, "Players, introduce yourselves."')
     print('     (Playing WHITE:) '+player1.introduce())
@@ -70,9 +73,12 @@ def runGame():
     FINISHED = False
     turnCount = 1
     print(currentState)
-    while not FINISHED :#and turnCount < 2:
+    while not FINISHED:
         who = currentState.whose_move
-        if who==bcs.WHITE: side = 'WHITE'
+        if who==bcs.WHITE:
+            side = 'WHITE'
+        else:
+            side = 'BLACK'
         global CURRENT_PLAYER
         CURRENT_PLAYER = who
         if VALIDATE_MOVES:
@@ -92,13 +98,12 @@ def runGame():
             FINISHED = True; continue
         if VALIDATE_MOVES:
             if not OCCURS_IN(moveAndState[1], legal_states):
-                print("Illegal move by "+side)  # Returned state is:\n" + str(currentState))
+                print("Illegal move by "+side+" as "+str(moveAndState[0]))
+                print("Returned state is:")
                 print(moveAndState[1])
                 break
         move, currentState = moveAndState
-        side = 'BLACK'
-        if who==bcs.WHITE: side = 'WHITE'
-        moveReport = "Turn "+str(turnCount)+": Move is by "+side+" to "+str(move)
+        moveReport = "Turn "+str(turnCount)+": Move is by "+side+" as "+str(move)
         print(moveReport)
         utteranceReport = name +' says: '+currentRemark
         print(utteranceReport)
@@ -112,13 +117,12 @@ def runGame():
         turnCount += 1
         #if turnCount == 9: FINISHED=True
     print(currentState)
-    who = currentState.whose_move
     print("Game over.")
 
 
 import sys
 import time
-import traceback
+from traceback import print_exc
 def timeout(func, args=(), kwargs={}, timeout_duration=1, default=None):
     '''This function will spawn a thread and run the given function using the args, kwargs and 
     return the given default value if the timeout_duration is exceeded 
@@ -133,10 +137,7 @@ def timeout(func, args=(), kwargs={}, timeout_duration=1, default=None):
                 self.result = func(*args, **kwargs)
             except:
                 print("Seems there was a problem with the time.")
-                info = sys.exc_info()
-                print(sys.exc_info())
-                traceback.print_tb(info[2], limit=None, file=None)
-                #traceback.print_exception(info[0], info[1], info[2], limit=None, file=None, chain=True)
+                print_exc()
                 self.result = default
 
     pt = PlayerThread()
@@ -152,8 +153,8 @@ def timeout(func, args=(), kwargs={}, timeout_duration=1, default=None):
     if pt.isAlive():
         print("Took too long.")
         print("We are now terminating the game.")
-        print("Player "+CURRENT_PLAYER+" loses.")
-        if USE_HTML: gameToHTML.reportResult("Player "+CURRENT_PLAYER+" took too long (%04f seconds) and thus loses." % diff)
+        print("Player "+PLAYER_MAP[CURRENT_PLAYER]+" loses.")
+        if USE_HTML: gameToHTML.reportResult("Player "+PLAYER_MAP[CURRENT_PLAYER]+" took too long (%04f seconds) and thus loses." % diff)
         if USE_HTML: gameToHTML.endHTML()
         exit()
     else:
