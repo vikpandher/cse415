@@ -1,4 +1,37 @@
-import boardTests
+'''
+Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
+Instructor:  S. Tanimoto.
+Assignment 5 Baroque Chess
+
+Status of the implementation:
+All required features working. Runs up to 10ply if time allows.
+
+Implementation of an Agent Chetter Hummin that plays Baroque Chess.
+
+The initial board state is represented as:
+c l i w k i l f
+p p p p p p p p
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+- - - - - - - -
+P P P P P P P P
+F L I W K I L C
+
+Where the starting board is shown using ASCII text, and the
+encoding is as follows: (lower case for black, upper case for WHITE):
+
+    p: pincer
+    l: leaper
+    i: imitator
+    w: withdrawer
+    k: king
+    c: coordinator
+    f: freezer
+    -: empty square on the board
+
+'''
+
 import time
 import random
 
@@ -10,12 +43,14 @@ INIT_TO_CODE = {'p':2, 'P':3, 'c':4, 'C':5, 'l':6, 'L':7, 'i':8, 'I':9,
 
 CODE_TO_INIT = {0:'-',2:'p',3:'P',4:'c',5:'C',6:'l',7:'L',8:'i',9:'I',
   10:'w',11:'W',12:'k',13:'K',14:'f',15:'F'}
-  
+
+# Used to print move descriptions
 CODE_TO_NAME = {0:'blank space', 2:'Black Pincer', 3:'White Pincer',
   4:'Black Coordinator', 5:'White Coordinator', 6:'Black Leaper', 7:'White Leaper',
   8:'Black Imitator', 9:'White Imitator', 10:'Black Withdrawer', 11:'White Withdrawer',
   12:'Black King', 13:'White King', 14:'Black Freezer', 15:'White Freezer'}
 
+# Used to print move descriptions
 COL_TO_LETTER = {0:'a', 1:'b', 2:'c', 3:'d', 4:'e', 5:'f', 6:'g', 7:'h'}
   
 def who(piece): return piece % 2
@@ -79,12 +114,13 @@ def test_starting_board():
   init_state = BC_state(INITIAL, WHITE)
   print(init_state)
 
-#######################
-#CURRENT_PLAYER = BLACK;
-#######################
-
+# Used to increase ply level and update best move
 TimeOut = False
 
+# It should return a list of the form [[move, newState], newRemark].
+# The move is a data item describing the chosen move.
+# The newState is the result of making the move from the given currentState.
+# The newRemark to be returned must be a string.
 def makeMove(currentState, currentRemark, timeLimit=5):
   global TimeOut
   TimeOut = False
@@ -99,18 +135,21 @@ def makeMove(currentState, currentRemark, timeLimit=5):
       break
   return  [[newState[3], BC_state(newState[2].board, newState[2].whose_move)], random.choice(PUNTS)]
 
+# Agents responses to the other Player
 PUNTS = ['I desire another sacrafice.',
          'I am looking for more options.',
          'Have you forgotten how powerful I am?',
          'What else do you have to offer?',
          'How does this help me?  If you can not help me I must dispose of you.']
 
+# Returns the opposite player as the parameter
 def other(player):
   if player == WHITE:
     return BLACK
   else:
     return WHITE
 
+# Applys iterative deepening to figure out the best move according to increasing ply
 def decideBest(state, first, desc, level, initTime, timeLimit, plyLeft):
   global TimeOut
   if plyLeft == 0: return [staticEval(state), state, first, desc, level, TimeOut]
@@ -134,14 +173,16 @@ def decideBest(state, first, desc, level, initTime, timeLimit, plyLeft):
         provisional = newVal      
   return provisional
 
+# Used to calculate the static evaluation, gives all pieces values
+# based on their importance
 CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
                  10:-40,11:40,12:-100,13:100,14:-50,15:50}
 
 # 1000(B_IsCheckMate) + 100(W_HaveKing) + 80(W_NumLeapers) + 70(W_NumImmitators) +\
 # 60(W_HaveCoordinator) + 50(W_HaveImmobilizer) + 40(W_HaveWithdrawer) +\
 # 10(W_NumPincers) - [1000(W_IsCheckMate) + 100(B_HaveKing) + 80(B_NumLeapers) +\
-# 70(B_NumImmitators) + 60(B_HaveCoordinator) + CoordEval + 50(B_HaveImmobilizer) +\
-# 40(B_HaveWithdrawer) + 10(B_NumPincers) + pincerEval]
+# 70(B_NumImmitators) + 60(B_HaveCoordinator) + 50(B_HaveImmobilizer) +\
+# 40(B_HaveWithdrawer) + 10(B_NumPincers)]
 def staticEval(state):
   value = 0
   board = state.board
@@ -160,28 +201,26 @@ def staticEval(state):
     value -= 1000
   return value
 
+# Finds all of the possible states resulting from moving one piece in the current state
 def look_for_successors(state):
   board = state.board
   CURRENT_PLAYER = state.whose_move
-  
   successors = []
-  
   for i in range(8): # look through row
     for j in range(8): # look through column
       current_piece = board[i][j]
       if(who(current_piece) == CURRENT_PLAYER and current_piece != 0):
-        #print("current_piece = " + CODE_TO_NAME[current_piece] + " (" + CODE_TO_INIT[current_piece] + "), (" + str(i) + ", " + str(j) + ")")
-        #print()
         new_boards = analyze_piece(current_piece, i, j, board, CURRENT_PLAYER)
         successors.extend(new_boards)
   return successors
 
+# Returns a string describing the move
 def get_move_desc(piece, old_row, old_col, new_row, new_col):
-  #print("get_move_desc(" + str(piece) + ", " + str(old_row) + ", " + str(old_col) + ", " + str(new_row) + ", " + str(new_col) + ")")
   if(new_col < 0):
     new_col = 0
   return CODE_TO_NAME[piece] + " from " +  COL_TO_LETTER[old_col] + str(8 - old_row) + " to " + COL_TO_LETTER[new_col] + str(8 - new_row)
-  
+
+
 def analyze_pincer_movement(piece, row, col, board, current_player):
   new_boards = []
   
@@ -1415,6 +1454,8 @@ def apply_imitator_coordinator_kill(piece, row, col, board, current_player):
           board[i][col] = 0
         return
 
+# Checks if a given piece is adjacent to another piece that belongs to
+# the opponent
 def is_adjacent_too(piece, row, col, board, other, current_player):
   if(row > 0 and board[row - 1][col] == other - current_player):
     return True
@@ -1473,33 +1514,11 @@ def analyze_piece(piece, row, col, board, current_player):
     new_boards.extend(analyze_imitator_movement(piece, row, col, board, current_player))
   
   return new_boards 
-  
-def print_boards(boards):
-  s = ''
-  for b in boards:
-    s += b[0] + "\n"
-    s += print_board(b[1])
-  return s
 
-# Wont work
-def print_board(board):
-  s = ''
-  for r in range(8):
-    for c in range(8):
-      s += CODE_TO_INIT[board[r][c]] + " "
-    s += "\n"
-  s += "\n"
-  return s
-  
+# Used to make a deep copy of a board
 def copy_board(old_board):
   new_board = [[0,0,0,0,0,0,0,0] for r in range(8)]
   for i in range(8):
     for j in range(8):
       new_board[i][j] = old_board[i][j]
   return new_board
-
-#test_state = BC_state(boardTests.B_COORDINATOR_TEST_2, CURRENT_PLAYER)
-#print(test_state)
-#look_for_successors(test_state)
-print(print_board(INITIAL))
-print(makeMove(BC_state(INITIAL, WHITE), "Go"))
