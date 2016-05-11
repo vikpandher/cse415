@@ -43,12 +43,12 @@ def nickname():
   
 INITIAL = parse('''
 c l i w k i l f
-p p p p - p p p
+p p p p p p p p
 - - - - - - - -
-- - - - P - - -
-- - - - p - - -
 - - - - - - - -
-P P P - P P P P
+- - - - - - - -
+- - - - - - - -
+P P P P P P P P
 F L I W K I L C
 ''')
 
@@ -1488,5 +1488,5 @@ def copy_board(old_board):
 #test_state = BC_state(boardTests.B_COORDINATOR_TEST_2, CURRENT_PLAYER)
 #print(test_state)
 #look_for_successors(test_state)
-print(print_board(INITIAL))
-print(makeMove(BC_state(INITIAL, WHITE), "Go"))
+#print(print_board(INITIAL))
+#print(makeMove(BC_state(INITIAL, WHITE), "Go"))
