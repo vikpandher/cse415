@@ -9,7 +9,7 @@ VERSION = '0.8-BETA'
 # Get names of players and time limit from the command line.
 
 import sys
-TIME_PER_MOVE = 10 # default time limit is half a second.
+TIME_PER_MOVE = 5 # default time limit is half a second.
 if len(sys.argv) > 1:
     import importlib    
     player1 = importlib.import_module(sys.argv[1])
@@ -17,7 +17,7 @@ if len(sys.argv) > 1:
     if len(sys.argv) > 3:
         TIME_PER_MOVE = float(sys.argv[3])
 else:
-    import alpha_BC_Player as player1
+    import testMove as player1
     import alpha_BC_Player as player2
 
 
@@ -93,6 +93,7 @@ def runGame():
         if VALIDATE_MOVES:
             if not OCCURS_IN(moveAndState[1], legal_states):
                 print("Illegal move by "+side)  # Returned state is:\n" + str(currentState))
+                print(moveAndState[1])
                 break
         move, currentState = moveAndState
         side = 'BLACK'
