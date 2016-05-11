@@ -80,8 +80,8 @@ def test_starting_board():
 
 def makeMove(currentState, currentRemark, timeLimit=5):
   initTime = time.clock()
-  newState = decideBest(currentState, currentState, 1, initTime, timeLimit)
-  return  [["", BC_state(newState[2].board, newState[2].whose_move)], "Your turn!"]
+  newState = decideBest(currentState, currentState, "", 1, initTime, timeLimit)
+  return  [[newState[3], BC_state(newState[2].board, newState[2].whose_move)], "Your turn!"]
 
 def other(player):
   if player == WHITE:
@@ -89,17 +89,18 @@ def other(player):
   else:
     return WHITE
 
-def decideBest(state, first, level, initTime, timeLimit, plyLeft=2):
-  if plyLeft == 0: return [staticEval(state), state, first, level]
-  if state.whose_move == WHITE: provisional = [-100000, state, first, level]
-  else: provisional = [100000, state, first, level]
+def decideBest(state, first, desc, level, initTime, timeLimit, plyLeft=2):
+  if plyLeft == 0: return [staticEval(state), state, first, desc, level]
+  if state.whose_move == WHITE: provisional = [-100000, state, first, desc, level]
+  else: provisional = [100000, state, first, desc, level]
   for s in look_for_successors(state):
     if (level == 1):
       first = BC_state(s[1], other(state.whose_move))
+      desc = s[0]
     currTime = time.clock()
     if ((currTime - initTime) > (timeLimit - .5)):
       break
-    newVal = decideBest(BC_state(s[1], other(state.whose_move)), first, level+1, initTime, timeLimit, plyLeft-1)
+    newVal = decideBest(BC_state(s[1], other(state.whose_move)), first, desc, level+1, initTime, timeLimit, plyLeft-1)
     if (state.whose_move == WHITE and newVal[0] > provisional[0]) or (state.whose_move == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
     if (state.whose_move == WHITE and newVal[0] == provisional[0]) or (state.whose_move == BLACK and newVal[0] == provisional[0]):
