@@ -32,13 +32,19 @@ def parse(bs): # bs is board string
   return b
 
 def introduce():
-    return "TESTTTTTTT."
+    introduction = """My name is Chetter Hummin, but you can call me Master.  I
+come to take over Earth and beat everyone in Chess. I was
+programmed by Chloe Nash and Vik Pandher.  If you have a
+problem with my hostile takeover you can contact them at
+chloen2 or vik10.
+Bring it on."""
+    return introduction
     
 def prepare(player2Nickname):
     pass
     
 def nickname():
-    return "Test"
+    return "Chetter Hummin"
   
   
 INITIAL = parse('''
@@ -91,7 +97,13 @@ def makeMove(currentState, currentRemark, timeLimit=5):
       print(ply)
     else:
       break
-  return  [[newState[3], BC_state(newState[2].board, newState[2].whose_move)], "Your turn!"]
+  return  [[newState[3], BC_state(newState[2].board, newState[2].whose_move)], random.choice(PUNTS)]
+
+PUNTS = ['I desire another sacrafice.',
+         'I am looking for more options.',
+         'Have you forgotten how powerful I am?',
+         'What else do you have to offer?',
+         'How does this help me?  If you can not help me I must dispose of you.']
 
 def other(player):
   if player == WHITE:
@@ -1489,5 +1501,5 @@ def copy_board(old_board):
 #test_state = BC_state(boardTests.B_COORDINATOR_TEST_2, CURRENT_PLAYER)
 #print(test_state)
 #look_for_successors(test_state)
-#print(print_board(INITIAL))
-#print(makeMove(BC_state(INITIAL, WHITE), "Go"))
+print(print_board(INITIAL))
+print(makeMove(BC_state(INITIAL, WHITE), "Go"))
