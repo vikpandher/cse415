@@ -42,14 +42,14 @@ def nickname():
   
   
 INITIAL = parse('''
-c l i w k i l f
-p p p p - p p p
 - - - - - - - -
-- - - - P - - -
-- - - - p - - -
+- f c k c f - -
 - - - - - - - -
-P P P - P P P P
-F L I W K I L C
+- - - - - - - -
+- - - - - - - -
+- - F C K C F -
+- - - - - - - -
+- - - - - - - -
 ''')
 
 class BC_state:
@@ -86,8 +86,18 @@ def makeMove(currentState, currentRemark, timeLimit=5):
   #print(newState[2])
   #print(newState[3])
   print("initTime: " + str(initTime))
-  print(print_board(newState[3][0][1]))
-  return  [[newState[3][0][0], BC_state(newState[3][0][1], other(currentState.whose_move))], "Your turn!"]
+  #print(newState[3][0][1]) #print(print_board(newState[3][0][1]))
+  piece0 = newState[3][0][0]
+  print("HERE 0")
+  piece1 = newState[3][0][1]
+  print("HERE 1")
+  piece2 = BC_state(piece1, other(currentState.whose_move))
+  print("HERE 2")
+  combined = [piece0, piece2]
+  print("HERE 3")
+  output = [combined, "Your turn!"]
+  print("HERE 4")
+  return output #[[newState[3][0][0], BC_state(newState[3][0][1], other(currentState.whose_move))], "Your turn!"]
 
 def other(player):
   if player == WHITE:
@@ -95,7 +105,7 @@ def other(player):
   else:
     return WHITE
 
-def decideBest(state, desc, whoseMove, initTime, path, timeLimit, plyLeft=3):
+def decideBest(state, desc, whoseMove, initTime, path, timeLimit, plyLeft=2):
   if plyLeft == 0: return [staticEval(state), state, desc, path[:]]
   if whoseMove == WHITE: provisional = [-100000, state, desc, path[:]]
   else: provisional = [100000, state, desc, path[:]]
@@ -103,9 +113,9 @@ def decideBest(state, desc, whoseMove, initTime, path, timeLimit, plyLeft=3):
     #print("successor:")
     #print(s)
     currTime = time.clock()
-    if ((currTime - initTime) > (timeLimit - 1)):
+    if ((currTime - initTime) > (timeLimit - 0.5)):
       print("currTime - initTime: " + str(currTime - initTime))
-      print("timeLimit - 1: " + str(timeLimit - 1))
+      print("timeLimit - 1: " + str(timeLimit - 0.5))
       break
     new_path = path[:]
     new_path.append(s)
@@ -148,6 +158,8 @@ def staticEval(state):
         B_IsCheckMate = False
       if board[row][col] == 13:
         W_IsCheckMate = False
+      if (board[row][col] < 0):
+        print("CODE_TO_VALUE: " + str(board[row][col]))
       value += CODE_TO_VALUE[board[row][col]]
   if B_IsCheckMate:
     value += 1000
@@ -172,6 +184,12 @@ def look_for_successors(state):
   return successors
 
 def get_move_desc(piece, old_row, old_col, new_row, new_col):
+    if(piece < 0):
+      print("piece = " + str(piece))
+    if(old_col < 0):
+      print("old_col = " + str(old_col))
+    if(old_row < 0):
+      print("new_col = " + str(new_col))
     return CODE_TO_NAME[piece] + " from " +  COL_TO_LETTER[old_col] + str(8 - old_row) + " to " + COL_TO_LETTER[new_col] + str(8 - new_row)
         
 def analyze_pincer_movement(piece, row, col, board, current_player):
@@ -185,7 +203,7 @@ def analyze_pincer_movement(piece, row, col, board, current_player):
       new_board = copy_board(board)
       new_board[row][col + k] = piece
       new_board[row][col] = 0
-      apply_pincer_kill(piece, row, col + k, new_board, current_player)
+      #apply_pincer_kill(piece, row, col + k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col + k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -201,7 +219,7 @@ def analyze_pincer_movement(piece, row, col, board, current_player):
       new_board = copy_board(board)
       new_board[row][col - k] = piece
       new_board[row][col] = 0
-      apply_pincer_kill(piece, row, col - k, new_board, current_player)
+      #apply_pincer_kill(piece, row, col - k, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row, col - k)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -217,7 +235,7 @@ def analyze_pincer_movement(piece, row, col, board, current_player):
       new_board = copy_board(board)
       new_board[row + k][col] = piece
       new_board[row][col] = 0
-      apply_pincer_kill(piece, row + k, col, new_board, current_player)
+      #apply_pincer_kill(piece, row + k, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row + k, col)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -233,7 +251,7 @@ def analyze_pincer_movement(piece, row, col, board, current_player):
       new_board = copy_board(board)
       new_board[row - k][col] = piece
       new_board[row][col] = 0
-      apply_pincer_kill(piece, row - k, col, new_board, current_player)
+      #apply_pincer_kill(piece, row - k, col, new_board, current_player)
       move_desc = get_move_desc(piece, row, col, row - k, col)
       new_boards.append([move_desc, new_board])
     # a piece is in the way
@@ -1408,29 +1426,47 @@ def apply_imitator_coordinator_kill(piece, row, col, board, current_player):
         return
 
 def is_adjacent_too(piece, row, col, board, other, current_player):
-  if(row > 0 and board[row - 1][col] == other - current_player):
-    return True
-  if(row < 7 and board[row + 1][col] == other - current_player):
-    return True
-  if(col > 0 and board[row][col - 1] == other - current_player):
-    return True
-  if(col < 7 and board[row][col + 1] == other - current_player):
-    return True
-  if(row > 0 and col > 0 and board[row - 1][col - 1] == other - current_player):
-    return True
-  if(row > 0 and col < 7 and board[row - 1][col + 1] == other - current_player):
-    return True
-  if(row < 7 and col > 0 and board[row + 1][col - 1] == other - current_player):
-    return True
-  if(row < 7 and col < 7 and board[row + 1][col + 1] == other - current_player):
-    return True
+  #print("row = " + str(row) + ", col = " + str(col))
+  if(row > 0):
+    #print("HERE 0")
+    if (board[row - 1][col] == other - current_player):
+      return True
+  if(row < 7):
+    #print("HERE 1")
+    if (board[row + 1][col] == other - current_player):
+      return True
+  if(col > 0):
+    #print("HERE 2")
+    if(board[row][col - 1] == other - current_player):
+      return True
+  if(col < 7):
+    #print("HERE 3")
+    if(board[row][col + 1] == other - current_player):
+      return True
+  if(row > 0 and col > 0):
+    #print("HERE 4")
+    if(board[row - 1][col - 1] == other - current_player):
+      return True
+  if(row > 0 and col < 7):
+    #print("HERE 5")
+    if(board[row - 1][col + 1] == other - current_player):
+      return True
+  if(row < 7 and col > 0):
+    #print("HERE 6")
+    if(board[row + 1][col - 1] == other - current_player):
+      return True
+  if(row < 7 and col < 7):
+    #print("HERE 7")
+    if(board[row + 1][col + 1] == other - current_player):
+      return True
   return False
 
 def analyze_piece(piece, row, col, board, current_player):
   new_boards = []
   
-  # check to see if this piece is frozen
+  # check to see if this piece is frozen 
   if is_adjacent_too(piece, row, col, board, 15, current_player):
+    #print("PIECE FROZEN")
     return new_boards
   
   # Pincer

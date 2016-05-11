@@ -17,8 +17,8 @@ if len(sys.argv) > 1:
     if len(sys.argv) > 3:
         TIME_PER_MOVE = float(sys.argv[3])
 else:
-    import testnew as player1
-    import testnew as player2
+    import alpha_BC_Player as player1
+    import alpha_BC_Player as player2
 
 
 # Specify details of a match here: 
@@ -117,6 +117,7 @@ def runGame():
 
 import sys
 import time
+import traceback
 def timeout(func, args=(), kwargs={}, timeout_duration=1, default=None):
     '''This function will spawn a thread and run the given function using the args, kwargs and 
     return the given default value if the timeout_duration is exceeded 
@@ -131,7 +132,10 @@ def timeout(func, args=(), kwargs={}, timeout_duration=1, default=None):
                 self.result = func(*args, **kwargs)
             except:
                 print("Seems there was a problem with the time.")
+                info = sys.exc_info()
                 print(sys.exc_info())
+                traceback.print_tb(info[2], limit=None, file=None)
+                #traceback.print_exception(info[0], info[1], info[2], limit=None, file=None, chain=True)
                 self.result = default
 
     pt = PlayerThread()
