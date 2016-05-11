@@ -88,6 +88,7 @@ def makeMove(currentState, currentRemark, timeLimit=5):
     nextState = decideBest(currentState, currentState, "", 1, initTime, timeLimit, ply)
     if nextState[-1] == False:
       newState = nextState
+      print(ply)
     else:
       break
   return  [[newState[3], BC_state(newState[2].board, newState[2].whose_move)], "Your turn!"]
@@ -108,7 +109,7 @@ def decideBest(state, first, desc, level, initTime, timeLimit, plyLeft):
       first = BC_state(s[1], other(state.whose_move))
       desc = s[0]
     currTime = time.clock()
-    if ((currTime - initTime) > (timeLimit - .5)):
+    if ((currTime - initTime) > (timeLimit - .1)):
       TimeOut = True
       provisional[-1] = TimeOut
       break

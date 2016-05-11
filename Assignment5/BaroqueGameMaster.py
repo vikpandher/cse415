@@ -9,7 +9,7 @@ VERSION = '0.8-BETA'
 # Get names of players and time limit from the command line.
 
 import sys
-TIME_PER_MOVE = 5 # default time limit is half a second.
+TIME_PER_MOVE = 10 # default time limit is half a second.
 if len(sys.argv) > 1:
     import importlib    
     player1 = importlib.import_module(sys.argv[1])
