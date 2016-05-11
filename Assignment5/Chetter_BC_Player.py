@@ -130,7 +130,6 @@ def makeMove(currentState, currentRemark, timeLimit=5):
     nextState = decideBest(currentState, currentState, "", 1, initTime, timeLimit, ply)
     if nextState[-1] == False:
       newState = nextState
-      print(ply)
     else:
       break
   return  [[newState[3], BC_state(newState[2].board, newState[2].whose_move)], random.choice(PUNTS)]
