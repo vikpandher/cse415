@@ -1,0 +1,38 @@
+Questions - How does Q-Learning work with dynamic state spaces?
+	  - Multiple moves in one turn? -- possible
+	  - 
+
+Game Master - handle the turn taking
+
+Q-learning - how? 
+	   - important when things die
+	   - satic eval function?
+	   - 
+
+State Space Search - Iterative deeping and heuristic
+
+Moves - Take a step, take a step and drop bomb, do not move
+
+States - board w/ current pieces, players & bombs & walls, bombs have a timer
+
+Operator - preconditions: check can move, check can place bomb; transition: move & bomb/no bomb
+
+Can move - have space, dont move into bomb zone or wall or other player
+
+Can place bomb - one at a time or wait two turns or some restriction
+
+End State - Kill the other player
+
+Heuristic - trap other player
+
+Values - Living Value: -.1 (dependant on position), Breaking Wall: +1, Killing Other Player: +10, Dieing: -10
+
+Changes - Board Walls move in over time -> better to be in center of board
+
+Moving - Manhattan movement
+
+Interactive - take user input -> stretch feature
+	    - could add random other enemies that simply use Q-Learning
+	    - could add power ups or additional features
+
+
