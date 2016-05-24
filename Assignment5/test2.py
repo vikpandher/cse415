@@ -321,10 +321,11 @@ CURRENT_PLAYER = WHITE
 
 def makeMove(currentState, currentRemark, timeLimit=5):
   initTime = time.clock()
-  newState = decideBest(currentState, CURRENT_PLAYER, initTime, timeLimit)
+  newState = decideBest(currentState, "", CURRENT_PLAYER, initTime, timeLimit)
   print("Our Move:")
   print(newState[1])
-  return  [["", newState[1]], "Your turn!"]
+  print(newState[2])
+  return  [[newState[2], newState[1]], "Your turn!"]
 
 def other(player):
   if player == WHITE:
@@ -332,15 +333,15 @@ def other(player):
   else:
     return WHITE
 
-def decideBest(state, whoseMove, initTime, timeLimit, plyLeft=2):
-  if plyLeft == 0: return (staticEval(state), state)
-  if whoseMove == WHITE: provisional = (-100000, state)
-  else: provisional = (100000, state)
+def decideBest(state, desc, whoseMove, initTime, timeLimit, plyLeft=2):
+  if plyLeft == 0: return (staticEval(state), state, desc)
+  if whoseMove == WHITE: provisional = (-100000, state, desc)
+  else: provisional = (100000, state, desc)
   for s in look_for_successors(state):
     currTime = time.clock()
     if ((initTime + currTime) > (timeLimit - 1)):
       break
-    newVal = decideBest(BC_state(s, whoseMove), other(whoseMove), initTime, timeLimit, plyLeft-1)
+    newVal = decideBest(BC_state(s[1], whoseMove), s[0], other(whoseMove), initTime, timeLimit, plyLeft-1)
     if (whoseMove == WHITE and newVal[0] > provisional[0]) \
        or (whoseMove == BLACK and newVal[0] < provisional[0]):
       provisional = newVal
@@ -354,8 +355,8 @@ CODE_TO_VALUE = {0:0,2:-10,3:10,4:-60,5:60,6:-80,7:80,8:-70,9:70,
 # 1000(B_IsCheckMate) + 100(W_HaveKing) + 80(W_NumLeapers) + 70(W_NumImmitators) +\
 # 60(W_HaveCoordinator) + 50(W_HaveImmobilizer) + 40(W_HaveWithdrawer) +\
 # 10(W_NumPincers) - [1000(W_IsCheckMate) + 100(B_HaveKing) + 80(B_NumLeapers) +\
-# 70(B_NumImmitators) + 60(B_HaveCoordinator) + 50(B_HaveImmobilizer) +\
-# 40(B_HaveWithdrawer) + 10(B_NumPincers)]
+# 70(B_NumImmitators) + 60(B_HaveCoordinator) + CoordEval + 50(B_HaveImmobilizer) +\
+# 40(B_HaveWithdrawer) + 10(B_NumPincers) + pincerEval]
 def staticEval(state):
   value = 0
   board = state.board
