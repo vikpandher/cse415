@@ -21,10 +21,11 @@ P P P P P P P P
 F L I W K I L C
 WHITE's move
 
-Time used in makeMove: 0.3906 seconds out of  0.5
+Time used in makeMove: 0.3750 seconds out of  0.5
 Within the time limit -- nice!
 Turn 1: Move is by WHITE as White Pincer from h2 to h6
-Chetter Hummin says: What else do you have to offer?
+Chetter Hummin says: How does this help me?  If you can not help me I must dispo
+se of you.
 c l i w k i l f
 p p p p p p p p
 - - - - - - - P
@@ -35,370 +36,288 @@ P P P P P P P -
 F L I W K I L C
 BLACK's move
 
-Time used in makeMove: 0.4375 seconds out of  0.5
+Time used in makeMove: 0.4606 seconds out of  0.5
 Within the time limit -- nice!
-Turn 2: Move is by BLACK as (1,0) to (5,0), reaching a depth of 1 ply
+Turn 2: Move is by BLACK as (1,0) to (3,0), reaching a depth of 1 ply
 B_Kasparov says: Your move, WHITE.
 c l i w k i l f
 - p p p p p p p
 - - - - - - - P
-- - - - - - - -
-- - - - - - - -
 p - - - - - - -
+- - - - - - - -
+- - - - - - - -
 P P P P P P P -
 F L I W K I L C
 WHITE's move
 
-Time used in makeMove: 0.3906 seconds out of  0.5
+Time used in makeMove: 0.3779 seconds out of  0.5
 Within the time limit -- nice!
-Turn 3: Move is by WHITE as White Coordinator from h1 to h4
-Chetter Hummin says: I desire another sacrafice.
+Turn 3: Move is by WHITE as White Coordinator from h1 to h5
+Chetter Hummin says: What else do you have to offer?
 c l i w k i l f
 - p p p p p p p
 - - - - - - - P
+p - - - - - - C
 - - - - - - - -
-- - - - - - - C
-p - - - - - - -
+- - - - - - - -
 P P P P P P P -
 F L I W K I L -
 BLACK's move
 
-Time used in makeMove: 0.4688 seconds out of  0.5
+Time used in makeMove: 0.4531 seconds out of  0.5
 Within the time limit -- nice!
-Turn 4: Move is by BLACK as (1,5) to (5,5), reaching a depth of 1 ply
+Turn 4: Move is by BLACK as (3,0) to (3,3), reaching a depth of 1 ply
 B_Kasparov says: Your move, WHITE.
 c l i w k i l f
-- p p p p - p p
+- p p p p p p p
 - - - - - - - P
+- - - p - - - C
 - - - - - - - -
-- - - - - - - C
-p - - - - p - -
+- - - - - - - -
 P P P P P P P -
 F L I W K I L -
 WHITE's move
 
-Time used in makeMove: 0.3906 seconds out of  0.5
+Time used in makeMove: 0.3900 seconds out of  0.5
 Within the time limit -- nice!
 Turn 5: Move is by WHITE as White Leaper from g1 to h2
-Chetter Hummin says: I am looking for more options.
+Chetter Hummin says: What else do you have to offer?
 c l i w k i l f
-- p p p p - p p
+- p p p p p p p
 - - - - - - - P
+- - - p - - - C
 - - - - - - - -
-- - - - - - - C
-p - - - - p - -
+- - - - - - - -
 P P P P P P P L
-F L I W K I - -
-BLACK's move
-
-Time used in makeMove: 0.4375 seconds out of  0.5
-Within the time limit -- nice!
-Turn 6: Move is by BLACK as (1,4) to (4,4), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-c l i w k i l f
-- p p p - - p p
-- - - - - - - P
-- - - - - - - -
-- - - - p - - C
-p - - - - p - -
-P P P P P P P L
-F L I W K I - -
-WHITE's move
-
-Time used in makeMove: 0.3848 seconds out of  0.5
-Within the time limit -- nice!
-Turn 7: Move is by WHITE as White Coordinator from h4 to g4
-Chetter Hummin says: Have you forgotten how powerful I am?
-c l i w k i l f
-- p p p - - p p
-- - - - - - - P
-- - - - - - - -
-- - - - - - C -
-p - - - - p - -
-P P P P P P P L
-F L I W K I - -
-BLACK's move
-
-Time used in makeMove: 0.4375 seconds out of  0.5
-Within the time limit -- nice!
-Turn 8: Move is by BLACK as (5,5) to (4,5), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-c l i w k i l f
-- p p p - - p p
-- - - - - - - P
-- - - - - - - -
-- - - - - p C -
-p - - - - - - -
-P P P P P P P L
-F L I W K I - -
-WHITE's move
-
-Time used in makeMove: 0.3864 seconds out of  0.5
-Within the time limit -- nice!
-Turn 9: Move is by WHITE as White Pincer from e2 to e4
-Chetter Hummin says: I am looking for more options.
-c l i w k i l f
-- p p p - - p p
-- - - - - - - P
-- - - - - - - -
-- - - - P - C -
-p - - - - - - -
-P P P P - P P L
 F L I W K I - -
 BLACK's move
 
 Time used in makeMove: 0.4688 seconds out of  0.5
 Within the time limit -- nice!
-Turn 10: Move is by BLACK as (0,0) to (4,0), reaching a depth of 1 ply
+Turn 6: Move is by BLACK as (1,2) to (4,2), reaching a depth of 1 ply
+B_Kasparov says: Your move, WHITE.
+c l i w k i l f
+- p - p p p p p
+- - - - - - - P
+- - - p - - - C
+- - p - - - - -
+- - - - - - - -
+P P P P P P P L
+F L I W K I - -
+WHITE's move
+
+Time used in makeMove: 0.3750 seconds out of  0.5
+Within the time limit -- nice!
+Turn 7: Move is by WHITE as White Imitator from f1 to h1
+Chetter Hummin says: What else do you have to offer?
+c l i w k i l f
+- p - p p p p p
+- - - - - - - P
+- - - p - - - C
+- - p - - - - -
+- - - - - - - -
+P P P P P P P L
+F L I W K - - I
+BLACK's move
+
+Time used in makeMove: 0.4688 seconds out of  0.5
+Within the time limit -- nice!
+Turn 8: Move is by BLACK as (1,3) to (1,2), reaching a depth of 1 ply
+B_Kasparov says: Your move, WHITE.
+c l i w k i l f
+- p p - p p p p
+- - - - - - - P
+- - - p - - - C
+- - p - - - - -
+- - - - - - - -
+P P P P P P P L
+F L I W K - - I
+WHITE's move
+
+Time used in makeMove: 0.3750 seconds out of  0.5
+Within the time limit -- nice!
+Turn 9: Move is by WHITE as White Imitator from h1 to g1
+Chetter Hummin says: How does this help me?  If you can not help me I must dispo
+se of you.
+c l i w k i l f
+- p p - p p p p
+- - - - - - - P
+- - - p - - - C
+- - p - - - - -
+- - - - - - - -
+P P P P P P P L
+F L I W K - I -
+BLACK's move
+
+Time used in makeMove: 0.4544 seconds out of  0.5
+Within the time limit -- nice!
+Turn 10: Move is by BLACK as (1,6) to (5,6), reaching a depth of 1 ply
+B_Kasparov says: Your move, WHITE.
+c l i w k i l f
+- p p - p p - p
+- - - - - - - P
+- - - p - - - C
+- - p - - - - -
+- - - - - - p -
+P P P P P P P L
+F L I W K - I -
+WHITE's move
+
+Time used in makeMove: 0.3906 seconds out of  0.5
+Within the time limit -- nice!
+Turn 11: Move is by WHITE as White Leaper from h2 to f4
+Chetter Hummin says: How does this help me?  If you can not help me I must dispo
+se of you.
+c l i w k i l f
+- p p - p p - p
+- - - - - - - P
+- - - p - - - C
+- - p - - L - -
+- - - - - - - -
+P P P P P P P -
+F L I W K - I -
+BLACK's move
+
+Time used in makeMove: 0.4433 seconds out of  0.5
+Within the time limit -- nice!
+Turn 12: Move is by BLACK as (0,1) to (1,0), reaching a depth of 1 ply
+B_Kasparov says: Your move, WHITE.
+c - i w k i l f
+l p p - p p - p
+- - - - - - - P
+- - - p - - - C
+- - p - - L - -
+- - - - - - - -
+P P P P P P P -
+F L I W K - I -
+WHITE's move
+
+Time used in makeMove: 0.3906 seconds out of  0.5
+Within the time limit -- nice!
+Turn 13: Move is by WHITE as White Leaper from f4 to b8
+Chetter Hummin says: How does this help me?  If you can not help me I must dispo
+se of you.
+c L i w k i l f
+l p - - p p - p
+- - - - - - - P
+- - - p - - - C
+- - p - - - - -
+- - - - - - - -
+P P P P P P P -
+F L I W K - I -
+BLACK's move
+
+Time used in makeMove: 0.4375 seconds out of  0.5
+Within the time limit -- nice!
+Turn 14: Move is by BLACK as (3,3) to (3,1), reaching a depth of 1 ply
+B_Kasparov says: Your move, WHITE.
+c L i w k i l f
+l p - - p p - p
+- - - - - - - P
+- p - - - - - C
+- - p - - - - -
+- - - - - - - -
+P P P P P P P -
+F L I W K - I -
+WHITE's move
+
+Time used in makeMove: 0.3906 seconds out of  0.5
+Within the time limit -- nice!
+Turn 15: Move is by WHITE as White Leaper from b8 to b6
+Chetter Hummin says: I desire another sacrafice.
+c - i w k i l f
+l - - - p p - p
+- L - - - - - P
+- p - - - - - C
+- - p - - - - -
+- - - - - - - -
+P P P P P P P -
+F L I W K - I -
+BLACK's move
+
+Time used in makeMove: 0.4375 seconds out of  0.5
+Within the time limit -- nice!
+Turn 16: Move is by BLACK as (1,4) to (1,1), reaching a depth of 1 ply
 B_Kasparov says: Take that, WHITE!
-- l i w k i l f
-- p p p - - p p
+c - i w k i l f
+l p - - - p - p
 - - - - - - - P
+- p - - - - - C
+- - p - - - - -
 - - - - - - - -
-c - - - - - C -
-p - - - - - - -
-P P P P - P P L
-F L I W K I - -
+P P P P P P P -
+F L I W K - I -
 WHITE's move
 
-Time used in makeMove: 0.3906 seconds out of  0.5
+Time used in makeMove: 0.3797 seconds out of  0.5
 Within the time limit -- nice!
-Turn 11: Move is by WHITE as White Imitator from f1 to d3
-Chetter Hummin says: I am looking for more options.
-- l i w k i l f
-- p p p - - p p
+Turn 17: Move is by WHITE as White Imitator from g1 to h2
+Chetter Hummin says: I desire another sacrafice.
+c - i w k i l f
+l p - - - p - p
 - - - - - - - P
+- p - - - - - C
+- - p - - - - -
 - - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
+P P P P P P P I
 F L I W K - - -
 BLACK's move
 
-Time used in makeMove: 0.4688 seconds out of  0.5
+Time used in makeMove: 0.4375 seconds out of  0.5
 Within the time limit -- nice!
-Turn 12: Move is by BLACK as (0,4) to (1,5), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-- l i w - i l f
-- p p p - k p p
+Turn 18: Move is by BLACK as (0,6) to (7,6), reaching a depth of 1 ply
+B_Kasparov says: Take that, WHITE!
+c - i w k i - f
+l p - - - p - p
 - - - - - - - P
+- p - - - - - C
+- - p - - - - -
 - - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I W K - - -
+P P P P P P - I
+F L I W K - l -
 WHITE's move
 
-Time used in makeMove: 0.3750 seconds out of  0.5
+Time used in makeMove: 0.3828 seconds out of  0.5
 Within the time limit -- nice!
-Turn 13: Move is by WHITE as White King from e1 to f1
+Turn 19: Move is by WHITE as White Coordinator from h5 to g6
 Chetter Hummin says: How does this help me?  If you can not help me I must dispo
 se of you.
-- l i w - i l f
-- p p p - k p p
-- - - - - - - P
+c - i w k i - f
+l p - - - p - p
+- - - - - - C P
+- p - - - - - -
+- - p - - - - -
 - - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I W - K - -
-BLACK's move
-
-Time used in makeMove: 0.4531 seconds out of  0.5
-Within the time limit -- nice!
-Turn 14: Move is by BLACK as (1,2) to (2,2), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-- l i w - i l f
-- p - p - k p p
-- - p - - - - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I W - K - -
-WHITE's move
-
-Time used in makeMove: 0.3750 seconds out of  0.5
-Within the time limit -- nice!
-Turn 15: Move is by WHITE as White King from f1 to e1
-Chetter Hummin says: What else do you have to offer?
-- l i w - i l f
-- p - p - k p p
-- - p - - - - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
+P P P P P P - I
 F L I W K - - -
 BLACK's move
 
 Time used in makeMove: 0.4531 seconds out of  0.5
 Within the time limit -- nice!
-Turn 16: Move is by BLACK as (2,2) to (2,5), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-- l i w - i l f
-- p - p - k p p
-- - - - - p - P
+Turn 20: Move is by BLACK as (1,0) to (7,6), reaching a depth of 1 ply
+B_Kasparov says: Take that, WHITE!
+c - i w k i - f
+- p - - - p - p
+- - - - - - C P
+- p - - - - - -
+- - p - - - - -
 - - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
+P P P P P - - I
+F L I W K - l -
+WHITE's move
+
+Time used in makeMove: 0.3917 seconds out of  0.5
+Within the time limit -- nice!
+Turn 21: Move is by WHITE as White Coordinator from g6 to g8
+Chetter Hummin says: What else do you have to offer?
+c - i w - i C f
+- p - - - p - p
+- - - - - - - P
+- p - - - - - -
+- - p - - - - -
+- - - - - - - -
+P P P P P - - I
 F L I W K - - -
-WHITE's move
-
-Time used in makeMove: 0.3750 seconds out of  0.5
-Within the time limit -- nice!
-Turn 17: Move is by WHITE as White King from e1 to f1
-Chetter Hummin says: Have you forgotten how powerful I am?
-- l i w - i l f
-- p - p - k p p
-- - - - - p - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I W - K - -
-BLACK's move
-
-Time used in makeMove: 0.4532 seconds out of  0.5
-Within the time limit -- nice!
-Turn 18: Move is by BLACK as (2,5) to (2,0), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-- l i w - i l f
-- p - p - k p p
-p - - - - - - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I W - K - -
-WHITE's move
-
-Time used in makeMove: 0.3906 seconds out of  0.5
-Within the time limit -- nice!
-Turn 19: Move is by WHITE as White Withdrawer from d1 to e1
-Chetter Hummin says: How does this help me?  If you can not help me I must dispo
-se of you.
-- l i w - i l f
-- p - p - k p p
-p - - - - - - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I - W K - -
-BLACK's move
-
-Time used in makeMove: 0.4375 seconds out of  0.5
-Within the time limit -- nice!
-Turn 20: Move is by BLACK as (2,0) to (2,4), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-- l i w - i l f
-- p - p - k p p
-- - - - p - - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I - W K - -
-WHITE's move
-
-Time used in makeMove: 0.3906 seconds out of  0.5
-Within the time limit -- nice!
-Turn 21: Move is by WHITE as White King from f1 to g1
-Chetter Hummin says: What else do you have to offer?
-- l i w - i l f
-- p - p - k p p
-- - - - p - - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I - W - K -
-BLACK's move
-
-Time used in makeMove: 0.4375 seconds out of  0.5
-Within the time limit -- nice!
-Turn 22: Move is by BLACK as (1,3) to (1,4), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-- l i w - i l f
-- p - - p k p p
-- - - - p - - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I - W - K -
-WHITE's move
-
-Time used in makeMove: 0.3907 seconds out of  0.5
-Within the time limit -- nice!
-Turn 23: Move is by WHITE as White King from g1 to f1
-Chetter Hummin says: I am looking for more options.
-- l i w - i l f
-- p - - p k p p
-- - - - p - - P
-- - - - - - - -
-c - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I - W K - -
-BLACK's move
-
-Time used in makeMove: 0.4375 seconds out of  0.5
-Within the time limit -- nice!
-Turn 24: Move is by BLACK as (4,0) to (3,0), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-- l i w - i l f
-- p - - p k p p
-- - - - p - - P
-c - - - - - - -
-- - - - - - C -
-p - - I - - - -
-P P P P - P P L
-F L I - W K - -
-WHITE's move
-
-Time used in makeMove: 0.3906 seconds out of  0.5
-Within the time limit -- nice!
-Turn 25: Move is by WHITE as White Withdrawer from e1 to e4
-Chetter Hummin says: I am looking for more options.
-- l i w - i l f
-- p - - p k p p
-- - - - p - - P
-c - - - - - - -
-- - - - W - C -
-p - - I - - - -
-P P P P - P P L
-F L I - - K - -
-BLACK's move
-
-Time used in makeMove: 0.4375 seconds out of  0.5
-Within the time limit -- nice!
-Turn 26: Move is by BLACK as (1,5) to (2,6), reaching a depth of 1 ply
-B_Kasparov says: Your move, WHITE.
-- l i w - i l f
-- p - - p - p p
-- - - - p - k P
-c - - - - - - -
-- - - - W - C -
-p - - I - - - -
-P P P P - P P L
-F L I - - K - -
-WHITE's move
-
-Time used in makeMove: 0.3906 seconds out of  0.5
-Within the time limit -- nice!
-Turn 27: Move is by WHITE as White Pincer from f2 to f6
-Chetter Hummin says: What else do you have to offer?
-- l i w - i l f
-- p - - p - p p
-- - - - p P - P
-c - - - - - - -
-- - - - W - C -
-p - - I - - - -
-P P P P - - P L
-F L I - - K - -
 BLACK's move
 
 Win for WHITE
