@@ -1,0 +1,18 @@
+files:
+
+# This file will run the game.
+BombermanGameMaster.py:
+	# This function runs the game.
+	runGame()
+	
+	# This function checks if the game is over.
+	# It returns either which player won or if there was a draw
+	endCheck()
+
+# This file contains the Q-Learning magic.
+BombermanPlayer.py:
+
+# This file contains the state info., constants, and analysis functions.
+BombermanSource.py:
+	# This converts the state from string to a 2D array
+	parse()
