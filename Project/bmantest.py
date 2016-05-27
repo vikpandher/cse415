@@ -71,9 +71,11 @@ def makeMove(state):
   print("Possible moves:")
   print(str(possible_moves))
 
+  # this will be replaced with heuristic function
   move = random.choice(possible_moves)
   print("chosen move: " + str(move))
 
+  # updates the state with the given move
   new_state = transformState(state, location, move)
   print("New state after making move:")
   print(new_state)
@@ -84,8 +86,10 @@ def transformState(old_state, old_location, move):
   new_location = move[0]
   oldx,oldy = old_location
   newx,newy = new_location
+  # checks for deaths first so !! don't get in the way of movements
   new_board = transformDeaths(new_board)
   new_board[newx][newy] = new_board[oldx][oldy]
+  # drops a bomb before moving
   if move[1] == DROP_BOMB:
     player_bomb = PLAYER1_BOMBS[0] 
     if old_state.whose_move == PLAYER2:
@@ -95,9 +99,13 @@ def transformState(old_state, old_location, move):
     new_board[oldx][oldy] = new_board[oldx][oldy]
   else :
     new_board[oldx][oldy] = EMPTY
+  # updates bombs (should probably do this before anything else.....
+  # will probably have to move this up by transformDeaths
+  # need to test more
   new_state = transformBombs(Bman_state(new_board, old_state.whose_move))
   return new_state
 
+# turns !! to --
 def transformDeaths(board):
   new_board = [r[:] for r in board]
   for r in range(BOARD_SIZE):
@@ -106,6 +114,7 @@ def transformDeaths(board):
         new_board[r][c] = EMPTY
   return new_board
 
+# ticks the bombs one more or explodes them
 def transformBombs(state):
   new_board = [r[:] for r in state.board]
   players = PLAYER1_BOMBS
@@ -121,6 +130,8 @@ def transformBombs(state):
           new_board[r][c] = new_bomb
   return Bman_state(new_board, state.whose_move)
 
+# turns a done bomb into an explosion killing anything in same row
+# or coll that is empty, enemy, or barrier. not wall or self
 def transformExplode(state, x, y):
   new_board = [r[:] for r in state.board]
   clear = True
@@ -186,6 +197,8 @@ def canMove(state, player_location):
     actions.append((x-1, y))
   return actions
 
+# right now can bomb at any time unless you are not moving then can not
+# drop a bomb in your own spot
 def canBomb(actions, player_location):
   moves = []
   for action in actions:
@@ -195,6 +208,7 @@ def canBomb(actions, player_location):
     else: moves.append([action, DONT_DROP_BOMB])
   return moves
 
+# gets location of current player for easier use
 def getPlayerLocation(state):
   for r in range(BOARD_SIZE):
     for c in range(BOARD_SIZE):
@@ -202,6 +216,8 @@ def getPlayerLocation(state):
         return (r,c)
   return (0,0)
 
+# checks if the current player has won by checking if all other
+# players are dead
 def checkWin(state, player):
   curr_board = state.board
   player_check = PLAYER2
@@ -214,7 +230,7 @@ def checkWin(state, player):
   print("Player" + str(player) + " won!")
   return True
 
-
+# used for testing
 def play():
   print("Initial board:")
   print(INITIAL)
