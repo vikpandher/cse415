@@ -102,35 +102,19 @@ def look_for_successors(state):
   # Find the location of all the bombs and snuff out old explosions
   for row in range(BOARD_SIZE): # look through rows
     for col in range(BOARD_SIZE): # look through columns
-      current_piece = state.board[row][col]
+      current_piece = state.board[row][col]      
       
       # Old Explosion die out
       if (current_piece == 30):
         state.board[row][col] = 0
-      '''
-      # Player
-      elif (current_piece == PLAYER_CODE_OFFSET + state.player * 10):
-        player_location = (row, col)
-      
-      # Player's Bomb
-      elif (current_piece > PLAYER_CODE_OFFSET + state.player * 10 and current_piece < PLAYER_CODE_OFFSET + 10 + state.player * 10):
-        bomb_locations.append((row, col))
-      '''
-      
-      # Find all bombs
-      if (current_piece > PLAYER_CODE_OFFSET and current_piece < (PLAYER_CODE_OFFSET + PLAYER_COUNT * 10) and (current_piece % 10) != 0):
-        bomb_locations.append((row, col))
-  '''
-  if (bomb_locations != []):
-    post_bomb_state = analyze_bombs(state, bomb_locations)
-  else:
-    post_bomb_state = state
-  if (player_location != None):
-    successors.extend(analyze_player(post_bomb_state, player_location))
-  else:
-    end_state = Bman_state(post_bomb_state.board, post_bomb_state.turn_count + 1, (post_bomb_state.player + 1) % PLAYER_COUNT, post_bomb_state.bomb_count)
-    print(end_state)
-  '''
+
+      # Find all bombs belonging to the current player
+      if (current_piece > PLAYER_CODE_OFFSET + 10 * state.player and current_piece < PLAYER_CODE_OFFSET + 10 * state.player + 10):
+        bomb_owner = (state.board[row][col] - PLAYER_CODE_OFFSET) // 10
+        bomb_locations.append((bomb_owner, row, col))
+
+  print(bomb_locations) #####################
+  
   if (bomb_locations != []):
     post_bomb_state = analyze_bombs(state, bomb_locations)
   else:
@@ -174,44 +158,48 @@ def analyze_piece(piece, player):
   You ain't got no life
   Cups with the ice and we do this every night'''
 
-# right now bombs don't chain together and the bomb indentory doesn't update correctly
 def analyze_bombs(state, bomb_locations):
   post_bomb_board = copy_board(state.board)
   new_bomb_count = state.bomb_count[:]
   
-  print(len(bomb_locations))
-  
-  # update all given bombs doesn't update player bomb count correctly
-  for spot in bomb_locations:
-    row, col = spot
+  # update bombs until none left to update
+  while (bomb_locations != []):
+    bomb_owner, row, col = bomb_locations.pop()
     
-    print((post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10)
-        
-    # bomb at spot was blown up
-    if(post_bomb_board[row][col] == 30):
-      #minus player offset
-      new_bomb_count[(post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10] += 1
-      bomb_timer = -1
-    else:
-      bomb_timer = int(CODE_TO_STRING[post_bomb_board[row][col]][-1])
-    # bomb ticks down
-    if(bomb_timer > 1 and (post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10 == state.player):
+    bomb_timer = post_bomb_board[row][col] % 10
+    
+    # bomb ticks down, only increment bombs that belong to the current player
+    if (bomb_timer > 1 and bomb_owner == state.player):
       post_bomb_board[row][col] -= 1
-    # bomb explodes
-    elif(bomb_timer == 1 and (post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10 == state.player):
-      new_bomb_count[(post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10] += 1
+    # bomb is set to blow
+    elif (bomb_timer == 1):
+      # recheck the owner since, oponent's bombs may have been added (bombs chain)
+      this_owner = (post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10
+      
+      new_bomb_count[this_owner] += 1
       post_bomb_board[row][col] = 30
       
       # explode towards the highest column
       k = 1
       while (col + k < BOARD_SIZE):
-        if(k > BOMB_BLAST_RADIUS): # out of blast range
+        # out of blast range
+        if(k > BOMB_BLAST_RADIUS):
           break
-        if (post_bomb_board[row][col + k] == 10): # hit a solid wall
+        # blank space or explosion space
+        elif (post_bomb_board[row][col + k] == 0 or post_bomb_board[row][col + k] == 30):
+          post_bomb_board[row][col + k] = 30 # explosion
+        # hit a solid wall
+        elif (post_bomb_board[row][col + k] == 10):
           break
-        elif (post_bomb_board[row][col + k] == 0): # blank space
-          post_bomb_board[row][col + k] = 30 # add an explosion
-        else: # hit something else
+        # hit a bomb
+        elif (post_bomb_board[row][col + k] > PLAYER_CODE_OFFSET and\
+              post_bomb_board[row][col + k] < PLAYER_CODE_OFFSET + PLAYER_COUNT * 10 and\
+              post_bomb_board[row][col + k] % 10 != 0):
+          bomb_owner = (post_bomb_board[row][col + k] - PLAYER_CODE_OFFSET) // 10
+          post_bomb_board[row][col + k] = post_bomb_board[row][col + k] // 10 * 10 + 1
+          bomb_locations.append((bomb_owner, row, col + k))
+        # hit something else
+        else:
           post_bomb_board[row][col + k] = 30 # add an explosion
           break
         k += 1
@@ -219,27 +207,49 @@ def analyze_bombs(state, bomb_locations):
       # explode towards the 0th column
       k = 1
       while (col - k > -1):
-        if(k > BOMB_BLAST_RADIUS): # out of blast range
+        # out of blast range
+        if(k > BOMB_BLAST_RADIUS):
           break
-        if (post_bomb_board[row][col - k] == 10): # hit a solid wall
+        # blank space or explosion space
+        elif (post_bomb_board[row][col - k] == 0 or post_bomb_board[row][col - k] == 30):
+          post_bomb_board[row][col - k] = 30 # explosion
+        # hit a solid wall
+        elif (post_bomb_board[row][col - k] == 10):
           break
-        elif (post_bomb_board[row][col - k] == 0): # blank space
-          post_bomb_board[row][col - k] = 30 # add an explosion
-        else: # hit something else
+        # hit a bomb
+        elif (post_bomb_board[row][col - k] > PLAYER_CODE_OFFSET and\
+              post_bomb_board[row][col - k] < PLAYER_CODE_OFFSET + PLAYER_COUNT * 10 and\
+              post_bomb_board[row][col - k] % 10 != 0):
+          bomb_owner = (post_bomb_board[row][col - k] - PLAYER_CODE_OFFSET) // 10
+          post_bomb_board[row][col - k] = post_bomb_board[row][col - k] // 10 * 10 + 1
+          bomb_locations.append((bomb_owner, row, col - k))
+        # hit something else
+        else:
           post_bomb_board[row][col - k] = 30 # add an explosion
           break
         k += 1
-        
+      
       # explode towards the highest row
       k = 1
       while (row + k < BOARD_SIZE):
-        if(k > BOMB_BLAST_RADIUS): # out of blast range
+        # out of blast range
+        if(k > BOMB_BLAST_RADIUS):
           break
-        if (post_bomb_board[row + k][col] == 10): # hit a solid wall
+        # blank space or explosion space
+        elif (post_bomb_board[row + k][col] == 0 or post_bomb_board[row + k][col] == 30):
+          post_bomb_board[row + k][col] = 30 # explosion
+        # hit a solid wall
+        elif (post_bomb_board[row + k][col] == 10):
           break
-        elif (post_bomb_board[row + k][col] == 0): # blank space
-          post_bomb_board[row + k][col] = 30 # add an explosion
-        else: # hit something else
+        # hit a bomb
+        elif (post_bomb_board[row + k][col] > PLAYER_CODE_OFFSET and\
+              post_bomb_board[row + k][col] < PLAYER_CODE_OFFSET + PLAYER_COUNT * 10 and\
+              post_bomb_board[row + k][col] % 10 != 0):
+          bomb_owner = (post_bomb_board[row + k][col] - PLAYER_CODE_OFFSET) // 10
+          post_bomb_board[row + k][col] = post_bomb_board[row + k][col] // 10 * 10 + 1
+          bomb_locations.append((bomb_owner, row + k, col))
+        # hit something else
+        else:
           post_bomb_board[row + k][col] = 30 # add an explosion
           break
         k += 1
@@ -247,27 +257,40 @@ def analyze_bombs(state, bomb_locations):
       # explode towards the 0th row
       k = 1
       while (row - k > -1):
-        if(k > BOMB_BLAST_RADIUS): # out of blast range
+        # out of blast range
+        if(k > BOMB_BLAST_RADIUS):
           break
-        if (post_bomb_board[row - k][col] == 10): # hit a solid wall
+        # blank space or explosion space
+        elif (post_bomb_board[row - k][col] == 0 or post_bomb_board[row - k][col] == 30):
+          post_bomb_board[row - k][col] = 30 # explosion
+        # hit a solid wall
+        elif (post_bomb_board[row - k][col] == 10):
           break
-        elif (post_bomb_board[row - k][col] == 0): # blank space
-          post_bomb_board[row - k][col] = 30 # add an explosion
-        else: # hit something else
+        # hit a bomb
+        elif (post_bomb_board[row - k][col] > PLAYER_CODE_OFFSET and\
+              post_bomb_board[row - k][col] < PLAYER_CODE_OFFSET + PLAYER_COUNT * 10 and\
+              post_bomb_board[row - k][col] % 10 != 0):
+          bomb_owner = (post_bomb_board[row - k][col] - PLAYER_CODE_OFFSET) // 10
+          post_bomb_board[row - k][col] = post_bomb_board[row - k][col] // 10 * 10 + 1
+          bomb_locations.append((bomb_owner, row - k, col))
+        # hit something else
+        else:
           post_bomb_board[row - k][col] = 30 # add an explosion
           break
         k += 1
+    
   new_state = Bman_state(post_bomb_board, state.turn_count, state.player, new_bomb_count)
   return new_state
 
-def analyze_bombs(state, bomb_locations):
-  post_bomb_board = copy_board(state.board)
-  new_bomb_count = state.bomb_count[:]
-  
 def analyze_player(state, player_location):
   new_states = []
   piece = PLAYER_CODE_OFFSET + state.player * 10
   row, col = player_location
+  
+  # adding the option no move move
+  new_board = copy_board(state.board)
+  new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count)
+  new_states.append(new_state)
   
   # checking horizontal movement toward the highest column
   # NOTE: Allowed to walk into empty space or an explosion, but piece dies if explosion
@@ -357,7 +380,6 @@ def analyze_player(state, player_location):
   return new_states
 
 
-
-init_state = Bman_state(parse(test.BOMB_TEST_3), 0, PLAYER_A)
+init_state = Bman_state(parse(test.BOMB_TEST_4), 0, PLAYER_A)
 print(init_state)
 print(states_to_string(look_for_successors(init_state)))
