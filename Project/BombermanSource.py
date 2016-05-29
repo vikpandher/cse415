@@ -11,7 +11,7 @@ PLAYER_CODE_OFFSET = 40
 BOARD_SIZE = 11 # sizes are width and height
 BOMB_BLAST_RADIUS = 3 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 3
-DEFAULT_BOMB_COUNT = 1 # players can only drop one bomb at a time
+DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
 
 # renamed these just because
 '''
@@ -89,6 +89,7 @@ class Bman_state:
     #  output += "C"
     #if self.player == PLAYER_D:
     #  output += "D"
+    #output += "'s move, " + str(self.bomb_count[self.player]) + " bombs\n"
     output += "'s move, " + str(self.bomb_count) + " bombs\n"
     return output
 
@@ -98,15 +99,15 @@ def look_for_successors(state):
   bomb_locations = []
   player_location = None
   
-  # Find the location of all the current player's pieces
+  # Find the location of all the bombs and snuff out old explosions
   for row in range(BOARD_SIZE): # look through rows
     for col in range(BOARD_SIZE): # look through columns
       current_piece = state.board[row][col]
       
-      # Old Explosion
+      # Old Explosion die out
       if (current_piece == 30):
         state.board[row][col] = 0
-      
+      '''
       # Player
       elif (current_piece == PLAYER_CODE_OFFSET + state.player * 10):
         player_location = (row, col)
@@ -114,8 +115,12 @@ def look_for_successors(state):
       # Player's Bomb
       elif (current_piece > PLAYER_CODE_OFFSET + state.player * 10 and current_piece < PLAYER_CODE_OFFSET + 10 + state.player * 10):
         bomb_locations.append((row, col))
+      '''
       
-        
+      # Find all bombs
+      if (current_piece > PLAYER_CODE_OFFSET and current_piece < (PLAYER_CODE_OFFSET + PLAYER_COUNT * 10) and (current_piece % 10) != 0):
+        bomb_locations.append((row, col))
+  '''
   if (bomb_locations != []):
     post_bomb_state = analyze_bombs(state, bomb_locations)
   else:
@@ -125,6 +130,26 @@ def look_for_successors(state):
   else:
     end_state = Bman_state(post_bomb_state.board, post_bomb_state.turn_count + 1, (post_bomb_state.player + 1) % PLAYER_COUNT, post_bomb_state.bomb_count)
     print(end_state)
+  '''
+  if (bomb_locations != []):
+    post_bomb_state = analyze_bombs(state, bomb_locations)
+  else:
+    post_bomb_state = state
+  
+  for row in range(BOARD_SIZE): # look through rows
+    for col in range(BOARD_SIZE): # look through columns
+      current_piece = post_bomb_state.board[row][col]
+      
+      # Player
+      if (current_piece == PLAYER_CODE_OFFSET + state.player * 10):
+        player_location = (row, col)
+        
+  if (player_location != None):
+    successors.extend(analyze_player(post_bomb_state, player_location))
+  else:
+    end_state = Bman_state(post_bomb_state.board, post_bomb_state.turn_count + 1, (post_bomb_state.player + 1) % PLAYER_COUNT, post_bomb_state.bomb_count)
+    successors.append(end_state)
+    
   return successors
   
 def states_to_string(states):
@@ -148,21 +173,33 @@ def analyze_piece(piece, player):
   Bad bitches is the only thing that I like
   You ain't got no life
   Cups with the ice and we do this every night'''
-  
+
+# right now bombs don't chain together and the bomb indentory doesn't update correctly
 def analyze_bombs(state, bomb_locations):
   post_bomb_board = copy_board(state.board)
-  explo_val = 0 # used to return bomb to player if it exploded
+  new_bomb_count = state.bomb_count[:]
   
-  # update all given bombs  
+  print(len(bomb_locations))
+  
+  # update all given bombs doesn't update player bomb count correctly
   for spot in bomb_locations:
     row, col = spot
-    bomb_timer = int(CODE_TO_STRING[post_bomb_board[row][col]][-1])
-    # bombs tick down
-    if(bomb_timer > 1):
+    
+    print((post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10)
+        
+    # bomb at spot was blown up
+    if(post_bomb_board[row][col] == 30):
+      #minus player offset
+      new_bomb_count[(post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10] += 1
+      bomb_timer = -1
+    else:
+      bomb_timer = int(CODE_TO_STRING[post_bomb_board[row][col]][-1])
+    # bomb ticks down
+    if(bomb_timer > 1 and (post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10 == state.player):
       post_bomb_board[row][col] -= 1
-    # bombs explode
-    elif(bomb_timer == 1):
-      explo_val += 1
+    # bomb explodes
+    elif(bomb_timer == 1 and (post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10 == state.player):
+      new_bomb_count[(post_bomb_board[row][col] - PLAYER_CODE_OFFSET) // 10] += 1
       post_bomb_board[row][col] = 30
       
       # explode towards the highest column
@@ -220,9 +257,12 @@ def analyze_bombs(state, bomb_locations):
           post_bomb_board[row - k][col] = 30 # add an explosion
           break
         k += 1
-      
-  new_state = Bman_state(post_bomb_board, state.turn_count, state.player, state.bomb_count + explo_val)
+  new_state = Bman_state(post_bomb_board, state.turn_count, state.player, new_bomb_count)
   return new_state
+
+def analyze_bombs(state, bomb_locations):
+  post_bomb_board = copy_board(state.board)
+  new_bomb_count = state.bomb_count[:]
   
 def analyze_player(state, player_location):
   new_states = []
@@ -241,12 +281,14 @@ def analyze_player(state, player_location):
     new_states.append(new_state)
     
     # add bomb drop state
-    if(state.bomb_count > 0):
+    if(state.bomb_count[state.player] > 0):
       new_board = copy_board(state.board)
       if (state.board[row][col + 1] == 0):
         new_board[row][col + 1] = piece
       new_board[row][col] = PLAYER_CODE_OFFSET + state.player * 10 + BOMB_COUNT_START
-      new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count - 1)
+      new_bomb_count = state.bomb_count[:]
+      new_bomb_count[state.player] -= 1
+      new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, new_bomb_count)
       new_states.append(new_state)
   
   # checking horizontal movement toward the 0th column
@@ -260,12 +302,14 @@ def analyze_player(state, player_location):
     new_states.append(new_state)
     
     # add bomb drop state
-    if(state.bomb_count > 0):
+    if(state.bomb_count[state.player] > 0):
       new_board = copy_board(state.board)
       if (state.board[row][col - 1] == 0):
         new_board[row][col - 1] = piece
       new_board[row][col] = PLAYER_CODE_OFFSET + state.player * 10 + BOMB_COUNT_START
-      new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count - 1)
+      new_bomb_count = state.bomb_count[:]
+      new_bomb_count[state.player] -= 1
+      new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, new_bomb_count)
       new_states.append(new_state)
   
   # checking vertical movement toward the highest row
@@ -279,12 +323,14 @@ def analyze_player(state, player_location):
     new_states.append(new_state)
     
     # add bomb drop state
-    if(state.bomb_count > 0):
+    if(state.bomb_count[state.player] > 0):
       new_board = copy_board(state.board)
       if (state.board[row + 1][col] == 0):
         new_board[row + 1][col] = piece
       new_board[row][col] = PLAYER_CODE_OFFSET + state.player * 10 + BOMB_COUNT_START
-      new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count - 1)
+      new_bomb_count = state.bomb_count[:]
+      new_bomb_count[state.player] -= 1
+      new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, new_bomb_count)
       new_states.append(new_state)
   
   # checking vertical movement toward the 0th row
@@ -298,18 +344,20 @@ def analyze_player(state, player_location):
     new_states.append(new_state)
     
     # add bomb drop state
-    if(state.bomb_count > 0):
+    if(state.bomb_count[state.player] > 0):
       new_board = copy_board(state.board)
       if (state.board[row - 1][col] == 0):
         new_board[row - 1][col] = piece
       new_board[row][col] = PLAYER_CODE_OFFSET + state.player * 10 + BOMB_COUNT_START
-      new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count - 1)
+      new_bomb_count = state.bomb_count[:]
+      new_bomb_count[state.player] -= 1
+      new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, new_bomb_count)
       new_states.append(new_state)
   
   return new_states
 
 
 
-init_state = Bman_state(parse(test.BOMB_TEST_1), 0, PLAYER_A)
+init_state = Bman_state(parse(test.BOMB_TEST_3), 0, PLAYER_A)
 print(init_state)
 print(states_to_string(look_for_successors(init_state)))
