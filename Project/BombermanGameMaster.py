@@ -1,79 +1,60 @@
-'''TimedGameMaster.py based on GameMaster.py which in turn is 
- based on code from RunKInARow.py
+'''BombermanGameMaster.py based on TimedGameMaster.py based on GameMaster.py 
+ which in turn is based on code from RunKInARow.py
 
-S. Tanimoto, May 3
-with enhancements by Tyler Williamson eliminating several bugs and
-adding better diagnostic printout when an agent makes an error.
+V. Pandher
 
 '''
-VERSION = '1.0-BETA'
+VERSION = '1.0-ALPHA'
 
-# Get names of players and time limit from the command line.
+import BombermanSource as bs
 
+# Get names of players and from the command line.
 import sys
-TIME_PER_MOVE = 0.5 # default time limit is ten seconds.
-if len(sys.argv) > 1:
-    import importlib    
-    player1 = importlib.import_module(sys.argv[1])
-    player2 = importlib.import_module(sys.argv[2])
-    if len(sys.argv) > 3:
-        TIME_PER_MOVE = float(sys.argv[3])
+
+#print(len(sys.argv))
+#print(sys.argv[0])
+
+if len(sys.argv) > 2:
+  import importlib
+  human_match = False
+  cpuA = importlib.import_module(sys.argv[1])
+  cpuB = importlib.import_module(sys.argv[2])
+elif len(sys.argv) > 1:
+  import importlib
+  human_match = True
+  cpuA = importlib.import_module(sys.argv[1])
+  cpuB = None
 else:
-    import Chetter_BC_Player as player1
-    import Baroque_Kasparov_BC_Player as player2
+  human_match = True
+  import Random_Player as playerA
+  cpuB = None
 
 
-# Specify details of a match here: 
 
-#import baroque_succ as bcs
-import new_succ as bcs
 
-VALIDATE_MOVES = False # If players are trusted not to cheat, this could be turned off to save time.
-USE_HTML = False
 
-from winTester import winTester
-
-CURRENT_PLAYER = bcs.WHITE
-
-PLAYER_MAP = (player1.nickname(), player2.nickname())
+CURRENT_PLAYER = bs.PLAYER_A
 
 FINISHED = False
 def runGame():
-    currentState = bcs.BC_state()
-    print('Baroque Chess Gamemaster v'+VERSION)
-    print('The Gamemaster says, "Players, introduce yourselves."')
-    print('     (Playing WHITE:) '+player1.introduce())
-    print('     (Playing BLACK:) '+player2.introduce())
-
-    try:
-        p1comment = player1.prepare(player2.nickname())
-    except:
-        report = 'Player 1 ('+player1.nickname()+' failed to prepare, and loses by default.'
-        print(report)
-        report = 'Congratulations to Player 2 ('+player2.nickname()+')!'
-        print(report)
-        return
-    try:
-        p2comment = player2.prepare(player1.nickname())
-    except:
-        report = 'Player 2 ('+player2.nickname()+' failed to prepare, and loses by default.'
-        print(report)
-        report = 'Congratulations to Player 1 ('+player1.nickname()+')!'
-        print(report)
-        return
+    currentState = bs.Bman_state()
+    print("Bomberman v" + VERSION + "\n")
     
-    print('The Gamemaster says, "Let\'s Play!"')
-    print('The initial state is...')
-
-    currentRemark = "The game is starting."
-
-    WHITEsTurn = True
-    name = None
+    print("!!!!!!!!!! BOMBER-MAN !!!!!!!!!!!")
+    print(currentState)
+    
+    whosTurn = 0
     global FINISHED
     FINISHED = False
-    turnCount = 1
-    print(currentState)
+    '''
     while not FINISHED:
+        result = whosTurn.makeMove(currentState)
+        
+        if(endCheck )
+    
+    
+    
+    
         who = currentState.whose_move
         if who==bcs.WHITE:
             side = 'WHITE'
@@ -118,7 +99,7 @@ def runGame():
         #if turnCount == 9: FINISHED=True
     print(currentState)
     print("Game over.")
-
+'''
 
 import sys
 import time

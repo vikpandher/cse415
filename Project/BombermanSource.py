@@ -3,8 +3,6 @@ import testBoards as test
 
 PLAYER_A = 0
 PLAYER_B = 1
-#PLAYER_C = 0
-#PLAYER_D = 1
 
 PLAYER_COUNT = 2
 PLAYER_CODE_OFFSET = 40
@@ -44,8 +42,6 @@ XX -- -- -- -- ## -- -- -- BB XX
 XX XX XX XX XX XX XX XX XX XX XX
 ''')
 
-
-
 def parse(board_string):
   '''Translate a board string into the list of lists representation.'''
   board_list = [[0 for c in range(BOARD_SIZE)] for r in range(BOARD_SIZE)]
@@ -67,7 +63,7 @@ def copy_board(old_board):
 
 class Bman_state:
   '''Object that tracks Bomberman's board state.'''
-  def __init__(self, old_board=INITIAL, turn_count=0, player=PLAYER_A, bomb_count=DEFAULT_BOMB_COUNT):
+  def __init__(self, old_board=parse(INITIAL), turn_count=0, player=PLAYER_A, bomb_count=DEFAULT_BOMB_COUNT):
     new_board = [r[:] for r in old_board]
     self.board = new_board
     self.player = player
@@ -85,12 +81,8 @@ class Bman_state:
       output += "A"
     if self.player == PLAYER_B:
       output += "B"
-    #if self.player == PLAYER_C:
-    #  output += "C"
-    #if self.player == PLAYER_D:
-    #  output += "D"
-    #output += "'s move, " + str(self.bomb_count[self.player]) + " bombs\n"
-    output += "'s move, " + str(self.bomb_count) + " bombs\n"
+    output += "'s move, " + str(self.bomb_count[self.player]) + " bomb(s)\n"
+    #output += "'s move, " + str(self.bomb_count) + " bomb(s)\n"
     return output
 
 def look_for_successors(state):
@@ -113,8 +105,6 @@ def look_for_successors(state):
         bomb_owner = (state.board[row][col] - PLAYER_CODE_OFFSET) // 10
         bomb_locations.append((bomb_owner, row, col))
 
-  print(bomb_locations) #####################
-  
   if (bomb_locations != []):
     post_bomb_state = analyze_bombs(state, bomb_locations)
   else:
@@ -159,6 +149,7 @@ def analyze_piece(piece, player):
   Cups with the ice and we do this every night'''
 
 def analyze_bombs(state, bomb_locations):
+  '''This takes a states and returns one with all the bombs updated.'''
   post_bomb_board = copy_board(state.board)
   new_bomb_count = state.bomb_count[:]
   
@@ -283,6 +274,8 @@ def analyze_bombs(state, bomb_locations):
   return new_state
 
 def analyze_player(state, player_location):
+  '''This takes a state and returns a list of states for each of the the
+     players potential moves.'''
   new_states = []
   piece = PLAYER_CODE_OFFSET + state.player * 10
   row, col = player_location
@@ -379,7 +372,28 @@ def analyze_player(state, player_location):
   
   return new_states
 
+def win_check(state):
+  PLAYER_A_DEAD = True
+  PLAYER_B_DEAD = True
+  for row in range(BOARD_SIZE): # look through rows
+    for col in range(BOARD_SIZE): # look through columns
+      current_piece = state.board[row][col]      
+      
+      # Player A found on the board
+      if (current_piece == PLAYER_A * 10 + PLAYER_CODE_OFFSET):
+        PLAYER_A_DEAD = False
+      
+      # Player B found on the board
+      if (current_piece == PLAYER_B * 10 + PLAYER_CODE_OFFSET):
+        PLAYER_B_DEAD = False
+  
+  if (PLAYER_A_DEAD and PLAYER_B_DEAD):
+    return -1
+  elif (PLAYER_B_DEAD):
+    return PLAYER_B
+  else:
+    return PLAYER_A
 
-init_state = Bman_state(parse(test.BOMB_TEST_4), 0, PLAYER_A)
-print(init_state)
-print(states_to_string(look_for_successors(init_state)))
+#init_state = Bman_state(parse(test.BOMB_TEST_4), 0, PLAYER_A)
+#print(init_state)
+#print(states_to_string(look_for_successors(init_state)))
