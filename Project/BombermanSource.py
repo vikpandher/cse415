@@ -29,22 +29,8 @@ CODE_TO_STRING = {0:'--', 10:'XX', 20:'##', 30:'!!', 40:'AA', 50:'BB',
                   41:'A1', 42:'A2', 43:'A3', 51:'B1', 52:'B2', 53:'B3'}
 MOVES = ['Stay', 'East', 'B.East', 'West', 'B.West', 'South', 'B.South', 'North', 'B.North']
 
-INITIAL = ('''
-XX XX XX XX XX XX XX XX XX XX XX
-XX AA -- -- -- ## -- -- -- -- XX
-XX -- XX -- XX -- XX -- XX -- XX
-XX -- -- ## -- ## -- ## -- -- XX
-XX -- XX -- XX -- XX -- XX -- XX
-XX ## -- ## -- ## -- ## -- ## XX
-XX -- XX -- XX -- XX -- XX -- XX
-XX -- -- ## -- ## -- ## -- -- XX
-XX -- XX -- XX -- XX -- XX -- XX
-XX -- -- -- -- ## -- -- -- BB XX
-XX XX XX XX XX XX XX XX XX XX XX
-''')
-
 INTRO_MESSAGE = ('''
-This is bomberman.
+This is bomberman. You are player
 This is how you play.
 These are your controls.
 When asked for input input:
@@ -79,9 +65,29 @@ def copy_board(old_board):
       new_board[row][col] = old_board[row][col]
   return new_board
 
+def create_initial_board():
+  '''Make the initial state.'''
+  board = [[0 for c in range(BOARD_SIZE)] for r in range(BOARD_SIZE)]
+  for row in range(BOARD_SIZE):
+    for col in range(BOARD_SIZE):
+      # ADD the boarder
+      if(row == 0 or row == BOARD_SIZE - 1 or col == 0 or col == BOARD_SIZE - 1):
+        board[row][col] = 10
+      # Add walls in center
+      elif(row % 2 == 0 and col % 2 == 0):
+        board[row][col] = 10
+      # All breakable walls
+      elif(col + row > 4 and col + row < (BOARD_SIZE - 1) * 2 - 4 and 
+      ((row % 2 == 1 and col % 2 == 0) or (row % 2 == 0 and col % 2 == 1))):
+        board[row][col] = 20
+  board[1][1] = PLAYER_A * 10 + PLAYER_CODE_OFFSET
+  board[BOARD_SIZE - 2][BOARD_SIZE - 2] = PLAYER_B * 10 + PLAYER_CODE_OFFSET
+  return board
+  
 class Bman_state:
   '''Object that tracks Bomberman's board state.'''
-  def __init__(self, old_board=parse(INITIAL), turn_count=0, player=PLAYER_A, bomb_count=DEFAULT_BOMB_COUNT):
+  #def __init__(self, old_board=parse(INITIAL), turn_count=0, player=PLAYER_A, bomb_count=DEFAULT_BOMB_COUNT):
+  def __init__(self, old_board=create_initial_board(), turn_count=0, player=PLAYER_A, bomb_count=DEFAULT_BOMB_COUNT):
     new_board = [r[:] for r in old_board]
     self.board = new_board
     self.player = player
@@ -430,6 +436,10 @@ def win_message(code):
   elif(code == PLAYER_A):
     message += "PLAYER_A wins"
   return message
+
+
+  
+#print(Bman_state(create_initial_board()))
 
 #init_state = Bman_state(parse(test.MOVE_TEST_0), 0, PLAYER_A)
 #print("INITIAL STATE:")
