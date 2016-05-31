@@ -27,6 +27,7 @@ STRING_TO_CODE = {'--':0, 'XX':10, '##':20, '!!':30, 'AA':40, 'BB':50,
                   'A1':41, 'A2':42, 'A3':43, 'B1':51, 'B2':52, 'B3':53}
 CODE_TO_STRING = {0:'--', 10:'XX', 20:'##', 30:'!!', 40:'AA', 50:'BB',
                   41:'A1', 42:'A2', 43:'A3', 51:'B1', 52:'B2', 53:'B3'}
+MOVES = ['Stay', 'East', 'B.East', 'West', 'B.West', 'South', 'B.South', 'North', 'B.North']
 
 INITIAL = ('''
 XX XX XX XX XX XX XX XX XX XX XX
@@ -41,6 +42,15 @@ XX -- XX -- XX -- XX -- XX -- XX
 XX -- -- -- -- ## -- -- -- BB XX
 XX XX XX XX XX XX XX XX XX XX XX
 ''')
+
+INTRO_MESSAGE = ('''
+
+
+
+
+
+''')
+
 
 def parse(board_string):
   '''Translate a board string into the list of lists representation.'''
@@ -85,6 +95,17 @@ class Bman_state:
     #output += "'s move, " + str(self.bomb_count) + " bomb(s)\n"
     return output
 
+def make_move(state, move):
+  '''Take a state and apply a move to it.'''
+  successors = look_for_successors(state)
+  index = 0
+  while move != MOVES[index]:
+    index += 1
+    if index == len(MOVES):
+      print("ERROR: That's not a move.")
+      return successors[0]
+  return successors[index]
+
 def look_for_successors(state):
   '''Generate all possible successor states from the current state'''
   successors = []
@@ -125,28 +146,13 @@ def look_for_successors(state):
     successors.append(end_state)
     
   return successors
-  
+
 def states_to_string(states):
   '''Takes a list of states and turns them into a string.'''
   output = ''
   for state in states:
     output += str(state) + "\n"
   return output
-
-def analyze_piece(piece, player):
-  '''Finds what type of piece the current piece is.'''
-  # Player
-  if (piece == PLAYER_CODE_OFFSET + player * 10):
-    return "player"
-  
-  # Player's Bomb
-  if (piece > PLAYER_CODE_OFFSET + player * 10 and piece < PLAYER_CODE_OFFSET + 10 + player * 10):
-    return "bomb"
-  
-  return '''ERROR: I don't got no type
-  Bad bitches is the only thing that I like
-  You ain't got no life
-  Cups with the ice and we do this every night'''
 
 def analyze_bombs(state, bomb_locations):
   '''This takes a states and returns one with all the bombs updated.'''
@@ -394,6 +400,8 @@ def win_check(state):
   else:
     return PLAYER_A
 
-#init_state = Bman_state(parse(test.BOMB_TEST_4), 0, PLAYER_A)
-#print(init_state)
-#print(states_to_string(look_for_successors(init_state)))
+init_state = Bman_state(parse(test.MOVE_TEST_0), 0, PLAYER_A)
+print("INITIAL STATE:")
+print(init_state)
+print("SUCCESSORS:")
+print(states_to_string(look_for_successors(init_state)))

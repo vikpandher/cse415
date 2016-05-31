@@ -22,12 +22,12 @@ if len(sys.argv) > 2:
 elif len(sys.argv) > 1:
   import importlib
   human_match = True
-  cpuA = importlib.import_module(sys.argv[1])
-  cpuB = None
+  cpuA = None
+  cpuB = importlib.import_module(sys.argv[1])
 else:
   human_match = True
-  import Random_Player as playerA
-  cpuB = None
+  cpuA = None
+  import Random_Player as cpuB
 
 
 
@@ -46,6 +46,13 @@ def runGame():
     whosTurn = 0
     global FINISHED
     FINISHED = False
+    
+    if
+    
+    while not FINISHED:
+      
+    
+    
     '''
     while not FINISHED:
         result = whosTurn.makeMove(currentState)

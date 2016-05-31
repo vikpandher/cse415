@@ -96,3 +96,16 @@ XX -- -- -- -- -- -- -- -- -- XX
 XX XX XX XX XX XX XX XX XX XX XX
 ''')
 
+MOVE_TEST_0 = ('''
+XX XX XX XX XX XX XX XX XX XX XX
+XX -- -- -- -- -- -- -- -- -- XX
+XX -- -- -- -- -- -- -- -- -- XX
+XX -- -- -- -- -- -- -- -- -- XX
+XX -- -- -- -- -- -- -- -- -- XX
+XX -- -- -- -- AA -- -- -- -- XX
+XX -- -- -- -- -- -- -- -- -- XX
+XX -- -- -- -- -- -- -- -- -- XX
+XX -- -- -- -- -- -- -- -- -- XX
+XX -- -- -- -- -- -- -- -- -- XX
+XX XX XX XX XX XX XX XX XX XX XX
+''')
