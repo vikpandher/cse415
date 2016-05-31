@@ -6,7 +6,7 @@ PLAYER_B = 1
 
 PLAYER_COUNT = 2
 PLAYER_CODE_OFFSET = 40
-BOARD_SIZE = 11 # sizes are width and height
+BOARD_SIZE = 11 # sizes are width and height, must be odd
 BOMB_BLAST_RADIUS = 3 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 3
 DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
@@ -44,13 +44,21 @@ XX XX XX XX XX XX XX XX XX XX XX
 ''')
 
 INTRO_MESSAGE = ('''
-
-
-
-
+This is bomberman.
+This is how you play.
+These are your controls.
+When asked for input input:
+e = move east
+E = move east and drop a bomb
+w = move west
+W = move west and drop a bomb
+s = move south
+S = move south and drop a bomb
+n = move north
+N = move north and dorp a bomb
+anything else your stay where you were
 
 ''')
-
 
 def parse(board_string):
   '''Translate a board string into the list of lists representation.'''
@@ -95,13 +103,14 @@ class Bman_state:
     #output += "'s move, " + str(self.bomb_count) + " bomb(s)\n"
     return output
 
+AVAILABLE_MOVES = [] # Tracks which moves are in successors returned by look_for_successors
 def make_move(state, move):
   '''Take a state and apply a move to it.'''
   successors = look_for_successors(state)
   index = 0
-  while move != MOVES[index]:
+  while move != AVAILABLE_MOVES[index] and len(AVAILABLE_MOVES) != 0:
     index += 1
-    if index == len(MOVES):
+    if index == len(AVAILABLE_MOVES):
       print("ERROR: That's not a move.")
       return successors[0]
   return successors[index]
@@ -282,6 +291,7 @@ def analyze_bombs(state, bomb_locations):
 def analyze_player(state, player_location):
   '''This takes a state and returns a list of states for each of the the
      players potential moves.'''
+  AVAILABLE_MOVES.clear()
   new_states = []
   piece = PLAYER_CODE_OFFSET + state.player * 10
   row, col = player_location
@@ -290,6 +300,7 @@ def analyze_player(state, player_location):
   new_board = copy_board(state.board)
   new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count)
   new_states.append(new_state)
+  AVAILABLE_MOVES.append('Stay')
   
   # checking horizontal movement toward the highest column
   # NOTE: Allowed to walk into empty space or an explosion, but piece dies if explosion
@@ -301,6 +312,7 @@ def analyze_player(state, player_location):
     new_board[row][col] = 0
     new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count)
     new_states.append(new_state)
+    AVAILABLE_MOVES.append('East')
     
     # add bomb drop state
     if(state.bomb_count[state.player] > 0):
@@ -312,6 +324,7 @@ def analyze_player(state, player_location):
       new_bomb_count[state.player] -= 1
       new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, new_bomb_count)
       new_states.append(new_state)
+      AVAILABLE_MOVES.append('B.East')
   
   # checking horizontal movement toward the 0th column
   if (col > 0 and (state.board[row][col - 1] == 0 or state.board[row][col - 1] == 30)):
@@ -322,6 +335,7 @@ def analyze_player(state, player_location):
     new_board[row][col] = 0
     new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count)
     new_states.append(new_state)
+    AVAILABLE_MOVES.append('West')
     
     # add bomb drop state
     if(state.bomb_count[state.player] > 0):
@@ -333,6 +347,7 @@ def analyze_player(state, player_location):
       new_bomb_count[state.player] -= 1
       new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, new_bomb_count)
       new_states.append(new_state)
+      AVAILABLE_MOVES.append('B.West')
   
   # checking vertical movement toward the highest row
   if (row < BOARD_SIZE - 1 and (state.board[row + 1][col] == 0 or state.board[row + 1][col] == 30)):
@@ -343,6 +358,7 @@ def analyze_player(state, player_location):
     new_board[row][col] = 0
     new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count)
     new_states.append(new_state)
+    AVAILABLE_MOVES.append('South')
     
     # add bomb drop state
     if(state.bomb_count[state.player] > 0):
@@ -354,6 +370,7 @@ def analyze_player(state, player_location):
       new_bomb_count[state.player] -= 1
       new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, new_bomb_count)
       new_states.append(new_state)
+      AVAILABLE_MOVES.append('B.South')
   
   # checking vertical movement toward the 0th row
   if (row > 0 and (state.board[row - 1][col] == 0 or state.board[row - 1][col] == 30)):
@@ -364,6 +381,7 @@ def analyze_player(state, player_location):
     new_board[row][col] = 0
     new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, state.bomb_count)
     new_states.append(new_state)
+    AVAILABLE_MOVES.append('North')
     
     # add bomb drop state
     if(state.bomb_count[state.player] > 0):
@@ -375,6 +393,7 @@ def analyze_player(state, player_location):
       new_bomb_count[state.player] -= 1
       new_state = Bman_state(new_board, state.turn_count + 1, (state.player + 1) % PLAYER_COUNT, new_bomb_count)
       new_states.append(new_state)
+      AVAILABLE_MOVES.append('B.North')
   
   return new_states
 
@@ -394,14 +413,26 @@ def win_check(state):
         PLAYER_B_DEAD = False
   
   if (PLAYER_A_DEAD and PLAYER_B_DEAD):
-    return -1
+    return "draw"
   elif (PLAYER_B_DEAD):
+    return PLAYER_A
+  elif (PLAYER_A_DEAD):
     return PLAYER_B
   else:
-    return PLAYER_A
+    return -1
+  
+def win_message(code):
+  message = "GAME OVER "
+  if(code == "draw"):
+    message += "draw"
+  elif(code == PLAYER_B):
+    message += "PLAYER_B wins"
+  elif(code == PLAYER_A):
+    message += "PLAYER_A wins"
+  return message
 
-init_state = Bman_state(parse(test.MOVE_TEST_0), 0, PLAYER_A)
-print("INITIAL STATE:")
-print(init_state)
-print("SUCCESSORS:")
-print(states_to_string(look_for_successors(init_state)))
+#init_state = Bman_state(parse(test.MOVE_TEST_0), 0, PLAYER_A)
+#print("INITIAL STATE:")
+#print(init_state)
+#print("SUCCESSORS:")
+#print(states_to_string(look_for_successors(init_state)))

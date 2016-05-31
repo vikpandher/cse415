@@ -14,6 +14,18 @@ import sys
 #print(len(sys.argv))
 #print(sys.argv[0])
 
+'''
+NOTE:
+For a match between two computers enter:
+python BombermanGameMaster.py [plyer file name] [plyer file name]
+ex: python BombermanGameMaster.py Random_Player Random_Player
+
+For a match against a computer enter:
+python BombermanGameMaster.py [plyer file name]
+ex: python BombermanGameMaster.py Random_Player
+
+'''
+
 if len(sys.argv) > 2:
   import importlib
   human_match = False
@@ -27,11 +39,7 @@ elif len(sys.argv) > 1:
 else:
   human_match = True
   cpuA = None
-  import Random_Player as cpuB
-
-
-
-
+  import Passive_Player as cpuB
 
 CURRENT_PLAYER = bs.PLAYER_A
 
@@ -40,130 +48,50 @@ def runGame():
     currentState = bs.Bman_state()
     print("Bomberman v" + VERSION + "\n")
     
-    print("!!!!!!!!!! BOMBER-MAN !!!!!!!!!!!")
-    print(currentState)
+    print("!!!!!!!!!! BOMBER-MAN !!!!!!!!!!!\n")
+    print(bs.INTRO_MESSAGE)
     
-    whosTurn = 0
+    whosTurn = currentState.player
     global FINISHED
     FINISHED = False
     
-    if
+    turnLimit = -1
     
-    while not FINISHED:
+    while not FINISHED and turnLimit != 0:
+      turnLimit -= 1
+      whosTurn = currentState.player
+      print(currentState)
       
-    
-    
-    '''
-    while not FINISHED:
-        result = whosTurn.makeMove(currentState)
-        
-        if(endCheck )
-    
-    
-    
-    
-        who = currentState.whose_move
-        if who==bcs.WHITE:
-            side = 'WHITE'
+      whoWon = bs.win_check(currentState)
+      if(whoWon != -1):
+        print(bs.win_message(whoWon))
+        break
+      
+      if (human_match and whosTurn == bs.PLAYER_A):
+        move = input("Enter your move:")
+        if (move == "e"):
+          move = "East"
+        elif (move == "E"):
+          move = "B.East"
+        elif (move == "w"):
+          move = "West"
+        elif (move == "W"):
+          move = "B.West"
+        elif (move == "s"):
+          move = "South"
+        elif (move == "S"):
+          move = "B.South"
+        elif (move == "n"):
+          move = "North"
+        elif (move == "N"):
+          move = "B.North"
         else:
-            side = 'BLACK'
-        global CURRENT_PLAYER
-        CURRENT_PLAYER = who
-        if VALIDATE_MOVES:
-            legal_states = bcs.successors(currentState)
-            if legal_states==[]:
-                print("Stalemate: "+side+" has no moves!"); break
-        if WHITEsTurn:
-            playerResult = timeout(player1.makeMove,args=(currentState, currentRemark, TIME_PER_MOVE), kwargs={}, timeout_duration=TIME_PER_MOVE, default=(None,"I give up!"));
-            name = player1.nickname()
-            WHITEsTurn = False
-        else:
-            playerResult = timeout(player2.makeMove,args=(currentState, currentRemark, TIME_PER_MOVE), kwargs={}, timeout_duration=TIME_PER_MOVE, default=(None,"I give up!"));
-            name = player2.nickname()
-            WHITEsTurn = True
-        moveAndState, currentRemark = playerResult
-        if moveAndState==None:
-            FINISHED = True; continue
-        if VALIDATE_MOVES:
-            if not OCCURS_IN(moveAndState[1], legal_states):
-                print("Illegal move by "+side+" as "+str(moveAndState[0]))
-                print("Returned state is:")
-                print(moveAndState[1])
-                break
-        move, currentState = moveAndState
-        moveReport = "Turn "+str(turnCount)+": Move is by "+side+" as "+str(move)
-        print(moveReport)
-        utteranceReport = name +' says: '+currentRemark
-        print(utteranceReport)
-        possibleWin = winTester(currentState)
-        if possibleWin != "No win":
-            FINISHED = True
-            print(currentState)
-            print(possibleWin)
-            return
-        print(currentState)
-        turnCount += 1
-        #if turnCount == 9: FINISHED=True
-    print(currentState)
-    print("Game over.")
-'''
-
-import sys
-import time
-from traceback import print_exc
-def timeout(func, args=(), kwargs={}, timeout_duration=1, default=None):
-    '''This function will spawn a thread and run the given function using the args, kwargs and 
-    return the given default value if the timeout_duration is exceeded 
-    ''' 
-    import threading
-    class PlayerThread(threading.Thread):
-        def __init__(self):
-            threading.Thread.__init__(self)
-            self.result = default
-        def run(self):
-            try:
-                self.result = func(*args, **kwargs)
-            except:
-                print("Seems there was a problem with the time.")
-                print_exc()
-                self.result = default
-
-    pt = PlayerThread()
-    #print("timeout_duration = "+str(timeout_duration))
-    pt.start()
-    started_at = time.time()
-    #print("makeMove started at: " + str(started_at))
-    pt.join(timeout_duration)
-    ended_at = time.time()
-    #print("makeMove ended at: " + str(ended_at))
-    diff = ended_at - started_at
-    print("Time used in makeMove: %0.4f seconds out of " % diff, timeout_duration)
-    if pt.isAlive():
-        print("Took too long.")
-        print("We are now terminating the game.")
-        print("Player "+PLAYER_MAP[CURRENT_PLAYER]+" loses.")
-        if USE_HTML: gameToHTML.reportResult("Player "+PLAYER_MAP[CURRENT_PLAYER]+" took too long (%04f seconds) and thus loses." % diff)
-        if USE_HTML: gameToHTML.endHTML()
-        exit()
-    else:
-        print("Within the time limit -- nice!")
-        return pt.result
-
-
-def OCCURS_IN(state, listOfStates):
-  for s in listOfStates:
-    if DEEP_EQUALS(state, s):
-        return True
-  return False
-
-def DEEP_EQUALS(s1, s2):
-  if s1.whose_move != s2.whose_move:
-    return False
-  b1 = s1.board
-  b2 = s2.board
-  for i in range(8):                  
-    for j in range(8):                  
-      if b1[i][j] != b2[i][j]: return False
-  return True
-                      
+          move = "Stay"
+        print(move)
+        currentState = bs.make_move(currentState, move)
+      elif (whosTurn == bs.PLAYER_A):
+        currentState = cpuA.makeMove(currentState)
+      elif (whosTurn == bs.PLAYER_B):
+        currentState = cpuB.makeMove(currentState)
+       
 runGame()
