@@ -10,6 +10,8 @@ BOARD_SIZE = 11 # sizes are width and height, must be odd
 BOMB_BLAST_RADIUS = 3 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 3
 DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
+CAVE_IN_START = 500 # board starts to cave in after this many turns
+CAVE_IN_TICK = 100 # cave in one layer every CAVE_IN_TICK number of turns after cave in starts
 
 # renamed these just because
 '''
@@ -403,6 +405,33 @@ def analyze_player(state, player_location):
   
   return new_states
 
+CAVE_COUNT = -1
+def cave_in_walls(state):
+  post_cave_board = copy_board(state.board)
+  global CAVE_COUNT
+  old_cave_count = CAVE_COUNT
+  if(state.turn_count > CAVE_IN_START):
+    CAVE_COUNT = (state.turn_count - CAVE_IN_START) // CAVE_IN_TICK
+    
+  if(CAVE_COUNT != old_cave_count):
+    for foo in range(CAVE_COUNT, BOARD_SIZE - CAVE_COUNT):
+      post_cave_board[CAVE_COUNT][foo] = 10
+      post_cave_board[foo][CAVE_COUNT] = 10
+      post_cave_board[BOARD_SIZE - 1 - CAVE_COUNT][foo] = 10
+      post_cave_board[foo][BOARD_SIZE - 1 - CAVE_COUNT] = 10
+  post_cave_state = Bman_state(post_cave_board, state.turn_count, state.player, state.bomb_count)
+  return post_cave_state
+
+'''
+# CAVE IN TEST
+initial_state = Bman_state(create_initial_board(), 1)
+while(CAVE_COUNT < 5):
+  initial_state = cave_in_walls(initial_state)
+  print("CAVE_COUNT: " + str(CAVE_COUNT))
+  print(initial_state)
+  initial_state.turn_count += CAVE_IN_TICK
+'''
+  
 def win_check(state):
   PLAYER_A_DEAD = True
   PLAYER_B_DEAD = True
