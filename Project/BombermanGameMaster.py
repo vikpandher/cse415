@@ -1,6 +1,24 @@
-'''BombermanGameMaster.py
+'''
+Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
+Instructor:  S. Tanimoto.
+Project: Bomberman
 
-V. Pandher
+Status of the implementation:
+Working computer player with min max statespace search and alpha beta cutoffs
+Working computer vs computer matches and human vs computer matches with optional
+custom settings
+
+FILES:
+  BombermanGameMaster.py
+  - contains the main loop that runs the game
+  BombermanSource.py
+  - contains many functions used in other files
+  BombermanHeuristic.py
+  - a player implemented with heuristics (minimax & alphabeta cuttoffs)
+  Random_Player.py
+  - a player that makes any random move
+  Passive_Player.py
+  - a player that makes random moves, but doesn't drop bombs
 
 '''
 
@@ -10,9 +28,6 @@ import BombermanSource as bs
 
 # Get names of players and from the command line.
 import sys
-
-#print(len(sys.argv))
-#print(sys.argv[0])
 
 '''
 NOTE:
@@ -24,6 +39,8 @@ For a match against a computer enter:
 python BombermanGameMaster.py [plyer file name]
 ex: python BombermanGameMaster.py Random_Player
 
+For a custom match include "-c" after BombermanGameMaster.py
+ex: python BombermanGameMaster.py -c Random_Player Random_Player
 '''
 
 if '-c' in sys.argv:
@@ -55,6 +72,7 @@ def runGame():
     
     print("!!!!!!!!!! BOMBER-MAN !!!!!!!!!!!\n")
     
+    # ask for custom settings
     if(custom_game):
       print("ENTERING DEFAULTS...")
       board_size = int(input("Select BOARD_SIZE (15): "))
@@ -71,7 +89,7 @@ def runGame():
     global FINISHED
     FINISHED = False
     
-    turnLimit = -1
+    turnLimit = -1 # if you want to give the game a time limit
     
     while not FINISHED and turnLimit != 0:
       turnLimit -= 1
@@ -84,7 +102,7 @@ def runGame():
         break
       
       if (human_match and whosTurn == bs.PLAYER_A):
-        move = input("Enter your move:")
+        move = input("Enter your move:") # get player input
         if (len(move) == 0):
           move = "Stay"
         elif (move[0] == bs.M_EAST):

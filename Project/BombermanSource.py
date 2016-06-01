@@ -10,11 +10,15 @@ custom settings
 
 FILES:
   BombermanGameMaster.py
+  - contains the main loop that runs the game
   BombermanSource.py
-  - contains the 
+  - contains many functions used in other files
   BombermanHeuristic.py
+  - a player implemented with heuristics (minimax & alphabeta cuttoffs)
   Random_Player.py
+  - a player that makes any random move
   Passive_Player.py
+  - a player that makes random moves, but doesn't drop bombs
 
 '''
 
