@@ -1,0 +1,3962 @@
+Bomberman v1.0-ALPHA
+
+!!!!!!!!!! BOMBER-MAN !!!!!!!!!!!
+
+
+This is bomberman. In this game you, Player A, represented by 'AA' on the board
+need to defeat the dreaded Player B, represented by 'BB'. To do this simply
+blow up Player B with a bomb, but be careful bombs don't care who they belong
+to.
+
+To move you must use the "wasd" keys on your keyboard. When you are promped for
+a move, simply enter:
+'a' to move left
+'w' to move up
+'d' to move right
+'s' to move down
+and anything else to stay
+
+While moving you may drop a bomb at your old location. Careful you cannot walk
+over bombs. To drop a bomb while moving enter the capital character:
+'A' to move left and drop a bomb
+'W' to move up and drop a bomb
+'D' to move right and drop a bomb
+'S' to move down and drop a bomb
+
+The bombs will be shown with the the letter of the player who placed it and a
+timer to indecate when the bomb will blow.
+
+'XX' are solid walls that cannot be broken with bombs
+'##' are soft wall that can be blown up
+'--' are empty spaces
+'!!' are remnants of an explosion
+
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 0, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- ## -- ## -- ## -- XX 
+XX AA XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 1, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- ## -- ## -- ## -- XX 
+XX AA XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX BB XX 
+XX -- ## -- ## -- ## -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 2, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- -- ## -- ## -- ## -- XX 
+XX A3 XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX BB XX 
+XX -- ## -- ## -- ## -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 3, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- -- ## -- ## -- ## -- XX 
+XX A3 XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX B3 XX 
+XX -- ## -- ## -- ## -- -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 4, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- AA -- ## -- ## -- ## -- XX 
+XX A2 XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX B3 XX 
+XX -- ## -- ## -- ## -- -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 5, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- AA -- ## -- ## -- ## -- XX 
+XX A2 XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX B2 XX 
+XX -- ## -- ## -- ## -- BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 6, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA ## -- ## -- ## -- XX 
+XX A1 XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX B2 XX 
+XX -- ## -- ## -- ## -- BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 7, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA ## -- ## -- ## -- XX 
+XX A1 XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX B1 XX 
+XX -- ## -- ## -- ## BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 8, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- AA A3 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX B1 XX 
+XX -- ## -- ## -- ## BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 9, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- AA A3 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B3 BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 10, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- A2 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B3 BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 11, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- A2 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B2 -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 12, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- A1 ## -- ## -- ## -- XX 
+XX AA XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B2 -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 13, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- A1 ## -- ## -- ## -- XX 
+XX AA XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX BB XX 
+XX -- ## -- ## -- ## B1 -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 14, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX AA ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX BB XX 
+XX -- ## -- ## -- ## B1 -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 15, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX AA ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## BB XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 16, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX AA XX -- XX ## XX ## XX ## XX 
+XX A3 ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## BB XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 17, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX AA XX -- XX ## XX ## XX ## XX 
+XX A3 ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## B3 XX 
+XX ## XX ## XX ## XX -- XX BB XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 18, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX A2 ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## B3 XX 
+XX ## XX ## XX ## XX -- XX BB XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 19, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX A2 ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## B2 XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 20, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- AA -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX A1 ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## B2 XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 21, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- AA -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX A1 ## -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## B1 XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 22, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- A3 AA -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- -- -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- ## B1 XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 23, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- A3 AA -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- -- -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- -- -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- BB B3 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 24, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- A2 -- -- -- ## -- ## -- XX 
+XX -- XX AA XX ## XX ## XX ## XX 
+XX -- -- -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- -- -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- BB B3 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 25, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- A2 -- -- -- ## -- ## -- XX 
+XX -- XX AA XX ## XX ## XX ## XX 
+XX -- -- -- ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- -- -- XX 
+XX ## XX ## XX ## XX BB XX -- XX 
+XX -- ## -- ## -- -- -- B2 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 26, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- A1 -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- -- AA ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## -- -- -- XX 
+XX ## XX ## XX ## XX BB XX -- XX 
+XX -- ## -- ## -- -- -- B2 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 27, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- A1 -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- -- AA ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## BB -- -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- B1 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 28, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- AA A3 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## BB -- -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- B1 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 29, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- AA A3 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B3 BB -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 30, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX AA -- A2 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B3 BB -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 31, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX AA -- A2 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B2 -- BB XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 32, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX AA XX -- XX ## XX ## XX ## XX 
+XX -- -- A1 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B2 -- BB XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 33, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX AA XX -- XX ## XX ## XX ## XX 
+XX -- -- A1 ## -- ## -- ## -- XX 
+XX -- XX ## XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B1 -- -- XX 
+XX ## XX ## XX ## XX -- XX BB XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 34, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- -- -- -- ## -- ## -- XX 
+XX A3 XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX ## XX -- XX 
+XX -- ## -- ## -- ## B1 -- -- XX 
+XX ## XX ## XX ## XX -- XX BB XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 35, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX AA -- -- -- -- ## -- ## -- XX 
+XX A3 XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX B3 XX 
+XX -- ## -- ## -- -- -- -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 36, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- AA -- -- -- ## -- ## -- XX 
+XX A2 XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX B3 XX 
+XX -- ## -- ## -- -- -- -- BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 37, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- AA -- -- -- ## -- ## -- XX 
+XX A2 XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX B2 XX 
+XX -- ## -- ## -- -- -- BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 38, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA -- -- ## -- ## -- XX 
+XX A1 XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX B2 XX 
+XX -- ## -- ## -- -- -- BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 39, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA -- -- ## -- ## -- XX 
+XX A1 XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX B1 XX 
+XX -- ## -- ## -- -- BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 40, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX AA XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX B1 XX 
+XX -- ## -- ## -- -- BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 41, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX AA XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX BB XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 42, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA -- -- ## -- ## -- XX 
+XX -- XX A3 XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX BB XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 43, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA -- -- ## -- ## -- XX 
+XX -- XX A3 XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX B3 XX -- XX 
+XX -- ## -- ## -- -- BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 44, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- AA -- ## -- ## -- XX 
+XX -- XX A2 XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX B3 XX -- XX 
+XX -- ## -- ## -- -- BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 45, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- AA -- ## -- ## -- XX 
+XX -- XX A2 XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX B2 XX -- XX 
+XX -- ## -- ## -- BB -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 46, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- AA ## -- ## -- XX 
+XX -- XX A1 XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX B2 XX -- XX 
+XX -- ## -- ## -- BB -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 47, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- AA ## -- ## -- XX 
+XX -- XX A1 XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX B1 XX -- XX 
+XX -- ## -- ## BB -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 48, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- AA A3 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX B1 XX -- XX 
+XX -- ## -- ## BB -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 49, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- AA A3 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B3 BB -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 50, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA -- A2 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B3 BB -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 51, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA -- A2 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B2 -- BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 52, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- A1 ## -- ## -- XX 
+XX -- XX AA XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B2 -- BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 53, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- A1 ## -- ## -- XX 
+XX -- XX AA XX ## XX ## XX ## XX 
+XX -- -- -- -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX BB XX -- XX 
+XX -- ## -- ## B1 -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 54, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX A3 XX -- XX ## XX ## XX 
+XX -- -- AA -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- -- -- -- XX 
+XX ## XX ## XX ## XX BB XX -- XX 
+XX -- ## -- ## B1 -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 55, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX A3 XX -- XX ## XX ## XX 
+XX -- -- AA -- -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- BB -- -- XX 
+XX ## XX ## XX -- XX B3 XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 56, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX A2 XX -- XX ## XX ## XX 
+XX -- -- -- AA -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- -- BB -- -- XX 
+XX ## XX ## XX -- XX B3 XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 57, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX A2 XX -- XX ## XX ## XX 
+XX -- -- -- AA -- ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- BB -- -- -- XX 
+XX ## XX ## XX -- XX B2 XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 58, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX A1 XX -- XX ## XX ## XX 
+XX -- -- -- -- AA ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## -- BB -- -- -- XX 
+XX ## XX ## XX -- XX B2 XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 59, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX A1 XX -- XX ## XX ## XX 
+XX -- -- -- -- AA ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## BB -- -- -- -- XX 
+XX ## XX ## XX -- XX B1 XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 60, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- AA A3 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## BB -- -- -- -- XX 
+XX ## XX ## XX -- XX B1 XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 61, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- AA A3 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B3 -- -- -- -- XX 
+XX ## XX ## XX BB XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 62, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- AA -- A2 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B3 -- -- -- -- XX 
+XX ## XX ## XX BB XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 63, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- AA -- A2 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B2 -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- BB -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 64, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX AA XX -- XX ## XX ## XX 
+XX -- -- -- -- A1 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B2 -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- BB -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 65, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX AA XX -- XX ## XX ## XX 
+XX -- -- -- -- A1 ## -- ## -- XX 
+XX -- XX -- XX ## XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B1 -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- BB -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 66, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA -- -- -- -- ## -- XX 
+XX -- XX A3 XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX ## XX -- XX -- XX 
+XX -- ## -- ## B1 -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- BB -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 67, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- AA -- -- -- -- ## -- XX 
+XX -- XX A3 XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- B3 BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 68, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- AA -- -- -- ## -- XX 
+XX -- XX A2 XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- B3 BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 69, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- AA -- -- -- ## -- XX 
+XX -- XX A2 XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX ## XX ## XX -- XX BB XX -- XX 
+XX -- ## -- -- -- B2 -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 70, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- AA -- -- ## -- XX 
+XX -- XX A1 XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX ## XX ## XX -- XX BB XX -- XX 
+XX -- ## -- -- -- B2 -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 71, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- AA -- -- ## -- XX 
+XX -- XX A1 XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- BB -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- B1 -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 72, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX AA XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- BB -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- B1 -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 73, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX AA XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- B3 -- -- XX 
+XX ## XX ## XX -- XX BB XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 74, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX A3 XX ## XX ## XX 
+XX -- -- -- -- AA -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- B3 -- -- XX 
+XX ## XX ## XX -- XX BB XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 75, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX A3 XX ## XX ## XX 
+XX -- -- -- -- AA -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- B2 -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 76, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX A2 XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX AA XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- B2 -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- BB -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 77, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX A2 XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX AA XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- B1 -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 78, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX A1 XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## AA ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- B1 -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- BB -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 79, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX A1 XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## AA ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- B3 BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 80, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX AA XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- B3 BB XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 81, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX AA XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX BB XX 
+XX -- ## -- -- -- -- -- B2 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 82, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- AA -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX BB XX 
+XX -- ## -- -- -- -- -- B2 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 83, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- AA -- -- -- BB XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- B1 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 84, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- AA -- -- BB XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- B1 -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 85, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- AA -- BB -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 86, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- AA A3 -- BB -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 87, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- AA A3 -- -- BB XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 88, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX AA XX -- XX -- XX 
+XX -- ## -- -- -- A2 -- -- BB XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 89, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## -- ## -- ## -- XX 
+XX ## XX ## XX AA XX -- XX BB XX 
+XX -- ## -- -- -- A2 -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 90, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## AA ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX BB XX 
+XX -- ## -- -- -- A1 -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 91, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## AA ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX B3 XX 
+XX -- ## -- -- -- A1 -- -- BB XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 92, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX AA XX ## XX ## XX 
+XX -- ## -- ## A3 ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX B3 XX 
+XX -- ## -- -- -- -- -- -- BB XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 93, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX AA XX ## XX ## XX 
+XX -- ## -- ## A3 ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX B2 XX 
+XX -- ## -- -- -- -- -- BB -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 94, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- AA -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## A2 ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX B2 XX 
+XX -- ## -- -- -- -- -- BB -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 95, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- -- AA -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## A2 ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX B1 XX 
+XX -- ## -- -- -- -- BB -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 96, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- AA -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- ## -- ## A1 ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX B1 XX 
+XX -- ## -- -- -- -- BB -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 97, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- -- AA -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX -- XX 
+XX -- ## -- ## A1 ## -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- BB -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 98, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- AA A3 -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX -- XX 
+XX -- ## -- -- -- -- -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- BB -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 99, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX -- -- -- -- -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX ## XX 
+XX -- -- AA A3 -- -- -- ## -- XX 
+XX -- XX -- XX -- XX ## XX -- XX 
+XX -- ## -- -- -- -- -- ## -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- BB -- -- -- -- XX 
+XX ## XX ## XX -- XX -- XX -- XX 
+XX -- ## -- -- -- -- -- -- -- XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 100, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- A2 -- -- -- ## XX XX 
+XX XX XX AA XX -- XX ## XX XX XX 
+XX XX ## -- -- -- -- -- ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 101, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- A2 -- -- -- ## XX XX 
+XX XX XX AA XX -- XX ## XX XX XX 
+XX XX ## -- -- -- -- -- ## XX XX 
+XX XX XX ## XX BB XX -- XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 102, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- A1 -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX ## AA -- -- -- -- ## XX XX 
+XX XX XX ## XX BB XX -- XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 103, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- A1 -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX ## AA -- -- -- -- ## XX XX 
+XX XX XX ## XX B3 XX -- XX XX XX 
+XX XX ## -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 104, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX ## -- AA -- -- -- ## XX XX 
+XX XX XX ## XX B3 XX -- XX XX XX 
+XX XX ## -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 105, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX ## -- AA -- -- -- ## XX XX 
+XX XX XX ## XX B2 XX -- XX XX XX 
+XX XX ## -- -- -- BB -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 106, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX ## AA A3 -- -- -- ## XX XX 
+XX XX XX ## XX B2 XX -- XX XX XX 
+XX XX ## -- -- -- BB -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 107, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX ## AA A3 -- -- -- ## XX XX 
+XX XX XX ## XX B1 XX -- XX XX XX 
+XX XX ## -- -- -- -- BB -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 108, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX AA XX -- XX ## XX XX XX 
+XX XX ## -- A2 -- -- -- ## XX XX 
+XX XX XX ## XX B1 XX -- XX XX XX 
+XX XX ## -- -- -- -- BB -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 109, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX AA XX -- XX ## XX XX XX 
+XX XX ## -- A2 -- -- -- ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- BB -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 110, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- AA -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX ## -- A1 -- -- -- ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- BB -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 111, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- AA -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX ## -- A1 -- -- -- ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- B3 BB -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 112, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- AA -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- B3 BB -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 113, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- AA -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX ## XX -- XX BB XX XX XX 
+XX XX ## -- -- -- B2 -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 114, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- AA -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX ## XX -- XX BB XX XX XX 
+XX XX ## -- -- -- B2 -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 115, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- AA -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- BB ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- B1 -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 116, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX AA XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- BB ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- B1 -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 117, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX AA XX -- XX ## XX XX XX 
+XX XX -- -- -- -- BB -- ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 118, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- AA -- -- -- -- ## XX XX 
+XX XX XX A3 XX -- XX ## XX XX XX 
+XX XX -- -- -- -- BB -- ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 119, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- AA -- -- -- -- ## XX XX 
+XX XX XX A3 XX -- XX ## XX XX XX 
+XX XX -- -- -- -- B3 BB ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 120, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- AA -- -- -- ## XX XX 
+XX XX XX A2 XX -- XX ## XX XX XX 
+XX XX -- -- -- -- B3 BB ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 121, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- AA -- -- -- ## XX XX 
+XX XX XX A2 XX -- XX ## XX XX XX 
+XX XX -- -- -- -- B2 -- ## XX XX 
+XX XX XX ## XX -- XX BB XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 122, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- AA -- -- ## XX XX 
+XX XX XX A1 XX -- XX ## XX XX XX 
+XX XX -- -- -- -- B2 -- ## XX XX 
+XX XX XX ## XX -- XX BB XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 123, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- AA -- -- ## XX XX 
+XX XX XX A1 XX -- XX ## XX XX XX 
+XX XX -- -- -- -- B1 -- ## XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX ## -- -- -- -- BB -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 124, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX AA XX ## XX XX XX 
+XX XX -- -- -- -- B1 -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX ## -- -- -- -- BB -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 125, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX AA XX ## XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 126, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- AA -- -- ## XX XX 
+XX XX XX -- XX A3 XX ## XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 127, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- AA -- -- ## XX XX 
+XX XX XX -- XX A3 XX ## XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX B3 XX XX XX 
+XX XX ## -- -- -- -- BB -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 128, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- AA -- -- -- ## XX XX 
+XX XX XX -- XX A2 XX ## XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX B3 XX XX XX 
+XX XX ## -- -- -- -- BB -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 129, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- AA -- -- -- ## XX XX 
+XX XX XX -- XX A2 XX ## XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX B2 XX XX XX 
+XX XX ## -- -- -- BB -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 130, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- AA -- -- -- -- ## XX XX 
+XX XX XX -- XX A1 XX ## XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX B2 XX XX XX 
+XX XX ## -- -- -- BB -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 131, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- AA -- -- -- -- ## XX XX 
+XX XX XX -- XX A1 XX ## XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX B1 XX XX XX 
+XX XX ## -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 132, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX AA XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX B1 XX XX XX 
+XX XX ## -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 133, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX AA XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 134, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- AA -- -- -- -- -- XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX ## -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 135, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- AA -- -- -- -- -- XX XX 
+XX XX XX -- XX B3 XX -- XX XX XX 
+XX XX ## -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 136, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- AA -- -- -- -- XX XX 
+XX XX XX -- XX B3 XX -- XX XX XX 
+XX XX ## -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 137, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- AA -- -- -- -- XX XX 
+XX XX XX -- XX B2 XX -- XX XX XX 
+XX XX ## -- BB -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 138, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX B2 XX -- XX XX XX 
+XX XX ## -- BB -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 139, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX B1 XX -- XX XX XX 
+XX XX ## BB -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 140, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX B1 XX -- XX XX XX 
+XX XX ## BB -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 141, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX ## -- BB -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 142, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- A3 AA -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX ## -- BB -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 143, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- A3 AA -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX ## BB B3 -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 144, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- A2 -- -- XX XX 
+XX XX XX -- XX -- XX AA XX XX XX 
+XX XX ## BB B3 -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 145, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- A2 -- -- XX XX 
+XX XX XX BB XX -- XX AA XX XX XX 
+XX XX ## -- B2 -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 146, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- A1 -- -- XX XX 
+XX XX XX BB XX -- XX -- XX XX XX 
+XX XX ## -- B2 -- -- AA -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 147, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- BB -- -- A1 -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX ## -- B1 -- -- AA -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 148, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX AA XX XX XX 
+XX XX ## -- B1 -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 149, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX -- XX -- XX AA XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 150, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX -- XX -- XX A3 XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 151, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- BB B3 -- -- -- -- XX XX 
+XX XX XX -- XX -- XX A3 XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 152, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- BB B3 -- -- -- -- XX XX 
+XX XX XX -- XX -- XX A2 XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 153, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- B2 -- -- -- -- XX XX 
+XX XX XX BB XX -- XX A2 XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 154, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- B2 -- -- -- -- XX XX 
+XX XX XX BB XX -- XX A1 XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 155, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- B1 -- -- -- -- XX XX 
+XX XX XX -- XX -- XX A1 XX XX XX 
+XX XX -- BB -- AA -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 156, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- B1 -- -- -- -- XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 157, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX BB XX AA XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 158, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX BB XX A3 XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 159, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 160, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 161, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX BB XX A2 XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 162, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX BB XX A1 XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 163, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX B3 XX A1 XX -- XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 164, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX B3 XX -- XX AA XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 165, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX B2 XX -- XX AA XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 166, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX B2 XX -- XX -- XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 167, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX B1 XX -- XX -- XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 168, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX B1 XX -- XX AA XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX ## XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 169, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX BB XX AA XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 170, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 171, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX -- XX B3 XX -- XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 172, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX B3 XX AA XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 173, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX B2 XX AA XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 174, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX -- XX B2 XX A3 XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 175, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX -- XX B1 XX A3 XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 176, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX B1 XX A2 XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 177, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX -- XX A2 XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 178, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX -- XX A1 XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 179, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX -- XX A1 XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 180, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 181, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX -- -- -- -- BB -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 182, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX -- -- -- -- BB -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 183, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX -- -- -- -- -- BB -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 184, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX -- -- -- -- -- BB -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 185, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX A2 XX BB XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 186, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX -- XX A1 XX BB XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 187, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX -- XX A1 XX B3 XX XX XX 
+XX XX -- -- -- -- -- BB -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 188, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX -- XX B3 XX XX XX 
+XX XX -- -- -- -- -- BB -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 189, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX -- XX B2 XX XX XX 
+XX XX -- -- -- -- BB -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 190, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX -- XX B2 XX XX XX 
+XX XX -- -- -- -- BB -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 191, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX -- XX B1 XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 192, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX AA XX B1 XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 193, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- -- -- XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX -- -- -- -- BB -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 194, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX -- -- -- -- BB -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 195, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- AA -- -- -- XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 196, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX -- -- -- BB -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 197, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- AA -- -- XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 198, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX -- -- BB -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 199, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- XX -- XX ## XX XX XX 
+XX XX -- -- -- -- -- -- ## XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX -- -- -- -- -- AA -- XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX -- BB -- -- -- -- -- XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 200, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX BB -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 201, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX BB XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 202, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA A3 -- XX XX XX 
+XX XX XX BB XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 203, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX BB -- AA A3 -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 204, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX BB -- -- A2 -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 205, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX BB XX -- XX -- XX XX XX 
+XX XX XX B3 -- -- A2 -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 206, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX BB XX -- XX -- XX XX XX 
+XX XX XX B3 -- -- A1 -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 207, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX BB -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX B2 -- -- A1 -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 208, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX BB -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX B2 -- -- -- -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 209, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- BB -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX B1 -- -- -- -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 210, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- BB -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX B1 -- -- -- -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 211, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 212, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 213, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- BB B3 -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 214, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- BB B3 -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX -- -- -- -- AA XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 215, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX BB -- B2 -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX -- -- -- -- AA XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 216, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX BB -- B2 -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 217, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B1 -- -- XX XX XX 
+XX XX XX BB XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 218, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B1 -- -- XX XX XX 
+XX XX XX BB XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 219, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX BB -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 220, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX BB -- -- -- -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 221, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- BB -- -- -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 222, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- BB -- -- -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 223, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- B3 BB -- -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 224, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- B3 BB -- -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 225, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- B2 -- -- -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 226, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- B2 -- -- -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 227, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- B1 -- -- -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 228, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- B1 -- -- -- XX XX XX 
+XX XX XX AA XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 229, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B3 BB -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX AA XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 230, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B3 BB -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A3 XX -- XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 231, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B2 -- BB XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A3 XX -- XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 232, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B2 -- BB XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A2 XX -- XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 233, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B1 -- -- XX XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A2 XX -- XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 234, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B1 -- -- XX XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A1 XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 235, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX A1 XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 236, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 237, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 238, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 239, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- BB B3 -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 240, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- BB B3 -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 241, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- B2 -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 242, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- B2 -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 243, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- B1 -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 244, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- B1 -- XX XX XX 
+XX XX XX AA XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 245, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B3 BB -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX AA XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 246, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B3 BB -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A3 XX -- XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 247, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B2 -- BB XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A3 XX -- XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 248, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B2 -- BB XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A2 XX -- XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 249, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B1 -- -- XX XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A2 XX -- XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 250, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B1 -- -- XX XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A1 XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 251, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX A1 XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 252, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 253, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 254, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 255, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- BB B3 -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 256, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- BB B3 -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 257, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- B2 -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 258, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- B2 -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 259, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- B1 -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 260, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- B1 -- XX XX XX 
+XX XX XX AA XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 261, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B3 BB -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX AA XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 262, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B3 BB -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A3 XX -- XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 263, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B2 -- BB XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A3 XX -- XX -- XX XX XX 
+XX XX XX AA -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 264, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B2 -- BB XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A2 XX -- XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 265, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B1 -- -- XX XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A2 XX -- XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 266, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- B1 -- -- XX XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX A1 XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 267, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX A1 XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 268, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 269, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 270, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 271, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- BB B3 -- XX XX XX 
+XX XX XX -- XX A3 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 272, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- BB B3 -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 273, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- B2 -- XX XX XX 
+XX XX XX -- XX A2 XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 274, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- B2 -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX -- -- -- -- AA XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 275, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- B1 -- XX XX XX 
+XX XX XX -- XX A1 XX -- XX XX XX 
+XX XX XX -- -- -- -- AA XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 276, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- B1 -- XX XX XX 
+XX XX XX -- XX -- XX AA XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 277, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX -- XX AA XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 278, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- -- AA XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 279, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX B3 XX -- XX XX XX 
+XX XX XX -- -- -- -- AA XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 280, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX B3 XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 281, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX B2 XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 282, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX B2 XX -- XX XX XX 
+XX XX XX -- -- -- -- AA XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 283, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX -- XX B1 XX -- XX XX XX 
+XX XX XX -- -- -- -- AA XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 284, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX -- XX B1 XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 285, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- AA -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 286, Player A's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA A3 -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 287, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA A3 -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 288, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- A2 -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 289, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- A2 -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 290, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX BB XX -- XX XX XX 
+XX XX XX -- -- -- A1 -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 291, Player B's move, 1 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX B3 XX -- XX XX XX 
+XX XX XX -- -- -- A1 -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 292, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- BB -- -- XX XX XX 
+XX XX XX -- XX B3 XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- A3 -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 293, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX B2 XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX -- XX AA XX -- XX XX XX 
+XX XX XX -- -- A3 -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 294, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- BB -- XX XX XX 
+XX XX XX -- XX B2 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- A2 -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 295, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX -- XX B1 XX -- XX XX XX 
+XX XX XX -- -- AA -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- A2 -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 296, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- BB XX XX XX 
+XX XX XX -- XX B1 XX -- XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- A1 -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 297, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- B3 XX XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX XX -- AA -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- A1 -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 298, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- B3 XX XX XX 
+XX XX XX -- XX -- XX BB XX XX XX 
+XX XX XX AA A3 -- -- -- XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 299, Player B's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX -- -- -- -- B2 XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX AA A3 -- -- BB XX XX XX 
+XX XX XX -- XX -- XX -- XX XX XX 
+XX XX XX -- -- -- -- -- XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 300, Player A's move, 0 bomb(s)
+
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX -- XX XX XX XX XX 
+XX XX XX XX A2 -- -- XX XX XX XX 
+XX XX XX XX XX -- XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+XX XX XX XX XX XX XX XX XX XX XX 
+Turn 301, Player B's move, 0 bomb(s)
+
+GAME OVER draw
+

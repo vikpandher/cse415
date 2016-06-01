@@ -10,12 +10,12 @@ A_BOMBS = [43,42,41]
 B_BOMBS = [53,52,51]
 
 def makeMove(curr_state):
-    move_choice = decide_best(curr_state, curr_state, 1, 6)
+    move_choice = decide_best(curr_state, curr_state, 1, 6, +1000000, 1000000)
     #print("orig: " + str(curr_state.board) + " val: " + str(static_eval(curr_state)))
     #print("move: " + str(move_choice[1].board) + " val: " + str(static_eval(move_choice[1])))
     return move_choice[2]
 
-def decide_best(state, first, level, plyLeft):
+def decide_best(state, first, level, plyLeft, alpha, beta):
     if plyLeft == 0: return [static_eval(state), state, first, level]
     if state.player == bs.PLAYER_A:
         provisional = [-100000, state, first, level]
@@ -26,10 +26,22 @@ def decide_best(state, first, level, plyLeft):
         if find_location(state) != find_location(s2):
             if level == 1:
                 first = s
-            new = decide_best(s, first, level+1, plyLeft-1)
+            new = decide_best(s, first, level+1, plyLeft-1, alpha, beta)
             if (state.player == bs.PLAYER_A and new[0] > provisional[0]) or\
                (state.player == bs.PLAYER_B and new[0] < provisional[0]):
                 provisional = new
+                '''
+            if state.player == bs.PLAYER_A:
+                if provisional[0] > alpha:
+                    alpha = provisional[0]
+                if beta > alpha:
+                    break # beta cut off
+            else: # state.player == bs.PLAYER_B:
+                if provisional[0] < beta:
+                    beta = provisional[0]
+                if beta < alpha:
+                    break # alpha cut off
+                    '''
             if (state.player == bs.PLAYER_A and new[0] == provisional[0]) or\
                (state.player == bs.PLAYER_B and new[0] == provisional[0]):
                 rint = random.randint(0,1)
