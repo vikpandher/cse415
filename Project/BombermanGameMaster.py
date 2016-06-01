@@ -26,6 +26,12 @@ ex: python BombermanGameMaster.py Random_Player
 
 '''
 
+if '-c' in sys.argv:
+  custom_game = True
+  sys.argv.remove('-c')
+else:
+  custom_game = False
+
 if len(sys.argv) > 2:
   import importlib
   human_match = False
@@ -49,6 +55,11 @@ def runGame():
     print("Bomberman v" + VERSION + "\n")
     
     print("!!!!!!!!!! BOMBER-MAN !!!!!!!!!!!\n")
+    
+    if(custom_game):
+      print("CUSTOM GAME!!!!!!!!!!!!!!!!!!!!!!")
+    
+    
     print(bs.INTRO_MESSAGE)
     
     whosTurn = currentState.player
@@ -69,21 +80,23 @@ def runGame():
       
       if (human_match and whosTurn == bs.PLAYER_A):
         move = input("Enter your move:")
-        if (move == "e"):
+        if (len(move) == 0):
+          move = "Stay"
+        elif (move[0] == bs.M_EAST):
           move = "East"
-        elif (move == "E"):
+        elif (move[0] == bs.M_EAST_B):
           move = "B.East"
-        elif (move == "w"):
+        elif (move[0] == bs.M_WEST):
           move = "West"
-        elif (move == "W"):
+        elif (move[0] == bs.M_WEST_B):
           move = "B.West"
-        elif (move == "s"):
+        elif (move[0] == bs.M_SOUTH):
           move = "South"
-        elif (move == "S"):
+        elif (move[0] == bs.M_SOUTH_B):
           move = "B.South"
-        elif (move == "n"):
+        elif (move[0] == bs.M_NORTH):
           move = "North"
-        elif (move == "N"):
+        elif (move[0] == bs.M_NORTH_B):
           move = "B.North"
         else:
           move = "Stay"

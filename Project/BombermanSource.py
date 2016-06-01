@@ -7,7 +7,7 @@ PLAYER_B = 1
 PLAYER_COUNT = 2
 PLAYER_CODE_OFFSET = 40
 BOARD_SIZE = 11 # sizes are width and height, must be odd
-BOMB_BLAST_RADIUS = 3 # 0 means just at bomb location, 1 is one out from there
+BOMB_BLAST_RADIUS = 2 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 3
 DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
 CAVE_IN_START = 500 # board starts to cave in after this many turns
@@ -21,30 +21,55 @@ XX  10  Solid Wall
 ##  20  Breakable Wall
 !!  30  Explosion
 AA  40  Player A
-A*  4*  Player A's Bomb (* = countdown from 3-1)
+A*  4*  Player A's Bomb (* = countdown from 1-9)
 BB  50  Player B
-B*  5*  Player B's Bomb (* = countdown from 3-1)
+B*  5*  Player B's Bomb (* = countdown from 1-9)
 '''
 STRING_TO_CODE = {'--':0, 'XX':10, '##':20, '!!':30, 'AA':40, 'BB':50,
-                  'A1':41, 'A2':42, 'A3':43, 'B1':51, 'B2':52, 'B3':53}
+                  'A1':41, 'A2':42, 'A3':43, 'A4':44, 'A5':45, 'A6':46, 'A7':47, 'A8':48, 'A9':49,
+                  'B1':51, 'B2':52, 'B3':53, 'B4':54, 'B5':55, 'B6':56, 'B7':57, 'B8':58, 'B9':59}
 CODE_TO_STRING = {0:'--', 10:'XX', 20:'##', 30:'!!', 40:'AA', 50:'BB',
                   41:'A1', 42:'A2', 43:'A3', 51:'B1', 52:'B2', 53:'B3'}
 MOVES = ['Stay', 'East', 'B.East', 'West', 'B.West', 'South', 'B.South', 'North', 'B.North']
 
+# Controls
+M_WEST = 'a'
+M_WEST_B = 'A'
+M_NORTH = 'w'
+M_NORTH_B = 'W'
+M_EAST = 'd'
+M_EAST_B = 'D'
+M_SOUTH = 's'
+M_SOUTH_B = 'S'
+
 INTRO_MESSAGE = ('''
-This is bomberman. You are player
-This is how you play.
-These are your controls.
-When asked for input input:
-e = move east
-E = move east and drop a bomb
-w = move west
-W = move west and drop a bomb
-s = move south
-S = move south and drop a bomb
-n = move north
-N = move north and dorp a bomb
-anything else your stay where you were
+This is bomberman. In this game you, Player A, represented by 'AA' on the board
+need to defeat the dreaded Player B, represented by 'BB'. To do this simply
+blow up Player B with a bomb, but be careful bombs don't care who they belong
+to.
+
+To move you must use the "wasd" keys on your keyboard. When you are promped for
+a move, simply enter:
+'a' to move left
+'w' to move up
+'d' to move right
+'s' to move down
+and anything else to stay
+
+While moving you may drop a bomb at your old location. Careful you cannot walk
+over bombs. To drop a bomb while moving enter the capital character:
+'A' to move left and drop a bomb
+'W' to move up and drop a bomb
+'D' to move right and drop a bomb
+'S' to move down and drop a bomb
+
+The bombs will be shown with the the letter of the player who placed it and a
+timer to indecate when the bomb will blow.
+
+'XX' are solid walls that cannot be broken with bombs
+'##' are soft wall that can be blown up
+'--' are empty spaces
+'!!' are remnants of an explosion
 
 ''')
 
