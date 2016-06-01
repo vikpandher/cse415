@@ -9,7 +9,8 @@ PLAYER_CODE_OFFSET = 40
 BOARD_SIZE = 15 # sizes are width and height, must be odd
 BOMB_BLAST_RADIUS = 2 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 4
-DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
+INITIAL_BOMB_COUNT = 1 # players can only drop one bomb at a time
+DEFAULT_BOMB_COUNT = [INITIAL_BOMB_COUNT for x in range(PLAYER_COUNT)]
 CAVE_IN_TICK = 100 # cave in one layer every CAVE_IN_TICK
 BOMB_GIFT_TICK = 100 # give players another bomb
 
@@ -74,13 +75,15 @@ timer to indecate when the bomb will blow.
 
 ''')
 
-def set_defaults(board_size, bomb_blast_radius, bomb_count_start, cave_in_tick):
+def set_defaults(board_size, bomb_blast_radius, bomb_count_start, initial_bomb_count, cave_in_tick):
   global BOARD_SIZE
   BOARD_SIZE = board_size
   global BOMB_BLAST_RADIUS
   BOMB_BLAST_RADIUS = bomb_blast_radius
   global BOMB_COUNT_START
   BOMB_COUNT_START = bomb_count_start
+  global INITIAL_BOMB_COUNT
+  INITIAL_BOMB_COUNT = initial_bomb_count
   global CAVE_IN_TICK
   CAVE_IN_TICK = cave_in_tick
 

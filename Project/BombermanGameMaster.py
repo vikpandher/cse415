@@ -60,12 +60,13 @@ def runGame():
       board_size = int(input("Select BOARD_SIZE (15): "))
       bomb_blast_radius = int(input("Select BOMB_BLAST_RADIUS (2): "))
       bomb_count_start = int(input("Select BOMB_COUNT_START (4): "))
+      initial_bomb_count = int(input("Select INITIAL_BOMB_COUNT (1): "))
       cave_in_tick = int(input("Select BOMB_COUNT_START (100): "))
-      bs.set_defaults(board_size, bomb_blast_radius, bomb_count_start, cave_in_tick)
+      bs.set_defaults(board_size, bomb_blast_radius, bomb_count_start, initial_bomb_count, cave_in_tick)
     
     print(bs.INTRO_MESSAGE)
     
-    currentState = bs.Bman_state(bs.create_initial_board())
+    currentState = bs.Bman_state(bs.create_initial_board(), 0, bs.PLAYER_A, [bs.INITIAL_BOMB_COUNT for x in range(bs.PLAYER_COUNT)])
     whosTurn = currentState.player
     global FINISHED
     FINISHED = False
