@@ -175,11 +175,13 @@ def look_for_successors(state):
     
   post_cave_state = cave_in_walls(post_bomb_state)
   
-  if (state.turn_count  != 0 and state.turn_count % BOMB_GIFT_TICK == 0):
-    print("give_extra_bombs")
-    bomb_inventory = state.bomb_count
+  '''
+  # Give bombs
+  if (post_cave_state.turn_count  != 0 and post_cave_state.turn_count % BOMB_GIFT_TICK == 0):
+    bomb_inventory = post_cave_state.bomb_count
     for index in range(len(bomb_inventory)):
       bomb_inventory[index] += 1
+  '''
   
   #post_gift_state = give_extra_bombs(post_cave_state)
   
@@ -480,15 +482,6 @@ def cave_in_walls(state):
       post_cave_board[foo][BOARD_SIZE - 1 - loc] = 10
     post_cave_state = Bman_state(post_cave_board, state.turn_count, state.player, state.bomb_count)
     return post_cave_state
-  return state
-
-def give_extra_bombs(state):
-  if (state.turn_count % BOMB_GIFT_TICK == 0):
-    print("give_extra_bombs")
-    bomb_inventory = state.bomb_count
-    for index in range(len(bomb_inventory)):
-      bomb_inventory[index] += 1
-    return Bman_state(state.board, state.turn_count, state.player, bomb_inventory)
   return state
 
 '''
