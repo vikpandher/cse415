@@ -44,7 +44,9 @@ over bombs. To drop a bomb while moving enter the capital character:
 'S' to move down and drop a bomb
 
 The bombs will be shown with the the letter of the player who placed it and a
-timer to indecate when the bomb will blow.
+timer to indecate when the bomb will blow. After some number of turns pass
+(default = 100), a new layer of walls will form on the inside crushing players.
+So be weary of walls caving in.
 
 'XX' are solid walls that cannot be broken with bombs
 '##' are soft wall that can be blown up
