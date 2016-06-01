@@ -1,9 +1,9 @@
-'''BombermanGameMaster.py based on TimedGameMaster.py based on GameMaster.py 
- which in turn is based on code from RunKInARow.py
+'''BombermanGameMaster.py
 
 V. Pandher
 
 '''
+
 VERSION = '1.0-ALPHA'
 
 import BombermanSource as bs

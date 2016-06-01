@@ -1,3 +1,7 @@
+'''
+Player for Bomberman that just makes random moves. Kills itself right away.
+'''
+
 import BombermanSource as bs
 import random
 

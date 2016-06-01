@@ -1,3 +1,8 @@
+'''
+Player for Bomberman that just makes random moves, but won't drop bombs.
+Dies from cave ins.
+'''
+
 import BombermanSource as bs
 import random
 

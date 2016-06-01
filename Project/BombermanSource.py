@@ -1,5 +1,53 @@
+'''
+Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
+Instructor:  S. Tanimoto.
+Project: Bomberman
 
-import testBoards as test
+Status of the implementation:
+Working computer player with min max statespace search and alpha beta cutoffs
+Working computer vs computer matches and human vs computer matches with optional
+custom settings
+
+FILES:
+  BombermanGameMaster.py
+  BombermanSource.py
+  - contains the 
+  BombermanHeuristic.py
+  Random_Player.py
+  Passive_Player.py
+
+'''
+
+INTRO_MESSAGE = ('''
+This is bomberman. In this game you, Player A, represented by 'AA' on the board
+need to defeat the dreaded Player B, represented by 'BB'. To do this simply
+blow up Player B with a bomb, but be careful bombs don't care who they belong
+to.
+
+To move you must use the "wasd" keys on your keyboard. When you are promped for
+a move, simply enter:
+'a' to move left
+'w' to move up
+'d' to move right
+'s' to move down
+and anything else to stay
+
+While moving you may drop a bomb at your old location. Careful you cannot walk
+over bombs. To drop a bomb while moving enter the capital character:
+'A' to move left and drop a bomb
+'W' to move up and drop a bomb
+'D' to move right and drop a bomb
+'S' to move down and drop a bomb
+
+The bombs will be shown with the the letter of the player who placed it and a
+timer to indecate when the bomb will blow.
+
+'XX' are solid walls that cannot be broken with bombs
+'##' are soft wall that can be blown up
+'--' are empty spaces
+'!!' are remnants of an explosion
+
+''')
 
 PLAYER_A = 0
 PLAYER_B = 1
@@ -43,37 +91,6 @@ M_EAST = 'd'
 M_EAST_B = 'D'
 M_SOUTH = 's'
 M_SOUTH_B = 'S'
-
-INTRO_MESSAGE = ('''
-This is bomberman. In this game you, Player A, represented by 'AA' on the board
-need to defeat the dreaded Player B, represented by 'BB'. To do this simply
-blow up Player B with a bomb, but be careful bombs don't care who they belong
-to.
-
-To move you must use the "wasd" keys on your keyboard. When you are promped for
-a move, simply enter:
-'a' to move left
-'w' to move up
-'d' to move right
-'s' to move down
-and anything else to stay
-
-While moving you may drop a bomb at your old location. Careful you cannot walk
-over bombs. To drop a bomb while moving enter the capital character:
-'A' to move left and drop a bomb
-'W' to move up and drop a bomb
-'D' to move right and drop a bomb
-'S' to move down and drop a bomb
-
-The bombs will be shown with the the letter of the player who placed it and a
-timer to indecate when the bomb will blow.
-
-'XX' are solid walls that cannot be broken with bombs
-'##' are soft wall that can be blown up
-'--' are empty spaces
-'!!' are remnants of an explosion
-
-''')
 
 def set_defaults(board_size, bomb_blast_radius, bomb_count_start, initial_bomb_count, cave_in_tick):
   global BOARD_SIZE
@@ -455,34 +472,6 @@ def analyze_player(state, player_location):
       AVAILABLE_MOVES.append('B.North')
   
   return new_states
-
-## DOESN'T WORK
-'''
-CAVE_COUNT = 0
-def cave_in_walls(state):
-  post_cave_board = copy_board(state.board)
-  global CAVE_COUNT
-  old_cave_count = CAVE_COUNT
-  
-  if(state.turn_count > CAVE_IN_START):
-    CAVE_COUNT = (state.turn_count - CAVE_IN_START) // CAVE_IN_TICK
-  
-  print("old_cave_count: " + str(old_cave_count))
-  print("CAVE_COUNT: " + str(CAVE_COUNT))
-  
-  if(CAVE_COUNT != old_cave_count):
-    
-    print("CAVEING IN")
-    print("CAVE_COUNT: " + str(CAVE_COUNT))
-    
-    for foo in range(CAVE_COUNT, BOARD_SIZE - CAVE_COUNT):
-      post_cave_board[CAVE_COUNT][foo] = 10
-      post_cave_board[foo][CAVE_COUNT] = 10
-      post_cave_board[BOARD_SIZE - 1 - CAVE_COUNT][foo] = 10
-      post_cave_board[foo][BOARD_SIZE - 1 - CAVE_COUNT] = 10
-  post_cave_state = Bman_state(post_cave_board, state.turn_count, state.player, state.bomb_count)
-  return post_cave_state
-'''
   
 def cave_in_walls(state):
   var = state.turn_count % CAVE_IN_TICK
@@ -497,16 +486,6 @@ def cave_in_walls(state):
     post_cave_state = Bman_state(post_cave_board, state.turn_count, state.player, state.bomb_count)
     return post_cave_state
   return state
-
-'''
-# CAVE IN TEST
-initial_state = Bman_state(create_initial_board(), 1)
-while(CAVE_COUNT < 5):
-  initial_state = cave_in_walls(initial_state)
-  print("CAVE_COUNT: " + str(CAVE_COUNT))
-  print(initial_state)
-  initial_state.turn_count += CAVE_IN_TICK
-'''
   
 def win_check(state):
   PLAYER_A_DEAD = True
@@ -541,13 +520,3 @@ def win_message(code):
   elif(code == PLAYER_A):
     message += "PLAYER_A wins"
   return message
-
-
-  
-#print(Bman_state(create_initial_board()))
-
-#init_state = Bman_state(parse(test.MOVE_TEST_0), 0, PLAYER_A)
-#print("INITIAL STATE:")
-#print(init_state)
-#print("SUCCESSORS:")
-#print(states_to_string(look_for_successors(init_state)))
