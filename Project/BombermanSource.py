@@ -8,7 +8,7 @@ PLAYER_COUNT = 2
 PLAYER_CODE_OFFSET = 40
 BOARD_SIZE = 15 # sizes are width and height, must be odd
 BOMB_BLAST_RADIUS = 3 # 0 means just at bomb location, 1 is one out from there
-BOMB_COUNT_START = 3
+BOMB_COUNT_START = 4
 DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
 CAVE_IN_TICK = 100 # cave in one layer every CAVE_IN_TICK
 BOMB_GIFT_TICK = 100 # give players another bomb
@@ -29,7 +29,8 @@ STRING_TO_CODE = {'--':0, 'XX':10, '##':20, '!!':30, 'AA':40, 'BB':50,
                   'A1':41, 'A2':42, 'A3':43, 'A4':44, 'A5':45, 'A6':46, 'A7':47, 'A8':48, 'A9':49,
                   'B1':51, 'B2':52, 'B3':53, 'B4':54, 'B5':55, 'B6':56, 'B7':57, 'B8':58, 'B9':59}
 CODE_TO_STRING = {0:'--', 10:'XX', 20:'##', 30:'!!', 40:'AA', 50:'BB',
-                  41:'A1', 42:'A2', 43:'A3', 51:'B1', 52:'B2', 53:'B3'}
+                  41:'A1', 42:'A2', 43:'A3', 44:'A4', 45:'A5', 46:'A6', 47:'A7', 48:'A8', 49:'A9',
+                  51:'B1', 52:'B2', 53:'B3', 54:'B4', 55:'B5', 56:'B6', 57:'B7', 58:'B8', 49:'B9'}
 MOVES = ['Stay', 'East', 'B.East', 'West', 'B.West', 'South', 'B.South', 'North', 'B.North']
 
 # Controls
