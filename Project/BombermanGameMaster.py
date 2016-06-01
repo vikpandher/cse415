@@ -5,8 +5,8 @@ Project: Bomberman
 
 Status of the implementation:
 Working computer player with min max statespace search and alpha beta cutoffs
-Working computer vs computer matches and human vs computer matches with optional
-custom settings
+Working computer vs computer matches and human vs computer and human vs human
+matches with optional custom settings
 
 FILES:
   BombermanGameMaster.py
@@ -51,18 +51,17 @@ else:
 
 if len(sys.argv) > 2:
   import importlib
-  human_match = False
+  human_match = 0
   cpuA = importlib.import_module(sys.argv[1])
   cpuB = importlib.import_module(sys.argv[2])
 elif len(sys.argv) > 1:
   import importlib
-  human_match = True
+  human_match = 1
   cpuA = None
   cpuB = importlib.import_module(sys.argv[1])
 else:
-  human_match = True
+  human_match = 2
   cpuA = None
-  import Passive_Player as cpuB
 
 CURRENT_PLAYER = bs.PLAYER_A
 
@@ -72,14 +71,40 @@ def runGame():
     
     print("!!!!!!!!!! BOMBER-MAN !!!!!!!!!!!\n")
     
-    # ask for custom settings
+    # ask for custom settings, assume they are ok for the most part
     if(custom_game):
       print("ENTERING DEFAULTS...")
-      board_size = int(input("Select BOARD_SIZE (15): "))
-      bomb_blast_radius = int(input("Select BOMB_BLAST_RADIUS (2): "))
-      bomb_count_start = int(input("Select BOMB_COUNT_START (3): "))
-      initial_bomb_count = int(input("Select INITIAL_BOMB_COUNT (1): "))
-      cave_in_tick = int(input("Select CAVE_IN_TICK (100): "))
+      
+      try:
+        board_size = int(input("Select BOARD_SIZE (15): "))
+      except ValueError:
+        print("That's not an int! Using default!")
+        board_size = bs.BOARD_SIZE
+      
+      try:
+        bomb_blast_radius = int(input("Select BOMB_BLAST_RADIUS (2): "))
+      except ValueError:
+        print("That's not an int! Using default!")
+        bomb_blast_radius = bs.BOMB_BLAST_RADIUS
+        
+      try:
+        bomb_count_start = int(input("Select BOMB_COUNT_START (3): "))
+      except ValueError:
+        print("That's not an int! Using default!")
+        bomb_count_start = bs.BOMB_COUNT_START
+      
+      try:
+        initial_bomb_count = int(input("Select INITIAL_BOMB_COUNT (1): "))
+      except ValueError:
+        print("That's not an int! Using default!")
+        initial_bomb_count = bs.INITIAL_BOMB_COUNT
+      
+      try:
+        cave_in_tick = int(input("Select CAVE_IN_TICK (100): "))
+      except ValueError:
+        print("That's not an int! Using default!")
+        cave_in_tick = bs.CAVE_IN_TICK
+        
       bs.set_defaults(board_size, bomb_blast_radius, bomb_count_start, initial_bomb_count, cave_in_tick)
     
     print(bs.INTRO_MESSAGE)
@@ -101,33 +126,40 @@ def runGame():
         print(bs.win_message(whoWon))
         break
       
-      if (human_match and whosTurn == bs.PLAYER_A):
-        move = input("Enter your move:") # get player input
-        if (len(move) == 0):
-          move = "Stay"
-        elif (move[0] == bs.M_EAST):
-          move = "East"
-        elif (move[0] == bs.M_EAST_B):
-          move = "B.East"
-        elif (move[0] == bs.M_WEST):
-          move = "West"
-        elif (move[0] == bs.M_WEST_B):
-          move = "B.West"
-        elif (move[0] == bs.M_SOUTH):
-          move = "South"
-        elif (move[0] == bs.M_SOUTH_B):
-          move = "B.South"
-        elif (move[0] == bs.M_NORTH):
-          move = "North"
-        elif (move[0] == bs.M_NORTH_B):
-          move = "B.North"
-        else:
-          move = "Stay"
-        print(move)
+      if (human_match > 0 and whosTurn == bs.PLAYER_A):
+        move = analyze_move()
+        currentState = bs.make_move(currentState, move)
+      elif (human_match > 1 and whosTurn == bs.PLAYER_B):
+        move = analyze_move()
         currentState = bs.make_move(currentState, move)
       elif (whosTurn == bs.PLAYER_A):
         currentState = cpuA.makeMove(currentState)
       elif (whosTurn == bs.PLAYER_B):
         currentState = cpuB.makeMove(currentState)
-       
+
+def analyze_move():
+  move = input("Enter your move:") # get player input
+  if (len(move) == 0):
+    move = "Stay"
+  elif (move[0] == bs.M_EAST):
+    move = "East"
+  elif (move[0] == bs.M_EAST_B):
+    move = "B.East"
+  elif (move[0] == bs.M_WEST):
+    move = "West"
+  elif (move[0] == bs.M_WEST_B):
+    move = "B.West"
+  elif (move[0] == bs.M_SOUTH):
+    move = "South"
+  elif (move[0] == bs.M_SOUTH_B):
+    move = "B.South"
+  elif (move[0] == bs.M_NORTH):
+    move = "North"
+  elif (move[0] == bs.M_NORTH_B):
+    move = "B.North"
+  else:
+    move = "Stay"
+  print(move)
+  return move
+        
 runGame()
