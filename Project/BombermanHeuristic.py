@@ -1,4 +1,5 @@
 import math
+import random
 
 import BombermanSource as bs
 import testBoards as boards
@@ -29,6 +30,11 @@ def decide_best(state, first, level, plyLeft):
             if (state.player == bs.PLAYER_A and new[0] > provisional[0]) or\
                (state.player == bs.PLAYER_B and new[0] < provisional[0]):
                 provisional = new
+            if (state.player == bs.PLAYER_A and new[0] == provisional[0]) or\
+               (state.player == bs.PLAYER_B and new[0] == provisional[0]):
+                rint = random.randint(0,1)
+                if rint == 0:
+                    provisional = new
     return provisional
 
 # good things are not bombs (minus if gunna die),
