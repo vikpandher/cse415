@@ -51,17 +51,21 @@ CURRENT_PLAYER = bs.PLAYER_A
 
 FINISHED = False
 def runGame():
-    currentState = bs.Bman_state()
     print("Bomberman v" + VERSION + "\n")
     
     print("!!!!!!!!!! BOMBER-MAN !!!!!!!!!!!\n")
     
     if(custom_game):
-      print("CUSTOM GAME!!!!!!!!!!!!!!!!!!!!!!")
-    
+      print("ENTERING DEFAULTS...")
+      board_size = int(input("Select BOARD_SIZE (15): "))
+      bomb_blast_radius = int(input("Select BOMB_BLAST_RADIUS (2): "))
+      bomb_count_start = int(input("Select BOMB_COUNT_START (4): "))
+      cave_in_tick = int(input("Select BOMB_COUNT_START (100): "))
+      bs.set_defaults(board_size, bomb_blast_radius, bomb_count_start, cave_in_tick)
     
     print(bs.INTRO_MESSAGE)
     
+    currentState = bs.Bman_state(bs.create_initial_board())
     whosTurn = currentState.player
     global FINISHED
     FINISHED = False

@@ -74,6 +74,16 @@ timer to indecate when the bomb will blow.
 
 ''')
 
+def set_defaults(board_size, bomb_blast_radius, bomb_count_start, cave_in_tick):
+  global BOARD_SIZE
+  BOARD_SIZE = board_size
+  global BOMB_BLAST_RADIUS
+  BOMB_BLAST_RADIUS = bomb_blast_radius
+  global BOMB_COUNT_START
+  BOMB_COUNT_START = bomb_count_start
+  global CAVE_IN_TICK
+  CAVE_IN_TICK = cave_in_tick
+
 def parse(board_string):
   '''Translate a board string into the list of lists representation.'''
   board_list = [[0 for c in range(BOARD_SIZE)] for r in range(BOARD_SIZE)]
@@ -114,7 +124,6 @@ def create_initial_board():
   
 class Bman_state:
   '''Object that tracks Bomberman's board state.'''
-  #def __init__(self, old_board=parse(INITIAL), turn_count=0, player=PLAYER_A, bomb_count=DEFAULT_BOMB_COUNT):
   def __init__(self, old_board=create_initial_board(), turn_count=0, player=PLAYER_A, bomb_count=DEFAULT_BOMB_COUNT):
     new_board = [r[:] for r in old_board]
     self.board = new_board
