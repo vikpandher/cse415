@@ -6,7 +6,7 @@ PLAYER_B = 1
 
 PLAYER_COUNT = 2
 PLAYER_CODE_OFFSET = 40
-BOARD_SIZE = 11 # sizes are width and height, must be odd
+BOARD_SIZE = 15 # sizes are width and height, must be odd
 BOMB_BLAST_RADIUS = 2 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 3
 DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
@@ -473,6 +473,9 @@ def cave_in_walls(state):
     return post_cave_state
   return state
 
+def give_extra_bombs(state):
+  post_gift_state = copy_board(state.board)
+  
 '''
 # CAVE IN TEST
 initial_state = Bman_state(create_initial_board(), 1)
