@@ -174,20 +174,27 @@ def look_for_successors(state):
     post_bomb_state = state
     
   post_cave_state = cave_in_walls(post_bomb_state)
-  post_gift_state = give_extra_bombs(post_cave_state)
+  
+  if (state.turn_count  != 0 and state.turn_count % BOMB_GIFT_TICK == 0):
+    print("give_extra_bombs")
+    bomb_inventory = state.bomb_count
+    for index in range(len(bomb_inventory)):
+      bomb_inventory[index] += 1
+  
+  #post_gift_state = give_extra_bombs(post_cave_state)
   
   for row in range(BOARD_SIZE): # look through rows
     for col in range(BOARD_SIZE): # look through columns
-      current_piece = post_gift_state.board[row][col]
+      current_piece = post_cave_state.board[row][col]
       
       # Player
       if (current_piece == PLAYER_CODE_OFFSET + state.player * 10):
         player_location = (row, col)
         
   if (player_location != None):
-    successors.extend(analyze_player(post_gift_state, player_location))
+    successors.extend(analyze_player(post_cave_state, player_location))
   else:
-    end_state = Bman_state(post_gift_state.board, post_gift_state.turn_count + 1, (post_gift_state.player + 1) % PLAYER_COUNT, post_gift_state.bomb_count)
+    end_state = Bman_state(post_cave_state.board, post_cave_state.turn_count + 1, (post_cave_state.player + 1) % PLAYER_COUNT, post_cave_state.bomb_count)
     successors.append(end_state)
     
   return successors
@@ -477,6 +484,7 @@ def cave_in_walls(state):
 
 def give_extra_bombs(state):
   if (state.turn_count % BOMB_GIFT_TICK == 0):
+    print("give_extra_bombs")
     bomb_inventory = state.bomb_count
     for index in range(len(bomb_inventory)):
       bomb_inventory[index] += 1
