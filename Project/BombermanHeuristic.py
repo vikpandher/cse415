@@ -6,8 +6,8 @@ import testBoards as boards
 
 EMPTY = 0
 MAX_BOMB_NUM = 1
-A_BOMBS = [44,43,42,41]
-B_BOMBS = [54,53,52,51]
+A_BOMBS = [43,42,41]
+B_BOMBS = [53,52,51]
 
 def makeMove(curr_state):
     move_choice = decide_best(curr_state, curr_state, 1, 6, -1000000, 1000000)
