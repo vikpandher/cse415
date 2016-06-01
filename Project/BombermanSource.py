@@ -150,6 +150,7 @@ def make_move(state, move):
 
 def look_for_successors(state):
   '''Generate all possible successor states from the current state'''
+  state = Bman_state(state.board, state.turn_count, state.player, state.bomb_count)
   successors = []
   bomb_locations = []
   player_location = None
