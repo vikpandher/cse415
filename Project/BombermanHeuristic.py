@@ -1,8 +1,31 @@
+'''
+Vikramjit Pandher, Chloe Nash, CSE 415, Spring 2016, University of Washington
+Instructor:  S. Tanimoto.
+Project: Bomberman
+
+Status of the implementation:
+Working computer player with min max statespace search and alpha beta cutoffs
+Working computer vs computer matches and human vs computer matches with optional
+custom settings
+
+FILES:
+  BombermanGameMaster.py
+  - contains the main loop that runs the game
+  BombermanSource.py
+  - contains many functions used in other files
+  BombermanHeuristic.py
+  - a player implemented with heuristics (minimax & alphabeta cuttoffs)
+  Random_Player.py
+  - a player that makes any random move
+  Passive_Player.py
+  - a player that makes random moves, but doesn't drop bombs
+
+'''
+
 import math
 import random
 
 import BombermanSource as bs
-import testBoards as boards
 
 EMPTY = 0 # if a board space is not occupied
 MAX_BOMB_NUM = 1 # max number of bombs a player can place at once, can be changed
