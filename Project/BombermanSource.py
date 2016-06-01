@@ -10,7 +10,7 @@ BOARD_SIZE = 11 # sizes are width and height, must be odd
 BOMB_BLAST_RADIUS = 2 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 3
 DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
-CAVE_IN_START = 500 # board starts to cave in after this many turns
+CAVE_IN_START = 0 # board starts to cave in after this many turns
 CAVE_IN_TICK = 100 # cave in one layer every CAVE_IN_TICK number of turns after cave in starts
 
 # renamed these just because
@@ -172,19 +172,21 @@ def look_for_successors(state):
     post_bomb_state = analyze_bombs(state, bomb_locations)
   else:
     post_bomb_state = state
+    
+  post_cave_state = cave_in_walls(post_bomb_state)
   
   for row in range(BOARD_SIZE): # look through rows
     for col in range(BOARD_SIZE): # look through columns
-      current_piece = post_bomb_state.board[row][col]
+      current_piece = post_cave_state.board[row][col]
       
       # Player
       if (current_piece == PLAYER_CODE_OFFSET + state.player * 10):
         player_location = (row, col)
         
   if (player_location != None):
-    successors.extend(analyze_player(post_bomb_state, player_location))
+    successors.extend(analyze_player(post_cave_state, player_location))
   else:
-    end_state = Bman_state(post_bomb_state.board, post_bomb_state.turn_count + 1, (post_bomb_state.player + 1) % PLAYER_COUNT, post_bomb_state.bomb_count)
+    end_state = Bman_state(post_cave_state.board, post_cave_state.turn_count + 1, (post_cave_state.player + 1) % PLAYER_COUNT, post_cave_state.bomb_count)
     successors.append(end_state)
     
   return successors
