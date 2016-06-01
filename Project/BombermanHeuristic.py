@@ -6,11 +6,11 @@ import testBoards as boards
 
 EMPTY = 0
 MAX_BOMB_NUM = 1
-A_BOMBS = [43,42,41]
-B_BOMBS = [53,52,51]
+A_BOMBS = [44,43,42,41]
+B_BOMBS = [54,53,52,51]
 
 def makeMove(curr_state):
-    move_choice = decide_best(curr_state, curr_state, 1, 6, +1000000, 1000000)
+    move_choice = decide_best(curr_state, curr_state, 1, 6, -1000000, 1000000)
     #print("orig: " + str(curr_state.board) + " val: " + str(static_eval(curr_state)))
     #print("move: " + str(move_choice[1].board) + " val: " + str(static_eval(move_choice[1])))
     return move_choice[2]
@@ -30,18 +30,18 @@ def decide_best(state, first, level, plyLeft, alpha, beta):
             if (state.player == bs.PLAYER_A and new[0] > provisional[0]) or\
                (state.player == bs.PLAYER_B and new[0] < provisional[0]):
                 provisional = new
-                '''
+                
             if state.player == bs.PLAYER_A:
                 if provisional[0] > alpha:
                     alpha = provisional[0]
-                if beta > alpha:
+                if beta < alpha:
                     break # beta cut off
             else: # state.player == bs.PLAYER_B:
                 if provisional[0] < beta:
                     beta = provisional[0]
                 if beta < alpha:
                     break # alpha cut off
-                    '''
+                   
             if (state.player == bs.PLAYER_A and new[0] == provisional[0]) or\
                (state.player == bs.PLAYER_B and new[0] == provisional[0]):
                 rint = random.randint(0,1)
@@ -214,7 +214,7 @@ def find_location(state):
             if state.board[row][col] == (state.player* 10 + bs.PLAYER_CODE_OFFSET):
                 return (row, col)
     return (0, 0)
-
+'''
 #print(bs.Bman_state(bs.create_initial_board()))
 print(static_eval(bs.Bman_state(bs.create_initial_board())))
 initial = bs.Bman_state(bs.create_initial_board())
@@ -226,7 +226,7 @@ for s in bs.look_for_successors(initial):
 
 
 
-
+'''
 
 
 
