@@ -10,8 +10,7 @@ BOARD_SIZE = 11 # sizes are width and height, must be odd
 BOMB_BLAST_RADIUS = 2 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 3
 DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
-CAVE_IN_START = 0 # board starts to cave in after this many turns
-CAVE_IN_TICK = 100 # cave in one layer every CAVE_IN_TICK number of turns after cave in starts
+CAVE_IN_TICK = 100 # cave in one layer every CAVE_IN_TICK
 
 # renamed these just because
 '''
@@ -432,15 +431,25 @@ def analyze_player(state, player_location):
   
   return new_states
 
-CAVE_COUNT = -1
+## DOESN'T WORK
+'''
+CAVE_COUNT = 0
 def cave_in_walls(state):
   post_cave_board = copy_board(state.board)
   global CAVE_COUNT
   old_cave_count = CAVE_COUNT
+  
   if(state.turn_count > CAVE_IN_START):
     CAVE_COUNT = (state.turn_count - CAVE_IN_START) // CAVE_IN_TICK
-    
+  
+  print("old_cave_count: " + str(old_cave_count))
+  print("CAVE_COUNT: " + str(CAVE_COUNT))
+  
   if(CAVE_COUNT != old_cave_count):
+    
+    print("CAVEING IN")
+    print("CAVE_COUNT: " + str(CAVE_COUNT))
+    
     for foo in range(CAVE_COUNT, BOARD_SIZE - CAVE_COUNT):
       post_cave_board[CAVE_COUNT][foo] = 10
       post_cave_board[foo][CAVE_COUNT] = 10
@@ -448,6 +457,21 @@ def cave_in_walls(state):
       post_cave_board[foo][BOARD_SIZE - 1 - CAVE_COUNT] = 10
   post_cave_state = Bman_state(post_cave_board, state.turn_count, state.player, state.bomb_count)
   return post_cave_state
+'''
+  
+def cave_in_walls(state):
+  post_cave_board = copy_board(state.board)
+  var = state.turn_count % CAVE_IN_TICK
+  if (var == 0):
+    loc = state.turn_count // CAVE_IN_TICK
+    for foo in range(loc, BOARD_SIZE - loc):
+      post_cave_board[loc][foo] = 10
+      post_cave_board[foo][loc] = 10
+      post_cave_board[BOARD_SIZE - 1 - loc][foo] = 10
+      post_cave_board[foo][BOARD_SIZE - 1 - loc] = 10
+    post_cave_state = Bman_state(post_cave_board, state.turn_count, state.player, state.bomb_count)
+    return post_cave_state
+  return state
 
 '''
 # CAVE IN TEST
