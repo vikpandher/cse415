@@ -11,6 +11,7 @@ BOMB_BLAST_RADIUS = 2 # 0 means just at bomb location, 1 is one out from there
 BOMB_COUNT_START = 3
 DEFAULT_BOMB_COUNT = [1 for x in range(PLAYER_COUNT)] # players can only drop one bomb at a time
 CAVE_IN_TICK = 100 # cave in one layer every CAVE_IN_TICK
+BOMB_GIFT_TICK = 100 # give players another bomb
 
 # renamed these just because
 '''
@@ -173,19 +174,20 @@ def look_for_successors(state):
     post_bomb_state = state
     
   post_cave_state = cave_in_walls(post_bomb_state)
+  post_gift_state = give_extra_bombs(post_cave_state)
   
   for row in range(BOARD_SIZE): # look through rows
     for col in range(BOARD_SIZE): # look through columns
-      current_piece = post_cave_state.board[row][col]
+      current_piece = post_gift_state.board[row][col]
       
       # Player
       if (current_piece == PLAYER_CODE_OFFSET + state.player * 10):
         player_location = (row, col)
         
   if (player_location != None):
-    successors.extend(analyze_player(post_cave_state, player_location))
+    successors.extend(analyze_player(post_gift_state, player_location))
   else:
-    end_state = Bman_state(post_cave_state.board, post_cave_state.turn_count + 1, (post_cave_state.player + 1) % PLAYER_COUNT, post_cave_state.bomb_count)
+    end_state = Bman_state(post_gift_state.board, post_gift_state.turn_count + 1, (post_gift_state.player + 1) % PLAYER_COUNT, post_gift_state.bomb_count)
     successors.append(end_state)
     
   return successors
@@ -460,10 +462,10 @@ def cave_in_walls(state):
 '''
   
 def cave_in_walls(state):
-  post_cave_board = copy_board(state.board)
   var = state.turn_count % CAVE_IN_TICK
   if (var == 0):
     loc = state.turn_count // CAVE_IN_TICK
+    post_cave_board = copy_board(state.board)
     for foo in range(loc, BOARD_SIZE - loc):
       post_cave_board[loc][foo] = 10
       post_cave_board[foo][loc] = 10
@@ -474,8 +476,13 @@ def cave_in_walls(state):
   return state
 
 def give_extra_bombs(state):
-  post_gift_state = copy_board(state.board)
-  
+  if (state.turn_count % BOMB_GIFT_TICK == 0):
+    bomb_inventory = state.bomb_count
+    for index in range(len(bomb_inventory)):
+      bomb_inventory[index] += 1
+    return Bman_state(state.board, state.turn_count, state.player, bomb_inventory)
+  return state
+
 '''
 # CAVE IN TEST
 initial_state = Bman_state(create_initial_board(), 1)
