@@ -30,7 +30,7 @@ import BombermanSource as bs
 import sys
 
 '''
-NOTE:
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 For a match between two computers enter:
 python BombermanGameMaster.py [plyer file name] [plyer file name]
 ex: python BombermanGameMaster.py Random_Player Random_Player
